@@ -17,6 +17,9 @@
     mc:Ignorable="d">
     <Window.Resources>
         <convertar:TimeOutRemainingConverter x:Key="TimeOutRemainingConverter" />
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
     </Window.Resources>
     <Grid>
         <!--  残りタイムアウト  -->
@@ -649,24 +652,27 @@
             <TextBlock
                 VerticalAlignment="Center"
                 FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
                 Text="SERVE POINT"
                 TextAlignment="Center" />
 
             <TextBlock
-                Margin="10,0,0,0"
+                Margin="30,0,0,0"
                 VerticalAlignment="Center"
-                FontSize="15"
+                FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
-                Text="{Binding LeftTeamServePoint.Value}"
+                Text="{Binding GameLeftTeamServePoint.Value}"
                 TextAlignment="Left" />
 
             <TextBlock
-                Margin="0,0,10,0"
+                Margin="0,0,30,0"
                 VerticalAlignment="Center"
-                FontSize="15"
+                FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
-                Text="{Binding RightTeamServePoint.Value}"
+                Text="{Binding GameRightTeamServePoint.Value}"
                 TextAlignment="Right" />
 
             <Grid.Style>
@@ -725,24 +731,27 @@
             <TextBlock
                 VerticalAlignment="Center"
                 FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
                 Text="SERVE ERROR"
                 TextAlignment="Center" />
 
             <TextBlock
-                Margin="10,0,0,0"
+                Margin="30,0,0,0"
                 VerticalAlignment="Center"
-                FontSize="15"
+                FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
-                Text="{Binding LeftTeamServeError.Value}"
+                Text="{Binding GameLeftTeamServeError.Value}"
                 TextAlignment="Left" />
 
             <TextBlock
-                Margin="0,0,10,0"
+                Margin="0,0,30,0"
                 VerticalAlignment="Center"
-                FontSize="15"
+                FontSize="20"
+                FontWeight="SemiBold"
                 Foreground="White"
-                Text="{Binding RightTeamServeError.Value}"
+                Text="{Binding GameRightTeamServeError.Value}"
                 TextAlignment="Right" />
 
             <Grid.Style>
