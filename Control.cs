@@ -202,6 +202,17 @@ namespace SportsCoderForVolleyball
                 //await DetectSetPoint();
             }
         }
+        public void Statistics()
+        {
+            if (Instance.IsDisplaySetStuts.Value)
+            {
+                Instance.IsDisplaySetStuts.Value = false;
+            }
+            else
+            {
+                Instance.IsDisplaySetStuts.Value = true;
+            }
+        }
         public void PointParSetInfomation()
         {
             if (Instance.IsDisplayPointParSet.Value)
@@ -301,11 +312,13 @@ namespace SportsCoderForVolleyball
             {
                 PointPlusLeft(false);
                 LeftTeamServePoint.Value++;
+                GameLeftTeamServePoint.Value++;
             }
             else
             {
                 PointPlusRight(false);
                 RightTeamServePoint.Value++;
+                GameRightTeamServePoint.Value++;
             }
 
             var s = DetectSetPoint().Result;
@@ -317,6 +330,7 @@ namespace SportsCoderForVolleyball
                 Instance.IsDisplayServePointInfomation.Value = true;
                 await Task.Delay(3000);
                 Instance.IsDisplayServePointInfomation.Value = false;
+
                 Instance.IsDisplayServeErrorInfomation.Value = true;
                 await Task.Delay(3000);
                 Instance.IsDisplayServeErrorInfomation.Value = false;
@@ -328,11 +342,13 @@ namespace SportsCoderForVolleyball
             {
                 PointPlusLeft();
                 LeftTeamBlockPoint.Value++;
+                GameLeftTeamBlockPoint.Value++;
             }
             else
             {
                 PointPlusRight();
                 RightTeamBlockPoint.Value++;
+                GameRightTeamBlockPoint.Value++;
             }
         }
         public void AttackPoint(bool IsLeftTeam)
@@ -341,11 +357,13 @@ namespace SportsCoderForVolleyball
             {
                 PointPlusLeft();
                 LeftTeamAttackPoint.Value++;
+                GameLeftTeamAttackPoint.Value++;
             }
             else
             {
                 PointPlusRight();
                 RightTeamAttackPoint.Value++;
+                GameRightTeamAttackPoint.Value++;
             }
         }
         public void ServeError(bool IsLeftTeam)
@@ -354,11 +372,13 @@ namespace SportsCoderForVolleyball
             {
                 PointPlusRight();
                 LeftTeamServeError.Value++;
+                GameLeftTeamServeError.Value++;
             }
             else
             {
                 PointPlusLeft();
                 RightTeamServeError.Value++;
+                GameRightTeamServeError.Value++;
             }
         }
         public void Error(bool IsLeftTeam)
@@ -367,19 +387,42 @@ namespace SportsCoderForVolleyball
             {
                 PointPlusRight();
                 LeftTeamError.Value++;
+                GameLeftTeamError.Value++;
             }
             else
             {
                 PointPlusLeft();
                 RightTeamError.Value++;
+                GameRightTeamError.Value++;
             }
         }
 
+        private static void Swap<T>(ref ReactiveProperty<T> a, ref ReactiveProperty<T> b)
+        {
+            (a.Value, b.Value) = (b.Value, a.Value);
+        }
         public async void CourtChange(bool detectSetpoint = true)
         {
-            (Instance.PointLeft.Value, Instance.PointRight.Value) = (Instance.PointRight.Value, Instance.PointLeft.Value);
-            (Instance.SetLeft.Value, Instance.SetRight.Value) = (Instance.SetRight.Value, Instance.SetLeft.Value);
-            (Instance.TeamLeft.Value, Instance.TeamRight.Value) = (Instance.TeamRight.Value, Instance.TeamLeft.Value);
+            Swap(ref Instance.PointLeft, ref Instance.PointRight);
+            Swap(ref Instance.SetLeft, ref Instance.SetRight);
+            Swap(ref Instance.TeamLeft, ref Instance.TeamRight);
+
+
+            Swap(ref Instance.LeftTeamAttackPoint, ref Instance.RightTeamAttackPoint);
+            Swap(ref Instance.LeftTeamBlockPoint, ref Instance.RightTeamBlockPoint);
+            Swap(ref Instance.LeftTeamServePoint, ref Instance.RightTeamServePoint);
+            Swap(ref Instance.LeftTeamServeError, ref Instance.RightTeamServeError);
+            Swap(ref Instance.LeftTeamError, ref Instance.RightTeamError);
+
+            Swap(ref Instance.GameLeftTeamServePoint, ref Instance.GameRightTeamServePoint);
+            Swap(ref Instance.GameLeftTeamAttackPoint, ref Instance.GameRightTeamAttackPoint);
+            Swap(ref Instance.GameLeftTeamBlockPoint, ref Instance.GameRightTeamBlockPoint);
+            Swap(ref Instance.GameLeftTeamServeError, ref Instance.GameRightTeamServeError);
+            Swap(ref Instance.GameLeftTeamError, ref Instance.GameRightTeamError);
+
+            Swap(ref Instance.GameLeftTeamOpponentError, ref Instance.GameRightTeamOpponentError);
+
+
             Instance.IsATeamLeft.Value = !Instance.IsATeamLeft.Value;
 
             if (detectSetpoint)
@@ -394,6 +437,9 @@ namespace SportsCoderForVolleyball
 
             await DeleteOption();
 
+            LeftTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
+            RightTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
+
             //記録の書き込み
             if (Instance.IsATeamLeft.Value)
             {
@@ -403,8 +449,23 @@ namespace SportsCoderForVolleyball
                     BTeamPoint = Instance.PointRight.Value,
 
                     ATeamTimeOut = Instance.TimeOutLeft.Value,
-                    BTeamTimeOut = Instance.TimeOutRight.Value
-                });
+                    BTeamTimeOut = Instance.TimeOutRight.Value,
+
+                    ATeamAttackPoint = Instance.LeftTeamAttackPoint.Value,
+                    BTeamAttackPoint = Instance.RightTeamAttackPoint.Value,
+
+                    ATeamBlockPoint = Instance.LeftTeamBlockPoint.Value,
+                    BTeamBlockPoint = Instance.RightTeamBlockPoint.Value,
+
+                    ATeamServePoint = Instance.LeftTeamServePoint.Value,
+                    BTeamServePoint = Instance.RightTeamServePoint.Value,
+
+                    ATeamServeError = Instance.LeftTeamServeError.Value,
+                    BTeamServeError = Instance.RightTeamServeError.Value,
+
+                    ATeamError = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value,
+                    BTeamError = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value,
+                }); ;
             }
             else
             {
@@ -414,21 +475,43 @@ namespace SportsCoderForVolleyball
                     BTeamPoint = Instance.PointLeft.Value,
 
                     ATeamTimeOut = Instance.TimeOutRight.Value,
-                    BTeamTimeOut = Instance.TimeOutLeft.Value
+                    BTeamTimeOut = Instance.TimeOutLeft.Value,
+
+                    ATeamAttackPoint = Instance.RightTeamAttackPoint.Value,
+                    BTeamAttackPoint = Instance.LeftTeamAttackPoint.Value,
+
+                    ATeamBlockPoint = Instance.RightTeamBlockPoint.Value,
+                    BTeamBlockPoint = Instance.LeftTeamBlockPoint.Value,
+
+                    ATeamServePoint = Instance.RightTeamServePoint.Value,
+                    BTeamServePoint = Instance.LeftTeamServePoint.Value,
+
+                    ATeamServeError = Instance.RightTeamServeError.Value,
+                    BTeamServeError = Instance.LeftTeamServeError.Value,
+
+                    ATeamError = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value,
+                    BTeamError = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value,
                 });
             }
 
 
 
             //情報表示
+
+            //セット数
             await Task.Delay(5000);
             Instance.SetInfomation();
 
+            //セットごとのポイント
             await Task.Delay(4000);
             Instance.PointParSetInfomation();
+            Instance.IsAnimation.Value = false;
+
+            //セットごとのポイントを削除
             await Task.Delay(10000);
             await DeleteOption();
 
+            //最終セットの場合
             if (Instance.SetRight.Value == Instance.NEEDSET.Value || Instance.SetLeft.Value == Instance.NEEDSET.Value)
             {
                 //ゲーム終了ならスコアボードを再表示させない
@@ -437,6 +520,42 @@ namespace SportsCoderForVolleyball
 
                 return;
             }
+
+            //スコアとセットを非表示
+            Instance.IsDisplayGetSet.Value = false;
+
+            //統計表示
+            await Task.Delay(2000);
+            Statistics();
+
+
+            //統計非表示
+            await Task.Delay(15000);
+            Statistics();
+
+
+            //スコアを表示
+            await Task.Delay(5000);
+
+
+            //次のセットへ
+            Instance.PointLeft.Value = 0;
+            Instance.PointRight.Value = 0;
+            Instance.TimeOutLeft.Value = 0;
+            Instance.TimeOutRight.Value = 0;
+            Instance.LeftTeamAttackPoint.Value = 0;
+            Instance.RightTeamAttackPoint.Value = 0;
+            Instance.LeftTeamBlockPoint.Value = 0;
+            Instance.RightTeamBlockPoint.Value= 0;
+            Instance.LeftTeamServePoint.Value=0;
+            Instance.RightTeamServePoint.Value = 0;
+            Instance.LeftTeamServeError.Value = 0;
+            Instance.RightTeamServeError.Value = 0;
+            Instance.LeftTeamError.Value = 0;
+            Instance.RightTeamError.Value = 0;
+            Instance.Set.Value++;
+
+
             if (Instance.COURTCHANGE.Value)
             {
                 CourtChange(false);
@@ -569,14 +688,6 @@ namespace SportsCoderForVolleyball
                             if (result.Result == ButtonResult.Yes)
                             {
                                 await GameSetAsync();
-
-                                Instance.PointLeft.Value = 0;
-                                Instance.PointRight.Value = 0;
-
-                                Instance.TimeOutLeft.Value = 0;
-                                Instance.TimeOutRight.Value = 0;
-
-                                Instance.Set.Value++;
                             }
                             else
                             {
@@ -628,14 +739,6 @@ namespace SportsCoderForVolleyball
                             if (result.Result == ButtonResult.Yes)
                             {
                                 await GameSetAsync();
-
-                                Instance.PointLeft.Value = 0;
-                                Instance.PointRight.Value = 0;
-
-                                Instance.TimeOutLeft.Value = 0;
-                                Instance.TimeOutRight.Value = 0;
-
-                                Instance.Set.Value++;
                             }
                             else
                             {
@@ -728,51 +831,61 @@ namespace SportsCoderForVolleyball
         public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
         public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
         public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
+        public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
+
+        //セット統計
+        public ReactiveProperty<int> LeftTeamServePoint = new(0);
+        public ReactiveProperty<int> RightTeamServePoint = new(0);
+        public ReactiveProperty<int> LeftTeamAttackPoint = new(0);
+        public ReactiveProperty<int> RightTeamAttackPoint = new(0);
+        public ReactiveProperty<int> LeftTeamBlockPoint = new(0);
+        public ReactiveProperty<int> RightTeamBlockPoint = new(0);
+        public ReactiveProperty<int> LeftTeamServeError = new(0);
+        public ReactiveProperty<int> RightTeamServeError = new(0);
+        public ReactiveProperty<int> LeftTeamError = new(0);
+        public ReactiveProperty<int> RightTeamError = new(0);
+        public ReactiveProperty<int> LeftTeamOpponentError = new(0);
+        public ReactiveProperty<int> RightTeamOpponentError = new(0);
+
+        //ゲーム統計
+        public ReactiveProperty<int> GameLeftTeamServePoint = new(0);
+        public ReactiveProperty<int> GameRightTeamServePoint = new(0);
+        public ReactiveProperty<int> GameLeftTeamAttackPoint = new(0);
+        public ReactiveProperty<int> GameRightTeamAttackPoint = new(0);
+        public ReactiveProperty<int> GameLeftTeamBlockPoint = new(0);
+        public ReactiveProperty<int> GameRightTeamBlockPoint = new(0);
+        public ReactiveProperty<int> GameLeftTeamServeError = new(0);
+        public ReactiveProperty<int> GameRightTeamServeError = new(0);
+        public ReactiveProperty<int> GameLeftTeamError = new(0);
+        public ReactiveProperty<int> GameRightTeamError = new(0);
+        public ReactiveProperty<int> GameLeftTeamOpponentError = new(0);
+        public ReactiveProperty<int> GameRightTeamOpponentError = new(0);
+
+        public ReactiveProperty<int> Set = new(1);
+        public ReactiveProperty<string> TeamLeft = new("USA");
+        public ReactiveProperty<string> TeamRight = new("JPN");
+        public ReactiveProperty<int> PointLeft = new(0);
+        public ReactiveProperty<int> PointRight = new(0);
+        public ReactiveProperty<int> SetLeft = new(0);
+        public ReactiveProperty<int> SetRight = new(0);
+        public ReactiveProperty<int> TimeOutRight = new(0);
+        public ReactiveProperty<int> TimeOutLeft = new(0);
+        public ReactiveProperty<bool> IsLeftServe = new(true);
+        public ReactiveProperty<bool> IsATeamLeft = new(true);
+        public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
+        public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
+
+        public ReactiveProperty<bool> EnableLeftMinus = new(false);
+        public ReactiveProperty<bool> EnableRightMinus = new(false);
+        public ReactiveProperty<bool> EnableLeftPlus = new(true);
+        public ReactiveProperty<bool> EnableRightPlus = new(true);
 
 
-
-        public ReactiveProperty<int> LeftTeamServePoint { get; set; } = new(0);
-        public ReactiveProperty<int> RightTeamServePoint { get; set; } = new(0);
-
-        public ReactiveProperty<int> LeftTeamAttackPoint { get; set; } = new(0);
-        public ReactiveProperty<int> RightTeamAttackPoint { get; set; } = new(0);
-
-        public ReactiveProperty<int> LeftTeamBlockPoint { get; set; } = new(0);
-        public ReactiveProperty<int> RightTeamBlockPoint { get; set; } = new(0);
-
-        public ReactiveProperty<int> LeftTeamServeError { get; set; } = new(0);
-        public ReactiveProperty<int> RightTeamServeError { get; set; } = new(0);
-
-        public ReactiveProperty<int> LeftTeamError { get; set; } = new(0);
-        public ReactiveProperty<int> RightTeamError { get; set; } = new(0);
-
-
-
-        public ReactiveProperty<int> Set { get; set; } = new(1);
-        public ReactiveProperty<string> TeamLeft { get; set; } = new("USA");
-        public ReactiveProperty<string> TeamRight { get; set; } = new("JPN");
-        public ReactiveProperty<int> PointLeft { get; set; } = new(0);
-        public ReactiveProperty<int> PointRight { get; set; } = new(0);
-        public ReactiveProperty<int> SetLeft { get; set; } = new(0);
-        public ReactiveProperty<int> SetRight { get; set; } = new(0);
-        public ReactiveProperty<int> TimeOutRight { get; set; } = new(0);
-        public ReactiveProperty<int> TimeOutLeft { get; set; } = new(0);
-        public ReactiveProperty<bool> IsLeftServe { get; set; } = new(true);
-        public ReactiveProperty<bool> IsATeamLeft { get; set; } = new(true);
-        public ReactiveProperty<string> ColorCodeLeftTeam { get; set; } = new("#ffffff");
-        public ReactiveProperty<string> ColorCodeRightTeam { get; set; } = new("#000000");
-
-        public ReactiveProperty<bool> EnableLeftMinus { get; set; } = new(false);
-        public ReactiveProperty<bool> EnableRightMinus { get; set; } = new(false);
-        public ReactiveProperty<bool> EnableLeftPlus { get; set; } = new(true);
-        public ReactiveProperty<bool> EnableRightPlus { get; set; } = new(true);
-
-
-        public ReactiveProperty<int> TIMEOUT { get; set; } = new(2);
-        public ReactiveProperty<int> SET { get; set; } = new(5);
-        public ReactiveProperty<int> NEEDSET { get; set; } = new(3);
-        public ReactiveProperty<int> POINT { get; set; } = new(25);
-        public ReactiveProperty<int> LASTSETPOINT { get; set; } = new(15);
-        public ReactiveProperty<bool> COURTCHANGE { get; set; } = new(true);
+        public ReactiveProperty<int> TIMEOUT = new(2);
+        public ReactiveProperty<int> SET = new(5);
+        public ReactiveProperty<int> NEEDSET = new(3);
+        public ReactiveProperty<int> POINT = new(25);
+        public ReactiveProperty<int> LASTSETPOINT = new(15);
+        public ReactiveProperty<bool> COURTCHANGE = new(true);
     }
 }
