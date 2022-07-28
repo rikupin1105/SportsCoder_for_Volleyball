@@ -1,0 +1,186 @@
+﻿<UserControl
+    x:Class="BlankApp1.Views.SettingDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:colopicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:BlankApp1.ViewModels"
+    Width="500"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SettingDialogViewModel}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <ui:TitleBar Title="{Binding Title}" />
+
+        <StackPanel>
+
+            <StackPanel Margin="10">
+                <TextBlock Grid.Row="0" Text="チーム名 4文字以下を推奨" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="0"
+                        Margin="0,0,5,0"
+                        Text="{Binding ATeamName.Value}" />
+
+                    <TextBox Grid.Column="1" Text="{Binding BTeamName.Value}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <TextBlock Grid.Row="0" Text="カラーコード" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="0"
+                        Margin="0,0,5,0"
+                        Text="{Binding ATeamColorCode.Value}" />
+
+                    <TextBox Grid.Column="1" Text="{Binding BTeamColorCode.Value}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="セット数" />
+
+                    <ui:NumberBox
+                        Grid.Column="1"
+                        ClearButtonEnabled="False"
+                        IntegersOnly="True"
+                        Max="7"
+                        Min="1"
+                        Step="2"
+                        Text="{Binding Set.Value}"
+                        Value="5" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="点数" />
+                    <ui:NumberBox
+                        Grid.Column="1"
+                        ClearButtonEnabled="False"
+                        IntegersOnly="True"
+                        Max="25"
+                        Min="15"
+                        Step="1"
+                        Text="{Binding Point.Value}"
+                        Value="25" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="最終セットの点数" />
+                    <ui:NumberBox
+                        Grid.Column="1"
+                        ClearButtonEnabled="False"
+                        IntegersOnly="True"
+                        Max="25"
+                        Min="8"
+                        Step="1"
+                        Text="{Binding LastSetPoint.Value}"
+                        Value="15" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="コートチェンジ" />
+
+                    <ui:ToggleSwitch
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        IsChecked="{Binding CourtChange.Value}" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="タイムアウトの回数" />
+                    <ui:NumberBox
+                        Grid.Column="1"
+                        ClearButtonEnabled="False"
+                        IntegersOnly="True"
+                        Max="5"
+                        Min="0"
+                        Step="1"
+                        Text="{Binding TimeOut.Value}"
+                        Value="2" />
+                </Grid>
+            </StackPanel>
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Width="150"
+                HorizontalAlignment="Right"
+                Background="#4CAF50"
+                Command="{Binding SubmitCommand}"
+                Content="確定"
+                FontSize="20" />
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>
