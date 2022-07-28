@@ -1,7 +1,7 @@
 ﻿using Prism.Services.Dialogs;
 using System.Windows;
 
-namespace BlankApp1.Views
+namespace SportsCoderForVolleyball.Views
 {
     /// <summary>
     /// Interaction logic for DialogWindow.xaml

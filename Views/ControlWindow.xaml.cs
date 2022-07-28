@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BlankApp1.Views
+namespace SportsCoderForVolleyball.Views
 {
     /// <summary>
     /// Interaction logic for ControlWindow.xaml

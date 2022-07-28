@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlankApp1
+namespace SportsCoderForVolleyball
 {
     public class Control
     {
@@ -441,7 +441,7 @@ namespace BlankApp1
             {
                 //ゲーム終了の検出
                 //左チーム
-                if (Instance.PointLeft.Value - Instance.PointRight.Value >= 2 && Instance.PointLeft.Value >= Control.Instance.LASTSETPOINT.Value)
+                if (Instance.PointLeft.Value - Instance.PointRight.Value >= 2 && Instance.PointLeft.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
                     await DeleteOption(false);
@@ -466,7 +466,7 @@ namespace BlankApp1
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value - Instance.PointLeft.Value >= 2 && Instance.PointRight.Value >= Control.Instance.LASTSETPOINT.Value)
+                if (Instance.PointRight.Value - Instance.PointLeft.Value >= 2 && Instance.PointRight.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
                     await DeleteOption(false);
@@ -493,7 +493,7 @@ namespace BlankApp1
 
                 //マッチポイントの検出
                 //左チーム
-                if (Instance.PointLeft.Value + 1 >= Control.Instance.LASTSETPOINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
+                if (Instance.PointLeft.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
                 {
                     Instance.IsDisplayLeftMatchPoint.Value = true;
                     return StateSet.MatchPoint;
@@ -504,7 +504,7 @@ namespace BlankApp1
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value + 1 >= Control.Instance.LASTSETPOINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
+                if (Instance.PointRight.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
                     Instance.IsDisplayRightMatchPoint.Value = true;
                     return StateSet.MatchPoint;
@@ -520,11 +520,11 @@ namespace BlankApp1
             {
                 //セット終了の検出
                 //左チーム
-                if (Instance.PointLeft.Value >= Control.Instance.POINT.Value && Instance.PointLeft.Value - Instance.PointRight.Value >= 2)
+                if (Instance.PointLeft.Value >= Instance.POINT.Value && Instance.PointLeft.Value - Instance.PointRight.Value >= 2)
                 {
                     LockControl(false);
                     await DeleteOption(false);
-                    if (Instance.SetLeft.Value + 1 == Control.Instance.NEEDSET.Value)
+                    if (Instance.SetLeft.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
                         Instance.SetLeft.Value++;
@@ -579,11 +579,11 @@ namespace BlankApp1
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value >= Control.Instance.POINT.Value && Instance.PointRight.Value - Instance.PointLeft.Value >= 2)
+                if (Instance.PointRight.Value >= Instance.POINT.Value && Instance.PointRight.Value - Instance.PointLeft.Value >= 2)
                 {
                     LockControl(false);
                     await DeleteOption(false);
-                    if (Instance.SetRight.Value + 1 == Control.Instance.NEEDSET.Value)
+                    if (Instance.SetRight.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
                         Instance.SetRight.Value++;

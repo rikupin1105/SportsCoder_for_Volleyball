@@ -1,9 +1,9 @@
-﻿using BlankApp1.ViewModels;
-using BlankApp1.Views;
+﻿using SportsCoderForVolleyball.ViewModels;
+using SportsCoderForVolleyball.Views;
 using Prism.Ioc;
 using System.Windows;
 
-namespace BlankApp1
+namespace SportsCoderForVolleyball
 {
     /// <summary>
     /// Interaction logic for App.xaml

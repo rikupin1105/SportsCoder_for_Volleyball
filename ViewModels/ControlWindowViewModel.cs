@@ -3,13 +3,14 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using SportsCoderForVolleyball;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BlankApp1.ViewModels
+namespace SportsCoderForVolleyball.ViewModels
 {
     public class ControlWindowViewModel : BindableBase
     {

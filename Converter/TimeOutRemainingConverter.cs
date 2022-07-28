@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace BlankApp1.Converter
+namespace SportsCoderForVolleyball.Converter
 {
     internal class TimeOutRemainingConverter : IValueConverter
     {

@@ -3,7 +3,7 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System.Collections.Generic;
 
-namespace BlankApp1.ViewModels
+namespace SportsCoderForVolleyball.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {

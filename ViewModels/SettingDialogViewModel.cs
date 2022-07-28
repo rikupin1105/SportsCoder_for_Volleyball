@@ -3,11 +3,12 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using SportsCoderForVolleyball;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlankApp1.ViewModels
+namespace SportsCoderForVolleyball.ViewModels
 {
     public class SettingDialogViewModel : BindableBase, IDialogAware
     {

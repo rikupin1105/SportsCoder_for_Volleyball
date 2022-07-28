@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlankApp1.ViewModels
+namespace SportsCoderForVolleyball.ViewModels
 {
     public class EndofSetDialogViewModel : BindableBase, IDialogAware
     {
