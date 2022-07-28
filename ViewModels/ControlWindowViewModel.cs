@@ -87,7 +87,8 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand LeftTeamServeErrorCommand { get; set; } = new();
         public ReactiveCommand RightTeamServeErrorCommand { get; set; } = new();
 
-
+        public ReactiveCommand LeftTeamErrorCommand { get; set; } = new();
+        public ReactiveCommand RightTeamErrorCommand { get; set; } = new();
 
         public ReactiveProperty<int> LeftTeamServePoint { get; set; } = Control.Instance.LeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> RightTeamServePoint { get; set; } = Control.Instance.RightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();

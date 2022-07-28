@@ -11,6 +11,7 @@
     Title="Controller"
     Width="720"
     d:DataContext="{d:DesignInstance Type=viewmodels:ControlWindowViewModel}"
+    SizeToContent="Height"
     Style="{StaticResource UiWindow}"
     mc:Ignorable="d">
 
@@ -387,7 +388,7 @@
                             Height="40"
                             Margin="5"
                             HorizontalAlignment="Left"
-                            Command="{Binding PointPlusLeftCommand}"
+                            Command="{Binding LeftTeamErroCommand}"
                             Content="その他ミス      +"
                             FontSize="20" />
                         <Button
@@ -399,8 +400,7 @@
                             HorizontalAlignment="left"
                             Command="{Binding PointMinusLeftCommand}"
                             Content="ー"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableLeftMinus.Value}" />
+                            FontSize="20" />
                         <Button
                             Grid.Row="0"
                             Grid.Column="3"
@@ -417,10 +417,9 @@
                             Height="40"
                             Margin="5"
                             HorizontalAlignment="Right"
-                            Command="{Binding PointPlusRightCommand}"
+                            Command="{Binding RightTeamErrorCommand}"
                             Content="+   その他ミス"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableRightPlus.Value}" />
+                            FontSize="20" />
                     </Grid>
 
                     <!--  タイムアウト  -->

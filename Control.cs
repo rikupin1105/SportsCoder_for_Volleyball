@@ -361,7 +361,19 @@ namespace SportsCoderForVolleyball
                 RightTeamServeError.Value++;
             }
         }
-
+        public void Error(bool IsLeftTeam)
+        {
+            if (IsLeftTeam)
+            {
+                PointPlusRight();
+                LeftTeamError.Value++;
+            }
+            else
+            {
+                PointPlusLeft();
+                RightTeamError.Value++;
+            }
+        }
 
         public async void CourtChange(bool detectSetpoint = true)
         {
