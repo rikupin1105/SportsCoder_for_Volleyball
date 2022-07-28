@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SportsCoderForVolleyball
+namespace SportsCoderForVolleyball.Models
 {
     public class Control
     {

@@ -3,7 +3,7 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using SportsCoderForVolleyball;
+using SportsCoderForVolleyball.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

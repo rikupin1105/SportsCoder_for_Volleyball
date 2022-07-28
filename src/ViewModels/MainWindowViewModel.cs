@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using SportsCoderForVolleyball.Models;
 using System.Collections.Generic;
 using System.Linq;
 
