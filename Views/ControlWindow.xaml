@@ -388,7 +388,7 @@
                             Height="40"
                             Margin="5"
                             HorizontalAlignment="Left"
-                            Command="{Binding LeftTeamErroCommand}"
+                            Command="{Binding LeftTeamErrorCommand}"
                             Content="その他ミス      +"
                             FontSize="20" />
                         <Button
