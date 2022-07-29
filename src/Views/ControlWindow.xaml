@@ -161,14 +161,38 @@
                         Text="{Binding SetRight.Value}" />
 
                 </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="170" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Text="SET" />
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        Text="Game統計" />
+                    <TextBlock
+                        Grid.Column="4"
+                        HorizontalAlignment="Center"
+                        Text="SET" />
+                </Grid>
                 <StackPanel>
                     <!--  アタックポイント  -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
@@ -182,28 +206,7 @@
                             Content="アタックポイント +"
                             FontSize="20" />
                         <Button
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="left"
-                            Command="{Binding PointMinusLeftCommand}"
-                            Content="ー"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableLeftMinus.Value}" />
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Command="{Binding PointMinusRightCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Column="4"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -211,15 +214,42 @@
                             Command="{Binding RightTeamAttackPointCommand}"
                             Content="+ アタックポイント"
                             FontSize="20" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding LeftTeamAttackPoint.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding RightTeamAttackPoint.Value}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameLeftTeamAttackPoint.Value}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameRightTeamAttackPoint.Value}" />
                     </Grid>
 
                     <!--  ブロックポイント  -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
@@ -233,28 +263,7 @@
                             Content="ブロックポイント +"
                             FontSize="20" />
                         <Button
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="left"
-                            Command="{Binding PointMinusLeftCommand}"
-                            Content="ー"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableLeftMinus.Value}" />
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Command="{Binding PointMinusRightCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Column="4"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -263,15 +272,42 @@
                             Content="+ ブロックポイント"
                             FontSize="20"
                             IsEnabled="{Binding EnableRightPlus.Value}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding LeftTeamBlockPoint.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding RightTeamBlockPoint.Value}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameLeftTeamBlockPoint.Value}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameRightTeamBlockPoint.Value}" />
                     </Grid>
 
                     <!--  サーブポイント  -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
@@ -285,28 +321,7 @@
                             Content="サーブポイント　+"
                             FontSize="20" />
                         <Button
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="left"
-                            Command="{Binding PointMinusLeftCommand}"
-                            Content="ー"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableLeftMinus.Value}" />
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Command="{Binding PointMinusRightCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Column="4"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -315,6 +330,33 @@
                             Content="+　サーブポイント"
                             FontSize="20"
                             IsEnabled="{Binding EnableRightPlus.Value}" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding LeftTeamServePoint.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding RightTeamServePoint.Value}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameLeftTeamServePoint.Value}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameRightTeamServePoint.Value}" />
+
                     </Grid>
 
                     <TextBlock
@@ -326,9 +368,10 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <Button
@@ -341,45 +384,51 @@
                             Content="サーブミス       +"
                             FontSize="20" />
                         <Button
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="left"
-                            Command="{Binding PointMinusLeftCommand}"
-                            Content="ー"
-                            FontSize="20"
-                            IsEnabled="{Binding EnableLeftMinus.Value}" />
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Command="{Binding PointMinusRightCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Column="4"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
                             HorizontalAlignment="Right"
                             Command="{Binding RightTeamServeErrorCommand}"
                             Content="+    サーブミス"
+                            FontSize="20" />
+
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
                             FontSize="20"
-                            IsEnabled="{Binding EnableRightPlus.Value}" />
+                            Text="{Binding LeftTeamServeError.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding RightTeamServeError.Value}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameLeftTeamServeError.Value}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameRightTeamServeError.Value}" />
+
                     </Grid>
 
                     <!--  その他ミス  -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <Button
@@ -392,27 +441,7 @@
                             Content="その他ミス      +"
                             FontSize="20" />
                         <Button
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="left"
-                            Command="{Binding PointMinusLeftCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Width="40"
-                            Height="40"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Command="{Binding PointMinusRightCommand}"
-                            Content="ー"
-                            FontSize="20" />
-                        <Button
-                            Grid.Column="4"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -420,12 +449,46 @@
                             Command="{Binding RightTeamErrorCommand}"
                             Content="+   その他ミス"
                             FontSize="20" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding LeftTeamError.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding RightTeamError.Value}" />
+
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameLeftTeamError.Value}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding GameRightTeamError.Value}" />
+
                     </Grid>
 
                     <!--  タイムアウト  -->
                     <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
                         <Button
-                            Grid.Row="3"
+                            Grid.Column="0"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -434,8 +497,7 @@
                             Content="タイムアウト"
                             FontSize="20" />
                         <Button
-                            Grid.Row="3"
-                            Grid.Column="3"
+                            Grid.Column="5"
                             Width="160"
                             Height="40"
                             Margin="5"
@@ -443,7 +505,26 @@
                             Command="{Binding RightTimeoutCommand}"
                             Content="タイムアウト"
                             FontSize="20" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding TimeOutLeft.Value}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="{Binding TimeOutRight.Value}" />
+
                     </Grid>
+
+                    <Button
+                        Margin="0,20,0,0"
+                        Command="{Binding UndoCommand}"
+                        Content="戻す"
+                        FontSize="20" />
                 </StackPanel>
 
 
