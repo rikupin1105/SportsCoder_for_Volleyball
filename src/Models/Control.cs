@@ -282,10 +282,7 @@ namespace SportsCoderForVolleyball.Models
 
         public void LockControl(bool look = true)
         {
-            Instance.EnableLeftMinus.Value = look;
-            Instance.EnableLeftPlus.Value = look;
-            Instance.EnableRightMinus.Value = look;
-            Instance.EnableRightPlus.Value = look;
+            Instance.GuiEnable.Value = look;
         }
 
         private async void PointPlusLeft(bool IsDetectSetPoint = true)
@@ -300,17 +297,6 @@ namespace SportsCoderForVolleyball.Models
             if (IsDetectSetPoint)
                 await DetectSetPoint();
         }
-        private async void PointMinusLeftAsync()
-        {
-            Instance.PointLeft.Value = Math.Min(Instance.PointLeft.Value--, 0);
-            await DetectSetPoint();
-        }
-        private async void PointMinusRightAsync()
-        {
-            Instance.PointRight.Value = Math.Min(Instance.PointRight.Value--, 0);
-            await DetectSetPoint();
-        }
-
 
         public async void ServePoint(bool IsLeftTeam)
         {
@@ -963,7 +949,7 @@ namespace SportsCoderForVolleyball.Models
 
                     Instance.Sets.Value.RemoveAt(set-1);
 
-                    if (c.Contains("C"))
+                    if (c.Contains('C'))
                     {
                         CourtChange(false, false);
                         if (c[2]=='R')
@@ -1054,10 +1040,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
         public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
 
-        public ReactiveProperty<bool> EnableLeftMinus = new(false);
-        public ReactiveProperty<bool> EnableRightMinus = new(false);
-        public ReactiveProperty<bool> EnableLeftPlus = new(true);
-        public ReactiveProperty<bool> EnableRightPlus = new(true);
+        public ReactiveProperty<bool> GuiEnable = new(true);
 
         //ルール
         public ReactiveProperty<int> TIMEOUT = new(2);

@@ -45,8 +45,6 @@ namespace SportsCoderForVolleyball.ViewModels
             RightTeamErrorCommand.Subscribe(_ => Control.Instance.Error(false));
             UndoCommand.Subscribe(_ => Control.Instance.Undo());
 
-
-
             PointLeft = Control.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
             PointRight = Control.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
             SetLeft = Control.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
@@ -61,12 +59,6 @@ namespace SportsCoderForVolleyball.ViewModels
             ColorCodeRightTeam = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
 
             Set = Control.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-            EnableLeftMinus = Control.Instance.EnableLeftMinus.ObserveProperty(x => x.Value).ToReactiveProperty();
-            EnableRightMinus = Control.Instance.EnableRightMinus.ObserveProperty(x => x.Value).ToReactiveProperty();
-            EnableLeftPlus = Control.Instance.EnableLeftPlus.ObserveProperty(x => x.Value).ToReactiveProperty();
-            EnableRightPlus = Control.Instance.EnableRightPlus.ObserveProperty(x => x.Value).ToReactiveProperty();
-
         }
         public ReactiveProperty<int> Set { get; set; }
 
@@ -118,6 +110,8 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<int> GameLeftTeamError { get; set; } = Control.Instance.GameLeftTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameRightTeamError { get; set; } = Control.Instance.GameRightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
 
+        public ReactiveProperty<bool> GuiEnable { get; set; } = Control.Instance.GuiEnable.ObserveProperty(x => x.Value).ToReactiveProperty();
+
 
 
         public ReactiveProperty<int> PointLeft { get; set; }
@@ -126,12 +120,6 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<int> SetRight { get; set; }
         public ReactiveProperty<string> TeamRight { get; set; }
         public ReactiveProperty<string> TeamLeft { get; set; }
-
-        public ReactiveProperty<bool> EnableLeftMinus { get; set; }
-        public ReactiveProperty<bool> EnableRightMinus { get; set; }
-
-        public ReactiveProperty<bool> EnableLeftPlus { get; set; }
-        public ReactiveProperty<bool> EnableRightPlus { get; set; }
 
         public ReactiveProperty<int> TimeOutRight { get; set; }
         public ReactiveProperty<int> TimeOutLeft { get; set; }
