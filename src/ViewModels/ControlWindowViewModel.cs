@@ -41,6 +41,10 @@ namespace SportsCoderForVolleyball.ViewModels
             RightTeamAttackPointCommand.Subscribe(_ => Control.Instance.AttackPoint(false));
             LeftTeamServeErrorCommand.Subscribe(_ => Control.Instance.ServeError(true));
             RightTeamServeErrorCommand.Subscribe(_ => Control.Instance.ServeError(false));
+            LeftTeamErrorCommand.Subscribe(_ => Control.Instance.Error(true));
+            RightTeamErrorCommand.Subscribe(_ => Control.Instance.Error(false));
+
+
 
             PointLeft = Control.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
             PointRight = Control.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
