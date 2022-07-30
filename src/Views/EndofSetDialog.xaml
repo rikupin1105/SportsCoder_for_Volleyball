@@ -5,24 +5,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
     d:DataContext="{d:DesignInstance Type=viewmodels:EndofSetDialogViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <StackPanel Margin="20">
-        <TextBlock Margin="5" Text="セットを終了しますか？" />
-        <StackPanel
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal">
-            <Button
-                Margin="5"
-                Command="{Binding NoCommand}"
-                Content="いいえ" />
-            <Button
-                Margin="5"
-                Command="{Binding YesCommand}"
-                Content="はい" />
+
+    <prism:Dialog.WindowStyle>
+        <Style BasedOn="{StaticResource UiWindow}" TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+            <Setter Property="Width" Value="300" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="SizeToContent" Value="Height" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+    <StackPanel>
+        <ui:TitleBar
+            Title="{Binding Title}"
+            ShowMaximize="False"
+            ShowMinimize="False" />
+        <StackPanel Margin="20">
+
+            <TextBlock FontSize="20" Text="セットを終了しますか？" />
+            <StackPanel
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <Button
+                    Margin="5"
+                    Command="{Binding NoCommand}"
+                    Content="いいえ" />
+                <Button
+                    Margin="5"
+                    Command="{Binding YesCommand}"
+                    Content="はい" />
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </UserControl>

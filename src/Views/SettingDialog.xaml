@@ -8,13 +8,24 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
-    Width="500"
     d:DataContext="{d:DesignInstance Type=viewmodels:SettingDialogViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window" BasedOn="{StaticResource UiWindow}">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+            <Setter Property="Width" Value="500" />
+            <Setter Property="SizeToContent" Value="Height" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
     <StackPanel>
-        <ui:TitleBar Title="{Binding Title}" />
+        <ui:TitleBar
+            Title="{Binding Title}"
+            ShowMaximize="False"
+            ShowMinimize="False" />
 
         <StackPanel>
 
@@ -218,6 +229,7 @@
                 Grid.Row="6"
                 Grid.Column="1"
                 Width="150"
+                Margin="10"
                 HorizontalAlignment="Right"
                 Background="#4CAF50"
                 Command="{Binding SubmitCommand}"

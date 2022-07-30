@@ -9,7 +9,6 @@
     d:DataContext="{d:DesignInstance Type=viewmodels:DialogWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     ResizeMode="NoResize"
-    SizeToContent="WidthAndHeight"
     Style="{StaticResource UiWindow}"
     mc:Ignorable="d" />
 
