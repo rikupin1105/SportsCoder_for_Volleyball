@@ -321,8 +321,9 @@ namespace SportsCoderForVolleyball.Models
 
             var s = DetectSetPoint().Result;
 
-            if (s == StateSet.None)
+            if (s == StateSet.None && IsAnimation.Value == true)
             {
+                //得点を表示していないとき、
                 //セットポイントやマッチポイント、セット終了時は表示しない
                 await DeleteOption();
                 Instance.IsDisplayServePointInfomation.Value = true;
