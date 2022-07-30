@@ -16,6 +16,7 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <Window.Resources>
+        <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
         <convertar:TimeOutRemainingConverter x:Key="TimeOutRemainingConverter" />
         <Style TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -1794,6 +1795,7 @@
                 HorizontalAlignment="Right"
                 FontSize="25"
                 Foreground="White"
+                Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
                 Text="●" />
             <TextBlock
                 Grid.Column="6"
@@ -1801,6 +1803,7 @@
                 HorizontalAlignment="Left"
                 FontSize="25"
                 Foreground="White"
+                Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
                 Text="●" />
 
             <TextBlock

@@ -126,6 +126,32 @@
                         Value="15" />
                 </Grid>
             </StackPanel>
+
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="最初のサーブ" />
+
+                    <ComboBox
+                        Grid.Column="1"
+                        SelectedIndex="{Binding ServerIndex.Value}"
+                        Text="{Binding Server.Value}">
+                        <ComboBoxItem Content="左" />
+                        <ComboBoxItem Content="右" />
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+
             <StackPanel Margin="10">
                 <Grid>
                     <Grid.ColumnDefinitions>

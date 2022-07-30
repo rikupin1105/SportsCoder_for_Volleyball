@@ -44,6 +44,7 @@ namespace SportsCoderForVolleyball.ViewModels
             LeftTeamErrorCommand.Subscribe(_ => Control.Instance.Error(true));
             RightTeamErrorCommand.Subscribe(_ => Control.Instance.Error(false));
             UndoCommand.Subscribe(_ => Control.Instance.Undo());
+            SwitchServerCommand.Subscribe(_ => Control.Instance.SwitchServer());
 
             //プレー統計
             StatisticsAttackPointCommand.Subscribe(_ => Control.Instance.InfomationAttackPoint());
@@ -82,6 +83,7 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand GetSetDisplayCommand { get; set; } = new();
         public ReactiveCommand SettingCommand { get; set; } = new();
         public ReactiveCommand UndoCommand { get; set; } = new();
+        public ReactiveCommand SwitchServerCommand { get; set; } = new();
 
         public ReactiveCommand LeftTeamServePointCommand { get; set; } = new();
         public ReactiveCommand RightTeamServePointCommand { get; set; } = new();

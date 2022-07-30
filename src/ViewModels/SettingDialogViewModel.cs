@@ -41,6 +41,21 @@ namespace SportsCoderForVolleyball.ViewModels
 
                 Control.Instance.BackGroundColor.Value = BackGroundColor.Value;
 
+                if(Server.Value == "左")
+                {
+                    Control.Instance.IsLeftServe.Value = true;
+                    Control.Instance.IsRightServe.Value = false;
+
+                    Control.Instance.IsLeftFirstServe.Value = true;
+                }
+                else
+                {
+                    Control.Instance.IsLeftServe.Value = false;
+                    Control.Instance.IsRightServe.Value = true;
+
+                    Control.Instance.IsLeftFirstServe.Value = false;
+                }
+
                 RequestClose.Invoke(null);
             });
         }
@@ -57,6 +72,8 @@ namespace SportsCoderForVolleyball.ViewModels
 
         public ReactiveProperty<string> ATeamColorCode { get; set; }
         public ReactiveProperty<string> BTeamColorCode { get; set; }
+        public ReactiveProperty<string> Server { get; set; } = new();
+        public ReactiveProperty<int> ServerIndex { get; set; } = new();
 
         public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
@@ -73,6 +90,14 @@ namespace SportsCoderForVolleyball.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             Control.Instance.LockControl(false);
+            if (Control.Instance.IsLeftFirstServe.Value)
+            {
+                ServerIndex.Value = 0;
+            }
+            else
+            {
+                ServerIndex.Value = 1;
+            }
         }
     }
 }

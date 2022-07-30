@@ -555,6 +555,7 @@
                         <Button
                             Width="100"
                             Margin="5"
+                            Command="{Binding SwitchServerCommand}"
                             Content="サーバー交代"
                             IsEnabled="{Binding GuiEnable.Value}" />
                         <Button

@@ -37,7 +37,6 @@ namespace SportsCoderForVolleyball.ViewModels
             TimeOutRight = Control.Instance.TimeOutRight.ObserveProperty(x => x.Value).ToReactiveProperty();
             TimeOutLeft = Control.Instance.TimeOutLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
             Set = Control.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsLeftServe = Control.Instance.IsLeftServe.ObserveProperty(x => x.Value).ToReactiveProperty();
 
             ColorCodeLeftTeam = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
             ColorCodeRightTeam = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
@@ -79,7 +78,8 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<int> SetRight { get; set; }
         public ReactiveProperty<int> TimeOutRight { get; set; }
         public ReactiveProperty<int> TimeOutLeft { get; set; }
-        public ReactiveProperty<bool> IsLeftServe { get; set; }
+        public ReactiveProperty<bool> IsLeftServe { get; set; } = Control.Instance.IsLeftServe.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsRightServe { get; set; } = Control.Instance.IsRightServe.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         public ReactiveProperty<string> ColorCodeLeftTeam { get; set; }
         public ReactiveProperty<string> ColorCodeRightTeam { get; set; }

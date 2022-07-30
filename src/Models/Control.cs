@@ -377,6 +377,11 @@ namespace SportsCoderForVolleyball.Models
         {
             Instance.GameLeftTeamPoint.Value++;
             Instance.PointLeft.Value++;
+
+            //サーバー表示
+            Instance.IsLeftServe.Value = true;
+            Instance.IsRightServe.Value = false;
+
             if (IsDetectSetPoint)
                 await DetectSetPoint();
         }
@@ -384,6 +389,11 @@ namespace SportsCoderForVolleyball.Models
         {
             Instance.GameRightTeamPoint.Value++;
             Instance.PointRight.Value++;
+
+            //サーバー表示
+            Instance.IsLeftServe.Value = false;
+            Instance.IsRightServe.Value = true;
+
             if (IsDetectSetPoint)
                 await DetectSetPoint();
         }
@@ -508,11 +518,12 @@ namespace SportsCoderForVolleyball.Models
             Swap(ref Instance.GameLeftTeamError, ref Instance.GameRightTeamError);
 
             Swap(ref Instance.GameLeftTeamOpponentError, ref Instance.GameRightTeamOpponentError);
+            SwitchServer();
 
             Instance.IsATeamLeft.Value = !Instance.IsATeamLeft.Value;
 
             if (History)
-                Instance.History.Add("C");
+                Instance.History.Add("CC");
 
             if (detectSetpoint)
             {
@@ -651,8 +662,43 @@ namespace SportsCoderForVolleyball.Models
 
             if (Instance.COURTCHANGE.Value && Instance.Set.Value != Instance.SET.Value)
             {
+                //コートチェンジあり
                 CourtChange(false, false);
+                Instance.IsLeftServe.Value = true;
+                Instance.IsRightServe.Value = false;
             }
+            else
+            {
+                //コートチェンジなし
+                if (Instance.Set.Value % 2 == 0)
+                {
+                    if (Instance.IsLeftFirstServe.Value)
+                    {
+                        Instance.IsLeftServe.Value = false;
+                        Instance.IsRightServe.Value = true;
+                    }
+                    else
+                    {
+                        Instance.IsLeftServe.Value = true;
+                        Instance.IsRightServe.Value = false;
+                    }
+                }
+                else
+                {
+                    if (Instance.IsLeftFirstServe.Value)
+                    {
+                        Instance.IsLeftServe.Value = true;
+                        Instance.IsRightServe.Value = false;
+                    }
+                    else
+                    {
+                        Instance.IsLeftServe.Value = false;
+                        Instance.IsRightServe.Value = true;
+                    }
+                }
+            }
+
+
             InfomationScore();
 
             //操作ロックの解除
@@ -913,6 +959,7 @@ namespace SportsCoderForVolleyball.Models
 
             var c = History[History.Count-1];
 
+            //ポイント
             if (c[0] == 'P')
             {
                 var skill = c.Split('.')[1];
@@ -975,6 +1022,7 @@ namespace SportsCoderForVolleyball.Models
                 }
                 await DetectSetPoint();
             }
+            //タイムアウト
             else if (c[0] == 'T')
             {
                 if (c[1]=='R')
@@ -986,7 +1034,8 @@ namespace SportsCoderForVolleyball.Models
                     TimeOutLeft.Value--;
                 }
             }
-            else if (c[0]=='E')
+            //終了
+            else if (c[0] == 'E')
             {
                 if (c[1]=='S')
                 {
@@ -1047,21 +1096,116 @@ namespace SportsCoderForVolleyball.Models
                             SetLeft.Value--;
                         }
                     }
-                    History.RemoveAt(History.Count-1);
+                    History.RemoveAt(History.Count - 1);
                     Undo();
                     return;
                 }
             }
+            //チェンジ
             else if (c[0] == 'C')
             {
-                //コートチェンジ
-                CourtChange(History: false);
+                if (c[1] == 'S')
+                {
+                    //サーバーチェンジ
+                    SwitchServer(false);
+                    History.RemoveAt(History.Count - 1);
+                    return;
+                }
+                else if (c[1] == 'C')
+                {
+                    //コートチェンジ
+                    CourtChange(History: false);
+                    History.RemoveAt(History.Count - 1);
+                    return;
+                }
             }
-            History.RemoveAt(History.Count-1);
+            //スタート
+            else if (c[0] == 'S')
+            {
+                return;
+            }
+
+            History.RemoveAt(History.Count - 1);
+
+            //サーバー
+            for (int i = History.Count - 1; i >= 0; i--)
+            {
+                if (History[i][0] == 'P')
+                {
+                    if (History[i][1] == 'R')
+                    {
+                        Instance.IsLeftServe.Value = false;
+                        Instance.IsRightServe.Value = true;
+                    }
+                    else if (History[i][1] == 'L')
+                    {
+                        Instance.IsLeftServe.Value = true;
+                        Instance.IsRightServe.Value = false;
+                    }
+                    return;
+                }
+                else if (History[i][0]=='E')
+                {
+                    var set = int.Parse(History[i][3].ToString()) + 1;
+                    if (Instance.COURTCHANGE.Value)
+                    {
+                        Instance.IsLeftServe.Value = true;
+                        Instance.IsRightServe.Value = false;
+                    }
+                    else if (set % 2 == 0)
+                    {
+                        if (Instance.IsLeftFirstServe.Value)
+                        {
+                            Instance.IsLeftServe.Value = false;
+                            Instance.IsRightServe.Value = true;
+                        }
+                        else
+                        {
+                            Instance.IsLeftServe.Value = true;
+                            Instance.IsRightServe.Value = false;
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        if (Instance.IsLeftFirstServe.Value)
+                        {
+                            Instance.IsLeftServe.Value = true;
+                            Instance.IsRightServe.Value = false;
+                            return;
+                        }
+                        else
+                        {
+                            Instance.IsLeftServe.Value = false;
+                            Instance.IsRightServe.Value = true;
+                            return;
+                        }
+                    }
+                }
+                else if (History[i] == "S")
+                {
+                    if (Instance.IsLeftFirstServe.Value)
+                    {
+                        Instance.IsLeftServe.Value = true;
+                        Instance.IsRightServe.Value = false;
+                    }
+                    else
+                    {
+                        Instance.IsLeftServe.Value = false;
+                        Instance.IsRightServe.Value = true;
+                    }
+                }
+            }
+        }
+        public void SwitchServer(bool History = true)
+        {
+            Swap(ref Instance.IsLeftServe, ref Instance.IsRightServe);
+            if (History)
+                Instance.History.Add("CS");
         }
 
         public static Control Instance { get; } = new();
-        public ReactiveCollection<string> History { get; set; } = new();
+        public ReactiveCollection<string> History { get; set; } = new ReactiveCollection<string>() { "S" };
 
         public ReactiveProperty<List<Set>> Sets = new(new List<Set>());
         public ReactiveProperty<List<PointParSetInfomationSource>> PointParSetSource { get; set; } = new();
@@ -1128,6 +1272,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<int> TimeOutRight = new(0);
         public ReactiveProperty<int> TimeOutLeft = new(0);
         public ReactiveProperty<bool> IsLeftServe = new(true);
+        public ReactiveProperty<bool> IsRightServe = new(false);
         public ReactiveProperty<bool> IsATeamLeft = new(true);
         public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
         public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
@@ -1142,6 +1287,8 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<int> POINT = new(25);
         public ReactiveProperty<int> LASTSETPOINT = new(15);
         public ReactiveProperty<bool> COURTCHANGE = new(true);
+
+        public ReactiveProperty<bool> IsLeftFirstServe = new(true);
 
 
         private static void Swap<T>(ref ReactiveProperty<T> a, ref ReactiveProperty<T> b)
