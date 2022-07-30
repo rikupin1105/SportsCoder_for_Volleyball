@@ -1666,7 +1666,8 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Right}"
-                        FontSize="25">
+                        FontSize="25"
+                        FontWeight="DemiBold">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Style.Triggers>
