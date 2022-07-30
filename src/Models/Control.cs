@@ -216,7 +216,7 @@ namespace SportsCoderForVolleyball.Models
                 //await DetectSetPoint();
             }
         }
-        public void InfomationStatistics()
+        public static void InfomationStatistics()
         {
             if (Instance.IsDisplaySetStuts.Value)
             {
@@ -261,7 +261,7 @@ namespace SportsCoderForVolleyball.Models
                 Instance.IsDisplayPointParSet.Value = true;
             }
         }
-        public void InfomationSet()
+        public static void InfomationSet()
         {
             if (Instance.IsDisplayGetSet.Value)
             {
@@ -288,7 +288,7 @@ namespace SportsCoderForVolleyball.Models
             }
             public bool IsRightWin { get => !IsLeftWin; }
         }
-        public void LockControl(bool look = true)
+        public static void LockControl(bool look = true)
         {
             Instance.GuiEnable.Value = look;
         }
@@ -600,7 +600,7 @@ namespace SportsCoderForVolleyball.Models
 
             //セット数
             await Task.Delay(5000);
-            Instance.InfomationSet();
+            InfomationSet();
 
             //セットごとのポイント
             await Task.Delay(4000);
@@ -957,7 +957,7 @@ namespace SportsCoderForVolleyball.Models
         {
             if (History.Count == 0) return;
 
-            var c = History[History.Count-1];
+            var c = History[^1];
 
             //ポイント
             if (c[0] == 'P')
@@ -1197,7 +1197,7 @@ namespace SportsCoderForVolleyball.Models
                 }
             }
         }
-        public void SwitchServer(bool History = true)
+        public static void SwitchServer(bool History = true)
         {
             Swap(ref Instance.IsLeftServe, ref Instance.IsRightServe);
             if (History)

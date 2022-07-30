@@ -3,7 +3,6 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using SportsCoderForVolleyball.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SportsCoderForVolleyball.ViewModels
 {
@@ -11,78 +10,49 @@ namespace SportsCoderForVolleyball.ViewModels
     {
         public MainWindowViewModel()
         {
-            Sets = Control.Instance.Sets.ObserveProperty(x => x.Value).ToReactiveProperty();
-            PointParSetSource = Control.Instance.PointParSetSource.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-            IsAnimation = Control.Instance.IsAnimation.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayTechnicalTimeout = Control.Instance.IsDisplayTechnicalTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayLeftTimeout = Control.Instance.IsDisplayLeftTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayRightTimeout = Control.Instance.IsDisplayRightTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayRightSetPoint = Control.Instance.IsDisplayRightSetPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayRightMatchPoint = Control.Instance.IsDisplayRightMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayLeftSetPoint = Control.Instance.IsDisplayLeftSetPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayLeftMatchPoint = Control.Instance.IsDisplayLeftMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayTimeoutRemaining = Control.Instance.IsDisplayTimeoutRemaining.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayGetSet = Control.Instance.IsDisplayGetSet.ObserveProperty(x => x.Value).ToReactiveProperty();
-            IsDisplayPointParSet = Control.Instance.IsDisplayPointParSet.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-            PointLeft = Control.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-            PointRight = Control.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-            SetLeft = Control.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-            SetRight = Control.Instance.SetRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-            TeamRight = Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-            TeamLeft = Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-            TimeOutRight = Control.Instance.TimeOutRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-            TimeOutLeft = Control.Instance.TimeOutLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-            Set = Control.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-            ColorCodeLeftTeam = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-            ColorCodeRightTeam = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-
-
-            var a = Control.Instance.Sets.Value.Sum(x => x.ATeamServePoint);
         }
 
-        public ReactiveProperty<List<Set>> Sets { get; set; }
-        public ReactiveProperty<List<Control.PointParSetInfomationSource>> PointParSetSource { get; set; }
+        public ReactiveProperty<List<Set>> Sets { get; set; } = Control.Instance.Sets.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<List<Control.PointParSetInfomationSource>> PointParSetSource { get; set; } = Control.Instance.PointParSetSource.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //情報表示用
-        public ReactiveProperty<bool> IsAnimation { get; set; }
-        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; set; }
-        public ReactiveProperty<bool> IsDisplayLeftTimeout { get; set; }
-        public ReactiveProperty<bool> IsDisplayRightTimeout { get; set; }
-        public ReactiveProperty<bool> IsDisplayRightSetPoint { get; set; }
-        public ReactiveProperty<bool> IsDisplayRightMatchPoint { get; set; }
-        public ReactiveProperty<bool> IsDisplayLeftSetPoint { get; set; }
-        public ReactiveProperty<bool> IsDisplayLeftMatchPoint { get; set; }
-        public ReactiveProperty<bool> IsDisplayTimeoutRemaining { get; set; }
-        public ReactiveProperty<bool> IsDisplayGetSet { get; set; }
-        public ReactiveProperty<bool> IsDisplayPointParSet { get; set; }
+        public ReactiveProperty<bool> IsAnimation { get; set; } = Control.Instance.IsAnimation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; set; } = Control.Instance.IsDisplayTechnicalTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayLeftTimeout { get; set; } = Control.Instance.IsDisplayLeftTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayRightTimeout { get; set; } = Control.Instance.IsDisplayRightTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayRightSetPoint { get; set; } = Control.Instance.IsDisplayRightSetPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayRightMatchPoint { get; set; } = Control.Instance.IsDisplayRightMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayLeftSetPoint { get; set; } = Control.Instance.IsDisplayLeftSetPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayLeftMatchPoint { get; set; } = Control.Instance.IsDisplayLeftMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayTimeoutRemaining { get; set; } = Control.Instance.IsDisplayTimeoutRemaining.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayGetSet { get; set; } = Control.Instance.IsDisplayGetSet.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayPointParSet { get; set; } = Control.Instance.IsDisplayPointParSet.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplaySetStuts { get; set; } = Control.Instance.IsDisplaySetStuts.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayGameStuts { get; set; } = Control.Instance.IsDisplayGameStuts.ObserveProperty(x => x.Value).ToReactiveProperty();
-        
+
         //プレー統計表示
         public ReactiveProperty<bool> IsDisplayAttackPointInfomation { get; set; } = Control.Instance.IsDisplayAttackPointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayBlockPointInfomation { get; set; } = Control.Instance.IsDisplayBlockPointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayServePointInfomation { get; set; } = Control.Instance.IsDisplayServePointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayServeErrorInfomation { get; set; } = Control.Instance.IsDisplayServeErrorInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-        public ReactiveProperty<int> Set { get; set; }
-        public ReactiveProperty<string> TeamRight { get; set; }
-        public ReactiveProperty<string> TeamLeft { get; set; }
-        public ReactiveProperty<int> PointLeft { get; set; }
-        public ReactiveProperty<int> PointRight { get; set; }
-        public ReactiveProperty<int> SetLeft { get; set; }
-        public ReactiveProperty<int> SetRight { get; set; }
-        public ReactiveProperty<int> TimeOutRight { get; set; }
-        public ReactiveProperty<int> TimeOutLeft { get; set; }
+        //UI部品
+        public ReactiveProperty<int> Set { get; set; } = Control.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> TeamRight { get; set; } = Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> TeamLeft { get; set; } = Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> PointLeft { get; set; } = Control.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> PointRight { get; set; } = Control.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> SetLeft { get; set; } = Control.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> SetRight { get; set; } = Control.Instance.SetRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOutRight { get; set; } = Control.Instance.TimeOutRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOutLeft { get; set; } = Control.Instance.TimeOutLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsLeftServe { get; set; } = Control.Instance.IsLeftServe.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsRightServe { get; set; } = Control.Instance.IsRightServe.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-        public ReactiveProperty<string> ColorCodeLeftTeam { get; set; }
-        public ReactiveProperty<string> ColorCodeRightTeam { get; set; }
+        //色
+        public ReactiveProperty<string> ColorCodeLeftTeam { get; set; } = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ColorCodeRightTeam { get; set; } = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //セット統計用
@@ -114,6 +84,5 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<int> GameRightTeamError { get; set; } = Control.Instance.GameRightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameLeftTeamOpponentError { get; set; } = Control.Instance.GameLeftTeamOpponentError.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameRightTeamOpponentError { get; set; } = Control.Instance.GameRightTeamOpponentError.ObserveProperty(x => x.Value).ToReactiveProperty();
-
     }
 }

@@ -14,16 +14,6 @@ namespace SportsCoderForVolleyball.ViewModels
     {
         public SettingDialogViewModel()
         {
-            ATeamName =     Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-            BTeamName =     Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-            Point =         Control.Instance.POINT.ObserveProperty(x => x.Value).ToReactiveProperty();
-            Set =           Control.Instance.SET.ObserveProperty(x => x.Value).ToReactiveProperty();
-            LastSetPoint =  Control.Instance.LASTSETPOINT.ObserveProperty(x => x.Value).ToReactiveProperty();
-            CourtChange =   Control.Instance.COURTCHANGE.ObserveProperty(x => x.Value).ToReactiveProperty();
-            TimeOut =       Control.Instance.TIMEOUT.ObserveProperty(x => x.Value).ToReactiveProperty();
-            ATeamColorCode =       Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-            BTeamColorCode =       Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-
             SubmitCommand.Subscribe(_ =>
             {
                 Control.Instance.POINT.Value = Point.Value;
@@ -62,20 +52,25 @@ namespace SportsCoderForVolleyball.ViewModels
 
         public ReactiveCommand SubmitCommand { get; } = new();
 
-        public ReactiveProperty<string> ATeamName { get; set; }
-        public ReactiveProperty<string> BTeamName { get; set; }
-        public ReactiveProperty<int> Set { get; set; }
-        public ReactiveProperty<int> Point { get; set; }
-        public ReactiveProperty<int> LastSetPoint { get; set; }
-        public ReactiveProperty<bool> CourtChange { get; set; }
-        public ReactiveProperty<int> TimeOut { get; set; } = new();
+        //設定
+        public ReactiveProperty<string> ATeamName { get; set; } = Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BTeamName { get; set; } = Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> Set { get; set; } = Control.Instance.SET.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> Point { get; set; } = Control.Instance.POINT.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LastSetPoint { get; set; } = Control.Instance.LASTSETPOINT.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> CourtChange { get; set; } = Control.Instance.COURTCHANGE.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOut { get; set; } = Control.Instance.TIMEOUT.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-        public ReactiveProperty<string> ATeamColorCode { get; set; }
-        public ReactiveProperty<string> BTeamColorCode { get; set; }
+        //色
+        public ReactiveProperty<string> ATeamColorCode { get; set; } = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BTeamColorCode { get; set; } = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
+
+
+        //コンボボックス用
         public ReactiveProperty<string> Server { get; set; } = new();
         public ReactiveProperty<int> ServerIndex { get; set; } = new();
 
-        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         public string Title => "設定";
 
@@ -84,12 +79,12 @@ namespace SportsCoderForVolleyball.ViewModels
         public bool CanCloseDialog() => true;
         public void OnDialogClosed() 
         {
-            Control.Instance.LockControl(true);
+            Control.LockControl(true);
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Control.Instance.LockControl(false);
+            Control.LockControl(false);
             if (Control.Instance.IsLeftFirstServe.Value)
             {
                 ServerIndex.Value = 0;
