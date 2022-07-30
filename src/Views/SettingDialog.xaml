@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <prism:Dialog.WindowStyle>
-        <Style TargetType="Window" BasedOn="{StaticResource UiWindow}">
+        <Style BasedOn="{StaticResource UiWindow}" TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="500" />
@@ -74,15 +74,15 @@
                         FontSize="20"
                         Text="セット数" />
 
-                    <ui:NumberBox
+                    <ComboBox
                         Grid.Column="1"
-                        ClearButtonEnabled="False"
-                        IntegersOnly="True"
-                        Max="7"
-                        Min="1"
-                        Step="2"
-                        Text="{Binding Set.Value}"
-                        Value="5" />
+                        SelectedIndex="{Binding ComboSetIndex.Value}"
+                        Text="{Binding ComboSet.Value}">
+                        <ComboBoxItem Content="7" />
+                        <ComboBoxItem Content="5" />
+                        <ComboBoxItem Content="3" />
+                        <ComboBoxItem Content="1" />
+                    </ComboBox>
                 </Grid>
             </StackPanel>
 
@@ -100,15 +100,14 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="点数" />
-                    <ui:NumberBox
+                    <ComboBox
                         Grid.Column="1"
-                        ClearButtonEnabled="False"
-                        IntegersOnly="True"
-                        Max="25"
-                        Min="15"
-                        Step="1"
-                        Text="{Binding BackGroundColor.Value}"
-                        Value="25" />
+                        SelectedIndex="{Binding ComboPointIndex.Value}"
+                        Text="{Binding ComboPoint.Value}">
+                        <ComboBoxItem Content="25" />
+                        <ComboBoxItem Content="21" />
+                        <ComboBoxItem Content="15" />
+                    </ComboBox>
                 </Grid>
             </StackPanel>
 
@@ -126,15 +125,14 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="最終セットの点数" />
-                    <ui:NumberBox
+                    <ComboBox
                         Grid.Column="1"
-                        ClearButtonEnabled="False"
-                        IntegersOnly="True"
-                        Max="25"
-                        Min="8"
-                        Step="1"
-                        Text="{Binding LastSetPoint.Value}"
-                        Value="15" />
+                        SelectedIndex="{Binding ComboLastSetIndex.Value}"
+                        Text="{Binding ComboLastSet.Value}">
+                        <ComboBoxItem Content="25" />
+                        <ComboBoxItem Content="21" />
+                        <ComboBoxItem Content="15" />
+                    </ComboBox>
                 </Grid>
             </StackPanel>
 
@@ -197,15 +195,15 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="タイムアウトの回数" />
-                    <ui:NumberBox
+                    <ComboBox
                         Grid.Column="1"
-                        ClearButtonEnabled="False"
-                        IntegersOnly="True"
-                        Max="5"
-                        Min="0"
-                        Step="1"
-                        Text="{Binding TimeOut.Value}"
-                        Value="2" />
+                        SelectedIndex="{Binding ComboTimeOutIndex.Value}"
+                        Text="{Binding ComboTimeOut.Value}">
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="1" />
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="3" />
+                    </ComboBox>
                 </Grid>
             </StackPanel>
             <StackPanel Margin="10">
