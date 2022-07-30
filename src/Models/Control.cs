@@ -65,6 +65,7 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
+                Instance.TimeOutLeft.Value++;
                 if (Instance.IsAnimation.Value == false)
                 {
                     Instance.IsAnimation.Value = true;
@@ -73,7 +74,6 @@ namespace SportsCoderForVolleyball.Models
 
                 await Instance.DeleteOption();
 
-                Instance.TimeOutLeft.Value++;
 
                 Instance.History.Value.Add("TL");
 
@@ -99,7 +99,7 @@ namespace SportsCoderForVolleyball.Models
 
 
                 await Task.Delay(1000);
-                //await DetectSetPoint();
+                await DetectSetPoint();
             }
         }
         public async void RightTimeOut()
@@ -111,6 +111,7 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
+                Instance.TimeOutRight.Value++;
                 if (Instance.IsAnimation.Value == false)
                 {
                     Instance.IsAnimation.Value = true;
@@ -119,7 +120,6 @@ namespace SportsCoderForVolleyball.Models
 
                 await Instance.DeleteOption();
 
-                Instance.TimeOutRight.Value++;
 
                 Instance.History.Value.Add("TR");
                 Instance.IsDisplayRightTimeout.Value = true;
@@ -145,7 +145,7 @@ namespace SportsCoderForVolleyball.Models
 
 
                 await Task.Delay(1000);
-                //await DetectSetPoint();
+                await DetectSetPoint();
             }
         }
         public async void TechnicalTimeOut()
