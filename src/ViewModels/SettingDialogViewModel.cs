@@ -24,6 +24,7 @@ namespace SportsCoderForVolleyball.ViewModels
             ATeamColorCode =       Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
             BTeamColorCode =       Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
 
+
             SubmitCommand.Subscribe(_ =>
             {
                 Control.Instance.POINT.Value = Point.Value;
@@ -63,11 +64,14 @@ namespace SportsCoderForVolleyball.ViewModels
         public event Action<IDialogResult> RequestClose;
 
         public bool CanCloseDialog() => true;
-        public void OnDialogClosed() { }
+        public void OnDialogClosed() 
+        {
+            Control.Instance.LockControl(true);
+        }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-
+            Control.Instance.LockControl(false);
         }
     }
 }
