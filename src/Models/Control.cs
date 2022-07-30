@@ -287,12 +287,14 @@ namespace SportsCoderForVolleyball.Models
 
         private async void PointPlusLeft(bool IsDetectSetPoint = true)
         {
+            Instance.GameLeftTeamPoint.Value++;
             Instance.PointLeft.Value++;
             if (IsDetectSetPoint)
                 await DetectSetPoint();
         }
         private async void PointPlusRight(bool IsDetectSetPoint = true)
         {
+            Instance.GameRightTeamPoint.Value++;
             Instance.PointRight.Value++;
             if (IsDetectSetPoint)
                 await DetectSetPoint();
@@ -421,6 +423,7 @@ namespace SportsCoderForVolleyball.Models
             Swap(ref Instance.LeftTeamServeError, ref Instance.RightTeamServeError);
             Swap(ref Instance.LeftTeamError, ref Instance.RightTeamError);
 
+            Swap(ref Instance.GameLeftTeamPoint, ref Instance.GameRightTeamPoint);
             Swap(ref Instance.GameLeftTeamServePoint, ref Instance.GameRightTeamServePoint);
             Swap(ref Instance.GameLeftTeamAttackPoint, ref Instance.GameRightTeamAttackPoint);
             Swap(ref Instance.GameLeftTeamBlockPoint, ref Instance.GameRightTeamBlockPoint);
@@ -446,8 +449,8 @@ namespace SportsCoderForVolleyball.Models
 
             await DeleteOption();
 
-            LeftTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
-            RightTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
+            LeftTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
+            RightTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
 
             //記録の書き込み
             if (Instance.IsATeamLeft.Value)
@@ -520,32 +523,37 @@ namespace SportsCoderForVolleyball.Models
             await Task.Delay(10000);
             await DeleteOption();
 
-            //最終セットの場合
-            if (Instance.SetRight.Value == Instance.NEEDSET.Value || Instance.SetLeft.Value == Instance.NEEDSET.Value)
-            {
-                //ゲーム終了ならスコアボードを再表示させない
-                Instance.InfomationSet();
-                InfomationScore();
-
-                return;
-            }
 
             //スコアとセットを非表示
             Instance.IsDisplayGetSet.Value = false;
 
             //統計表示
             await Task.Delay(2000);
-            InfomationStatistics();
+            IsDisplaySetStuts.Value = true;
 
 
             //統計非表示
             await Task.Delay(15000);
-            InfomationStatistics();
+            IsDisplaySetStuts.Value = false;
 
 
-            //スコアを表示
+            //最終セットの場合
+            if (Instance.SetRight.Value == Instance.NEEDSET.Value || Instance.SetLeft.Value == Instance.NEEDSET.Value)
+            {
+                //ゲーム終了ならスコアボードを再表示させない
+                await Task.Delay(2000);
+
+                IsDisplayGameStuts.Value = true;
+
+                await Task.Delay(15000);
+
+                IsDisplayGameStuts.Value = false;
+                
+                return;
+            }
+
+
             await Task.Delay(5000);
-
 
             //次のセットへ
             Instance.PointLeft.Value = 0;
@@ -746,7 +754,7 @@ namespace SportsCoderForVolleyball.Models
                                     Instance.History.Value.Add($"ESR{Instance.Set.Value}C");
                                 else
                                     Instance.History.Value.Add($"ESR{Instance.Set.Value}");
-                                
+
 
                                 await GameSetAsync();
                             }
@@ -831,30 +839,27 @@ namespace SportsCoderForVolleyball.Models
                 var skill = c.Split('.')[1];
                 if (c[1]=='R')
                 {
+                    GameRightTeamPoint.Value--;
+                    PointRight.Value--;
                     switch (skill)
                     {
                         case "A":
-                            PointRight.Value--;
                             RightTeamAttackPoint.Value--;
                             GameRightTeamAttackPoint.Value--;
                             break;
                         case "B":
-                            PointRight.Value--;
                             RightTeamBlockPoint.Value--;
                             GameRightTeamBlockPoint.Value--;
                             break;
                         case "S":
-                            PointRight.Value--;
                             RightTeamServePoint.Value--;
                             GameRightTeamServeError.Value--;
                             break;
                         case "E":
-                            PointRight.Value--;
                             LeftTeamError.Value--;
                             GameLeftTeamError.Value--;
                             break;
                         case "SE":
-                            PointRight.Value--;
                             LeftTeamServeError.Value--;
                             GameLeftTeamServeError.Value--;
                             break;
@@ -862,30 +867,28 @@ namespace SportsCoderForVolleyball.Models
                 }
                 else if (c[1] == 'L')
                 {
+
+                    GameLeftTeamPoint.Value--;
+                    PointLeft.Value--;
                     switch (skill)
                     {
                         case "A":
-                            PointLeft.Value--;
                             LeftTeamAttackPoint.Value--;
                             GameLeftTeamAttackPoint.Value--;
                             break;
                         case "B":
-                            PointLeft.Value--;
                             LeftTeamBlockPoint.Value--;
                             GameLeftTeamBlockPoint.Value--;
                             break;
                         case "S":
-                            PointLeft.Value--;
                             LeftTeamServePoint.Value--;
                             GameLeftTeamServeError.Value--;
                             break;
                         case "E":
-                            PointLeft.Value--;
                             RightTeamError.Value--;
                             GameRightTeamError.Value--;
                             break;
                         case "SE":
-                            PointLeft.Value--;
                             RightTeamServeError.Value--;
                             GameRightTeamServeError.Value--;
                             break;
@@ -922,6 +925,7 @@ namespace SportsCoderForVolleyball.Models
                         LeftTeamServePoint.Value = a.ATeamServePoint;
                         LeftTeamServeError.Value = a.ATeamServeError;
                         LeftTeamError.Value = a.ATeamError;
+                        LeftTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
 
                         PointRight.Value = a.BTeamPoint;
                         RightTeamAttackPoint.Value = a.BTeamAttackPoint;
@@ -929,6 +933,7 @@ namespace SportsCoderForVolleyball.Models
                         RightTeamServePoint.Value = a.BTeamServePoint;
                         RightTeamServeError.Value = a.BTeamServeError;
                         RightTeamError.Value = a.BTeamError;
+                        RightTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
                     }
                     else
                     {
@@ -938,6 +943,7 @@ namespace SportsCoderForVolleyball.Models
                         LeftTeamServePoint.Value = a.BTeamServePoint;
                         LeftTeamServeError.Value = a.BTeamServeError;
                         LeftTeamError.Value = a.BTeamError;
+                        LeftTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
 
                         PointRight.Value = a.ATeamPoint;
                         RightTeamAttackPoint.Value = a.ATeamAttackPoint;
@@ -945,6 +951,7 @@ namespace SportsCoderForVolleyball.Models
                         RightTeamServePoint.Value = a.ATeamServePoint;
                         RightTeamServeError.Value = a.ATeamServeError;
                         RightTeamError.Value = a.ATeamError;
+                        RightTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
                     }
 
                     Instance.Sets.Value.RemoveAt(set-1);
@@ -996,6 +1003,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
         public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
         public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
+        public ReactiveProperty<bool> IsDisplayGameStuts = new(false);
 
         //セット統計
         public ReactiveProperty<int> LeftTeamServePoint = new(0);
@@ -1012,6 +1020,8 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<int> RightTeamOpponentError = new(0);
 
         //ゲーム統計
+        public ReactiveProperty<int> GameLeftTeamPoint = new(0);
+        public ReactiveProperty<int> GameRightTeamPoint = new(0);
         public ReactiveProperty<int> GameLeftTeamServePoint = new(0);
         public ReactiveProperty<int> GameRightTeamServePoint = new(0);
         public ReactiveProperty<int> GameLeftTeamAttackPoint = new(0);
