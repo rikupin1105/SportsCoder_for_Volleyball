@@ -34,6 +34,10 @@ namespace SportsCoderForVolleyball.Models
             Instance.IsDisplayLeftSetPoint.Value = false;
             Instance.IsDisplayLeftMatchPoint.Value = false;
             Instance.IsDisplayPointParSet.Value = false;
+            Instance.IsDisplayAttackPointInfomation.Value = false;
+            Instance.IsDisplayBlockPointInfomation.Value = false;
+            Instance.IsDisplayServePointInfomation.Value = false;
+            Instance.IsDisplayServeErrorInfomation.Value = false;
 
             if (flag && wait) await Task.Delay(1000);
         }
@@ -52,6 +56,11 @@ namespace SportsCoderForVolleyball.Models
             if (Instance.IsDisplayLeftSetPoint.Value) return true;
             if (Instance.IsDisplayLeftMatchPoint.Value) return true;
             if (Instance.IsDisplayPointParSet.Value) return true;
+
+            if (Instance.IsDisplayAttackPointInfomation.Value) return true;
+            if (Instance.IsDisplayBlockPointInfomation.Value) return true;
+            if (Instance.IsDisplayServePointInfomation.Value) return true;
+            if (Instance.IsDisplayServeErrorInfomation.Value) return true;
 
             if (IsDisplayGetSet.Value) return true;
             return false;
@@ -279,10 +288,89 @@ namespace SportsCoderForVolleyball.Models
             }
             public bool IsRightWin { get => !IsLeftWin; }
         }
-
         public void LockControl(bool look = true)
         {
             Instance.GuiEnable.Value = look;
+        }
+
+
+        //プレー統計表示
+        public async void InfomationAttackPoint()
+        {
+            if (IsDisplayAttackPointInfomation.Value)
+            {
+                IsDisplayAttackPointInfomation.Value = false;
+                await Task.Delay(1000);
+                await DetectSetPoint();
+            }
+            else
+            {
+                if (Instance.IsAnimation.Value == false)
+                {
+                    Instance.IsAnimation.Value = true;
+                    await Task.Delay(1000);
+                }
+
+                await DeleteOption();
+                IsDisplayAttackPointInfomation.Value = true;
+            }
+        }
+        public async void InfomationBlockPoint()
+        {
+            if (IsDisplayBlockPointInfomation.Value)
+            {
+                IsDisplayBlockPointInfomation.Value = false;
+                await Task.Delay(1000);
+                await DetectSetPoint();
+            }
+            else
+            {
+                if (Instance.IsAnimation.Value == false)
+                {
+                    Instance.IsAnimation.Value = true;
+                    await Task.Delay(1000);
+                }
+                await DeleteOption();
+                IsDisplayBlockPointInfomation.Value = true;
+            }
+        }
+        public async void InfomationServePoint()
+        {
+            if (IsDisplayServePointInfomation.Value)
+            {
+                IsDisplayServePointInfomation.Value = false;
+                await Task.Delay(1000);
+                await DetectSetPoint();
+            }
+            else
+            {
+                if (Instance.IsAnimation.Value == false)
+                {
+                    Instance.IsAnimation.Value = true;
+                    await Task.Delay(1000);
+                }
+                await DeleteOption();
+                IsDisplayServePointInfomation.Value = true;
+            }
+        }
+        public async void InfomationServeError()
+        {
+            if (IsDisplayServeErrorInfomation.Value)
+            {
+                IsDisplayServeErrorInfomation.Value = false;
+                await Task.Delay(1000);
+                await DetectSetPoint();
+            }
+            else
+            {
+                if (Instance.IsAnimation.Value == false)
+                {
+                    Instance.IsAnimation.Value = true;
+                    await Task.Delay(1000);
+                }
+                await DeleteOption();
+                IsDisplayServeErrorInfomation.Value = true;
+            }
         }
 
         private async void PointPlusLeft(bool IsDetectSetPoint = true)
@@ -300,7 +388,7 @@ namespace SportsCoderForVolleyball.Models
                 await DetectSetPoint();
         }
 
-        public async void ServePoint(bool IsLeftTeam)
+        public void ServePoint(bool IsLeftTeam)
         {
             if (IsLeftTeam)
             {
@@ -533,7 +621,7 @@ namespace SportsCoderForVolleyball.Models
                 await Task.Delay(15000);
 
                 IsDisplayGameStuts.Value = false;
-                
+
                 return;
             }
 
@@ -985,10 +1073,14 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<bool> IsDisplayTimeoutRemaining = new(false);
         public ReactiveProperty<bool> IsDisplayGetSet = new(false);
         public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
-        public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
         public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
         public ReactiveProperty<bool> IsDisplayGameStuts = new(false);
+
+        //プレー統計アニメーション
+        public ReactiveProperty<bool> IsDisplayAttackPointInfomation = new(false);
+        public ReactiveProperty<bool> IsDisplayBlockPointInfomation = new(false);
+        public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
+        public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
 
         //セット統計
         public ReactiveProperty<int> LeftTeamServePoint = new(0);

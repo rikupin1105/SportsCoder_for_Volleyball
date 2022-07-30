@@ -61,10 +61,14 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<bool> IsDisplayTimeoutRemaining { get; set; }
         public ReactiveProperty<bool> IsDisplayGetSet { get; set; }
         public ReactiveProperty<bool> IsDisplayPointParSet { get; set; }
-        public ReactiveProperty<bool> IsDisplayServePointInfomation { get; set; } = Control.Instance.IsDisplayServePointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> IsDisplayServeErrorInfomation { get; set; } = Control.Instance.IsDisplayServeErrorInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplaySetStuts { get; set; } = Control.Instance.IsDisplaySetStuts.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayGameStuts { get; set; } = Control.Instance.IsDisplayGameStuts.ObserveProperty(x => x.Value).ToReactiveProperty();
+        
+        //プレー統計表示
+        public ReactiveProperty<bool> IsDisplayAttackPointInfomation { get; set; } = Control.Instance.IsDisplayAttackPointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayBlockPointInfomation { get; set; } = Control.Instance.IsDisplayBlockPointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayServePointInfomation { get; set; } = Control.Instance.IsDisplayServePointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayServeErrorInfomation { get; set; } = Control.Instance.IsDisplayServeErrorInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
 
 
         public ReactiveProperty<int> Set { get; set; }

@@ -1284,7 +1284,7 @@
         </Grid>
 
 
-        <!--  サービスエース  -->
+        <!--  サーブポイント  -->
         <Grid
             Width="600"
             Height="35"
@@ -1363,7 +1363,7 @@
                 </Style>
             </Grid.Style>
         </Grid>
-        <!--  サービスエラー  -->
+        <!--  サーブエラー  -->
         <Grid
             Width="600"
             Height="35"
@@ -1406,6 +1406,164 @@
                 <Style TargetType="Grid">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsDisplayServeErrorInfomation.Value}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,530,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,445,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="100"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,445,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,530,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0.3"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="100"
+                                            To="0"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        <!--  アタックポイント  -->
+        <Grid
+            Width="600"
+            Height="35"
+            Margin="0,530,0,0"
+            Background="#2e30ac"
+            Opacity="0">
+
+            <Border
+                Grid.ColumnSpan="3"
+                BorderBrush="White"
+                BorderThickness="3" />
+
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="ATTACK POINTS"
+                TextAlignment="Center" />
+
+            <TextBlock
+                Margin="30,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="{Binding GameLeftTeamAttackPoint.Value}"
+                TextAlignment="Left" />
+
+            <TextBlock
+                Margin="0,0,30,0"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="{Binding GameRightTeamAttackPoint.Value}"
+                TextAlignment="Right" />
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisplayAttackPointInfomation.Value}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,530,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,445,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="100"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,445,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,530,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0.3"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="100"
+                                            To="0"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        <!--  ブロックイント  -->
+        <Grid
+            Width="600"
+            Height="35"
+            Margin="0,530,0,0"
+            Background="#2e30ac"
+            Opacity="0">
+
+            <Border
+                Grid.ColumnSpan="3"
+                BorderBrush="White"
+                BorderThickness="3" />
+
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="BLOCK POINTS"
+                TextAlignment="Center" />
+
+            <TextBlock
+                Margin="30,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="{Binding GameLeftTeamBlockPoint.Value}"
+                TextAlignment="Left" />
+
+            <TextBlock
+                Margin="0,0,30,0"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="{Binding GameRightTeamBlockPoint.Value}"
+                TextAlignment="Right" />
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisplayBlockPointInfomation.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

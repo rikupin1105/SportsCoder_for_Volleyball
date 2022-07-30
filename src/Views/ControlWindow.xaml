@@ -577,6 +577,36 @@
                         IsEnabled="{Binding GuiEnable.Value}" />
                 </StackPanel>
 
+                <!--  統計表示ボタン  -->
+                <StackPanel>
+                    <TextBlock
+                        Margin="5,20,0,0"
+                        FontSize="20"
+                        Text="ゲーム統計表示" />
+                    <TextBlock Margin="5,0,0,0" Text="もう一度クリックすると非表示になります。" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Margin="5"
+                            Command="{Binding StatisticsAttackPointCommand}"
+                            Content="アタックポイント"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Margin="5"
+                            Command="{Binding StatisticsBlockPointCommand}"
+                            Content="ブロックポイント"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Margin="5"
+                            Command="{Binding StatisticsServePointCommand}"
+                            Content="サーブポイント"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Margin="5"
+                            Command="{Binding StatisticsServeErrorCommand}"
+                            Content="サーブミス"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
