@@ -24,7 +24,7 @@ namespace SportsCoderForVolleyball.ViewModels
 
         public ReactiveCommand YesCommand { get; set; } = new();
         public ReactiveCommand NoCommand { get; set; } = new();
-
+        public ReactiveProperty<string> Message { get; set; } = new();
 
         public string Title => "確認";
 
@@ -35,7 +35,7 @@ namespace SportsCoderForVolleyball.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-
+            Message.Value = parameters.GetValue<string>("message");
         }
     }
 }

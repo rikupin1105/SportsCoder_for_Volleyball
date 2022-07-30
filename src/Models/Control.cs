@@ -716,7 +716,7 @@ namespace SportsCoderForVolleyball.Models
                     LockControl(false);
                     await DeleteOption(false);
                     Instance.SetLeft.Value++;
-                    var parmaters = new DialogParameters($"Team={Instance.TeamLeft.Value}");
+                    var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                     _dialogService.Show("EndofSetDialog", parmaters, async result =>
                     {
@@ -739,7 +739,7 @@ namespace SportsCoderForVolleyball.Models
                     LockControl(false);
                     await DeleteOption(false);
                     Instance.SetRight.Value++;
-                    var parmaters = new DialogParameters($"Team={Instance.TeamRight.Value}");
+                    var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                     _dialogService.Show("EndofSetDialog", parmaters, async result =>
                     {
@@ -794,7 +794,7 @@ namespace SportsCoderForVolleyball.Models
                     {
                         //試合に勝利
                         Instance.SetLeft.Value++;
-                        var parmaters = new DialogParameters($"Team={Instance.TeamLeft.Value}");
+                        var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
                         {
@@ -817,7 +817,7 @@ namespace SportsCoderForVolleyball.Models
                         Instance.SetLeft.Value++;
 
 
-                        var parmaters = new DialogParameters($"Team={Instance.TeamLeft.Value}");
+                        var parmaters = new DialogParameters($"message=セットを終了しますか？");
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
                         {
                             if (result.Result == ButtonResult.Yes)
@@ -848,7 +848,7 @@ namespace SportsCoderForVolleyball.Models
                     {
                         //試合に勝利
                         Instance.SetRight.Value++;
-                        var parmaters = new DialogParameters($"Team={Instance.TeamRight.Value}");
+                        var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
                         {
@@ -870,7 +870,7 @@ namespace SportsCoderForVolleyball.Models
                         //セット獲得
                         Instance.SetRight.Value++;
 
-                        var parmaters = new DialogParameters($"Team={Instance.TeamRight.Value}");
+                        var parmaters = new DialogParameters($"message=セットを終了しますか？");
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
                         {
                             if (result.Result == ButtonResult.Yes)

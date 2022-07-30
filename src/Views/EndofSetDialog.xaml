@@ -28,7 +28,7 @@
             ShowMinimize="False" />
         <StackPanel Margin="20">
 
-            <TextBlock FontSize="20" Text="セットを終了しますか？" />
+            <TextBlock FontSize="20" Text="{Binding Message.Value}" />
             <StackPanel
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
