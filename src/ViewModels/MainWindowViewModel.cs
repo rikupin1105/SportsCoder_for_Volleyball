@@ -101,7 +101,7 @@ namespace SportsCoderForVolleyball.ViewModels
 
         //ゲーム統計
         public ReactiveProperty<int> GameLeftTeamPoint { get; set; } = Control.Instance.GameLeftTeamPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamPoint { get; set; } = Control.Instance.GameLeftTeamPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamPoint { get; set; } = Control.Instance.GameRightTeamPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameLeftTeamServePoint { get; set; } = Control.Instance.GameLeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameRightTeamServePoint { get; set; } = Control.Instance.GameRightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> GameLeftTeamAttackPoint { get; set; } = Control.Instance.GameLeftTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
