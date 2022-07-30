@@ -40,7 +40,7 @@
 
 プレーを入力します。  
 サーブミス、その他ミスについては反対のチームに点数が入ることを留意してください。  
-判定については [判定について]() を参考にしてください。
+判定については [判定について](https://github.com/rikupin1105/SportsCoder_for_Volleyball/blob/main/docs/About%20Judgement.md) を参考にしてください。
 
 ## STEP 3 (セット終了)
 
