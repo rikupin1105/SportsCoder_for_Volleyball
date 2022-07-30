@@ -84,7 +84,7 @@ namespace SportsCoderForVolleyball.Models
                 await Instance.DeleteOption();
 
 
-                Instance.History.Value.Add("TL");
+                Instance.History.Add("TL");
 
                 Instance.IsDisplayLeftTimeout.Value = true;
                 _stopLeftTimeOut = false;
@@ -130,7 +130,7 @@ namespace SportsCoderForVolleyball.Models
                 await Instance.DeleteOption();
 
 
-                Instance.History.Value.Add("TR");
+                Instance.History.Add("TR");
                 Instance.IsDisplayRightTimeout.Value = true;
                 _stopRightTimeOut = false;
 
@@ -396,7 +396,7 @@ namespace SportsCoderForVolleyball.Models
                 LeftTeamServePoint.Value++;
                 GameLeftTeamServePoint.Value++;
 
-                History.Value.Add("PL.S");
+                History.Add("PL.S");
             }
             else
             {
@@ -404,7 +404,7 @@ namespace SportsCoderForVolleyball.Models
                 RightTeamServePoint.Value++;
                 GameRightTeamServePoint.Value++;
 
-                History.Value.Add("PR.S");
+                History.Add("PR.S");
             }
         }
         public void BlockPoint(bool IsLeftTeam)
@@ -415,7 +415,7 @@ namespace SportsCoderForVolleyball.Models
                 LeftTeamBlockPoint.Value++;
                 GameLeftTeamBlockPoint.Value++;
 
-                History.Value.Add("PL.B");
+                History.Add("PL.B");
             }
             else
             {
@@ -423,7 +423,7 @@ namespace SportsCoderForVolleyball.Models
                 RightTeamBlockPoint.Value++;
                 GameRightTeamBlockPoint.Value++;
 
-                History.Value.Add("PR.B");
+                History.Add("PR.B");
             }
         }
         public void AttackPoint(bool IsLeftTeam)
@@ -434,7 +434,7 @@ namespace SportsCoderForVolleyball.Models
                 LeftTeamAttackPoint.Value++;
                 GameLeftTeamAttackPoint.Value++;
 
-                History.Value.Add("PL.A");
+                History.Add("PL.A");
             }
             else
             {
@@ -442,7 +442,7 @@ namespace SportsCoderForVolleyball.Models
                 RightTeamAttackPoint.Value++;
                 GameRightTeamAttackPoint.Value++;
 
-                History.Value.Add("PR.A");
+                History.Add("PR.A");
             }
         }
         public void ServeError(bool IsLeftTeam)
@@ -452,16 +452,18 @@ namespace SportsCoderForVolleyball.Models
                 PointPlusRight();
                 LeftTeamServeError.Value++;
                 GameLeftTeamServeError.Value++;
+                GameRightTeamOpponentError.Value++;
 
-                History.Value.Add("PR.SE");
+                History.Add("PR.SE");
             }
             else
             {
                 PointPlusLeft();
                 RightTeamServeError.Value++;
                 GameRightTeamServeError.Value++;
+                GameLeftTeamOpponentError.Value++;
 
-                History.Value.Add("PL.SE");
+                History.Add("PL.SE");
             }
         }
         public void Error(bool IsLeftTeam)
@@ -471,16 +473,18 @@ namespace SportsCoderForVolleyball.Models
                 PointPlusRight();
                 LeftTeamError.Value++;
                 GameLeftTeamError.Value++;
+                GameRightTeamOpponentError.Value++;
 
-                History.Value.Add("PR.SE");
+                History.Add("PR.SE");
             }
             else
             {
                 PointPlusLeft();
                 RightTeamError.Value++;
                 GameRightTeamError.Value++;
+                GameLeftTeamOpponentError.Value++;
 
-                History.Value.Add("PL.E");
+                History.Add("PL.E");
             }
         }
 
@@ -508,7 +512,7 @@ namespace SportsCoderForVolleyball.Models
             Instance.IsATeamLeft.Value = !Instance.IsATeamLeft.Value;
 
             if (History)
-                Instance.History.Value.Add("C");
+                Instance.History.Add("C");
 
             if (detectSetpoint)
             {
@@ -754,6 +758,7 @@ namespace SportsCoderForVolleyball.Models
                             }
                             else
                             {
+                                Instance.SetLeft.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -772,9 +777,9 @@ namespace SportsCoderForVolleyball.Models
                             if (result.Result == ButtonResult.Yes)
                             {
                                 if (Instance.COURTCHANGE.Value)
-                                    Instance.History.Value.Add($"ESL{Instance.Set.Value}C");
+                                    Instance.History.Add($"ESL{Instance.Set.Value}C");
                                 else
-                                    Instance.History.Value.Add($"ESL{Instance.Set.Value}");
+                                    Instance.History.Add($"ESL{Instance.Set.Value}");
                                 await GameSetAsync();
                             }
                             else
@@ -807,6 +812,7 @@ namespace SportsCoderForVolleyball.Models
                             }
                             else
                             {
+                                Instance.SetRight.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -824,9 +830,9 @@ namespace SportsCoderForVolleyball.Models
                             if (result.Result == ButtonResult.Yes)
                             {
                                 if (Instance.COURTCHANGE.Value)
-                                    Instance.History.Value.Add($"ESR{Instance.Set.Value}C");
+                                    Instance.History.Add($"ESR{Instance.Set.Value}C");
                                 else
-                                    Instance.History.Value.Add($"ESR{Instance.Set.Value}");
+                                    Instance.History.Add($"ESR{Instance.Set.Value}");
 
 
                                 await GameSetAsync();
@@ -903,9 +909,9 @@ namespace SportsCoderForVolleyball.Models
         }
         public async void Undo()
         {
-            if (History.Value.Count == 0) return;
+            if (History.Count == 0) return;
 
-            var c = History.Value[History.Value.Count-1];
+            var c = History[History.Count-1];
 
             if (c[0] == 'P')
             {
@@ -1041,7 +1047,7 @@ namespace SportsCoderForVolleyball.Models
                             SetLeft.Value--;
                         }
                     }
-                    History.Value.RemoveAt(History.Value.Count-1);
+                    History.RemoveAt(History.Count-1);
                     Undo();
                     return;
                 }
@@ -1051,12 +1057,11 @@ namespace SportsCoderForVolleyball.Models
                 //コートチェンジ
                 CourtChange(History: false);
             }
-
-            History.Value.RemoveAt(History.Value.Count-1);
+            History.RemoveAt(History.Count-1);
         }
 
         public static Control Instance { get; } = new();
-        public ReactiveProperty<List<string>> History { get; set; } = new(new List<string>());
+        public ReactiveCollection<string> History { get; set; } = new();
 
         public ReactiveProperty<List<Set>> Sets = new(new List<Set>());
         public ReactiveProperty<List<PointParSetInfomationSource>> PointParSetSource { get; set; } = new();
