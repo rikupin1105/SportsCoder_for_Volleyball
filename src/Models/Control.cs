@@ -318,22 +318,6 @@ namespace SportsCoderForVolleyball.Models
 
                 History.Value.Add("PR.S");
             }
-
-            var s = DetectSetPoint().Result;
-
-            if (s == StateSet.None && IsAnimation.Value == true)
-            {
-                //得点を表示していないとき、
-                //セットポイントやマッチポイント、セット終了時は表示しない
-                await DeleteOption();
-                Instance.IsDisplayServePointInfomation.Value = true;
-                await Task.Delay(3000);
-                Instance.IsDisplayServePointInfomation.Value = false;
-
-                Instance.IsDisplayServeErrorInfomation.Value = true;
-                await Task.Delay(3000);
-                Instance.IsDisplayServeErrorInfomation.Value = false;
-            }
         }
         public void BlockPoint(bool IsLeftTeam)
         {
