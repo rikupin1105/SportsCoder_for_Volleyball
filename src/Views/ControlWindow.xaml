@@ -532,49 +532,70 @@
 
                     </Grid>
 
-                    <Button
-                        Margin="0,20,0,0"
-                        Command="{Binding UndoCommand}"
-                        Content="戻す"
+
+                </StackPanel>
+
+
+
+
+
+                <!--  コマンド  -->
+                <StackPanel>
+                    <TextBlock
+                        Margin="5,20,0,0"
                         FontSize="20"
-                        IsEnabled="{Binding GuiEnable.Value}" />
+                        Text="その他操作" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="120"
+                            Margin="5"
+                            Command="{Binding UndoCommand}"
+                            Content="戻す"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Width="100"
+                            Margin="5"
+                            Content="サーバー交代"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Width="100"
+                            Margin="5"
+                            Command="{Binding CourtChangeCommand}"
+                            Content="コートチェンジ"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Width="100"
+                            Margin="5"
+                            Command="{Binding SettingCommand}"
+                            Content="設定"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                    </StackPanel>
                 </StackPanel>
 
-
-
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Margin="5"
-                        Content="サーバー交代"
-                        IsEnabled="{Binding GuiEnable.Value}" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding CourtChangeCommand}"
-                        Content="コートチェンジ"
-                        IsEnabled="{Binding GuiEnable.Value}" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding SettingCommand}"
-                        Content="設定"
-                        IsEnabled="{Binding GuiEnable.Value}" />
-
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Margin="5"
-                        Command="{Binding DisplayCommand}"
-                        Content="メイン点数表示"
-                        IsEnabled="{Binding GuiEnable.Value}" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding TechnicalTimeoutCommand}"
-                        Content="テクニカルタイムアウト"
-                        IsEnabled="{Binding GuiEnable.Value}" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding GetSetDisplayCommand}"
-                        Content="獲得セット表示"
-                        IsEnabled="{Binding GuiEnable.Value}" />
+                <!--  情報表示  -->
+                <StackPanel>
+                    <TextBlock
+                        Margin="5,20,0,0"
+                        FontSize="20"
+                        Text="情報表示" />
+                    <TextBlock Margin="5,0,0,0" Text="もう一度クリックすると非表示になります。" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Margin="5"
+                            Command="{Binding DisplayCommand}"
+                            Content="メイン点数表示"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Margin="5"
+                            Command="{Binding GetSetDisplayCommand}"
+                            Content="獲得セット表示"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                        <Button
+                            Margin="5"
+                            Command="{Binding TechnicalTimeoutCommand}"
+                            Content="テクニカルタイムアウト"
+                            IsEnabled="{Binding GuiEnable.Value}" />
+                    </StackPanel>
                 </StackPanel>
 
                 <!--  統計表示ボタン  -->
