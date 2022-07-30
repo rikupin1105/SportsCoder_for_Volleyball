@@ -185,7 +185,7 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="背景色の変更" />
-                    <TextBox Grid.Column="1" Text="{Binding TimeOut.Value}" />
+                    <TextBox Grid.Column="1" Text="{Binding BackGroundColor.Value}" />
                 </Grid>
             </StackPanel>
             <Button
