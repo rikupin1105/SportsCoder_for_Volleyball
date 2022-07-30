@@ -70,9 +70,7 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<bool> IsDisplayServePointInfomation { get; set; } = Control.Instance.IsDisplayServePointInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<bool> IsDisplayServeErrorInfomation { get; set; } = Control.Instance.IsDisplayServeErrorInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-
         public ReactiveProperty<int> Set { get; set; }
-
         public ReactiveProperty<string> TeamRight { get; set; }
         public ReactiveProperty<string> TeamLeft { get; set; }
         public ReactiveProperty<int> PointLeft { get; set; }
@@ -85,6 +83,7 @@ namespace SportsCoderForVolleyball.ViewModels
 
         public ReactiveProperty<string> ColorCodeLeftTeam { get; set; }
         public ReactiveProperty<string> ColorCodeRightTeam { get; set; }
+        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //セット統計用
         public ReactiveProperty<int> LeftTeamServePoint { get; set; } = Control.Instance.LeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();

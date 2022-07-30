@@ -96,7 +96,7 @@
                         Max="25"
                         Min="15"
                         Step="1"
-                        Text="{Binding Point.Value}"
+                        Text="{Binding BackGroundColor.Value}"
                         Value="25" />
                 </Grid>
             </StackPanel>
@@ -169,6 +169,23 @@
                         Step="1"
                         Text="{Binding TimeOut.Value}"
                         Value="2" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="背景色の変更" />
+                    <TextBox Grid.Column="1" Text="{Binding TimeOut.Value}" />
                 </Grid>
             </StackPanel>
             <Button

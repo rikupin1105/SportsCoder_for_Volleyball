@@ -24,7 +24,6 @@ namespace SportsCoderForVolleyball.ViewModels
             ATeamColorCode =       Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
             BTeamColorCode =       Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-
             SubmitCommand.Subscribe(_ =>
             {
                 Control.Instance.POINT.Value = Point.Value;
@@ -39,6 +38,8 @@ namespace SportsCoderForVolleyball.ViewModels
 
                 Control.Instance.ColorCodeLeftTeam.Value = ATeamColorCode.Value;
                 Control.Instance.ColorCodeRightTeam.Value = BTeamColorCode.Value;
+
+                Control.Instance.BackGroundColor.Value = BackGroundColor.Value;
 
                 RequestClose.Invoke(null);
             });
@@ -57,7 +58,7 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<string> ATeamColorCode { get; set; }
         public ReactiveProperty<string> BTeamColorCode { get; set; }
 
-
+        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         public string Title => "設定";
 

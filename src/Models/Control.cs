@@ -1126,6 +1126,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<bool> IsATeamLeft = new(true);
         public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
         public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
+        public ReactiveProperty<string> BackGroundColor = new("#00ff00");
 
         public ReactiveProperty<bool> GuiEnable = new(true);
 

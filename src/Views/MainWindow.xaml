@@ -12,7 +12,7 @@
     Height="720"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    Background="Green"
+    Background="{Binding BackGroundColor.Value}"
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <Window.Resources>
@@ -273,7 +273,7 @@
                 Margin="560,60,638.5,594"
                 BorderBrush="White"
                 BorderThickness="0,0,5,0" />
-            <Rectangle Margin="0,0,0,0" Fill="Green">
+            <Rectangle Margin="0,0,0,0" Fill="{Binding BackGroundColor.Value}">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
@@ -604,7 +604,7 @@
                 BorderThickness="0,0,5,0" />
             <Rectangle
                 Margin="0,0,0,0"
-                Fill="Green"
+                Fill="{Binding BackGroundColor.Value}"
                 Opacity="0">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
