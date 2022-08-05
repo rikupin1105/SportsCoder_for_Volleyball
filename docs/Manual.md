@@ -2,11 +2,9 @@
 
 ## STEP 0 (OBS の設定)
 
-- OBS をインストールします。  
-  [OBS Studio](https://obsproject.com/ja/download)
-- OBS-NDI をインストールします。  
-  Windows の場合 `obs-ndi-4.9.0-Windows-Installer.exe` を選択します。  
-  [OBS-NDI](https://github.com/Palakis/obs-ndi/releases)
+- [OBS Studio](https://obsproject.com/ja/download) をインストールします。
+- [OBS-NDI](https://github.com/Palakis/obs-ndi/releases) をインストールします。  
+  Windows の場合 `obs-ndi-4.9.0-Windows-Installer.exe` を選択します。
 - SportsCoder Volleyball を起動します。
 - OBS で ソースを追加 → NDI Source → Source name → SportsCoder Volleyball を選択します。
 
