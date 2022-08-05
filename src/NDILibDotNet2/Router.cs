@@ -48,7 +48,7 @@ namespace NewTek.NDI
         }
 
         // Constructor
-        public Router(String routingName = "Routing", String[]? groups = null)
+        public Router(String routingName = "Routing", String[] groups = null)
         {
             _groups = groups;
             _routingName = routingName;
@@ -199,7 +199,7 @@ namespace NewTek.NDI
             UpdateRouting();
         }
 
-        private string[]? _groups = null;
+        private string[] _groups = null;
         private IntPtr _routingInstancePtr = IntPtr.Zero;
         private Source _selectedSource = new Source();
         private string _routingName = "Routing";
