@@ -20,6 +20,6 @@
     <PackageReference Include="WPF-UI" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Program Files\NDI\NDI 5 SDK\Examples\C#\NDILibDotNet2\NDILibDotNet2.csproj" />
+    <ProjectReference Include="..\NDILibDotNet2\NDILibDotNet2.csproj" />
   </ItemGroup>
 </Project>
