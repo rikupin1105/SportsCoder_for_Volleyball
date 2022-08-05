@@ -1,25 +1,14 @@
 # 使用方法
 
-## STEP 0 (配信ソフトの設定)
+## STEP 0 (OBS の設定)
 
-配信ソフトを使用し、`得点表示`ウィンドウをキャプチャーします。
-
-> OBS の場合
->
-> > 新規ソース → ウィンドウキャプチャ。
-
-カラーキーにより、背景を透過させます。
-
-> OBS の場合
->
-> > ソースを選択 → フィルタ → エフェクトを追加 → カラーキー → 色キーの種類を緑  
-> > 設定により背景色を変更した場合、カスタム色を利用します。
-
-マウスカーソルは非表示を推奨します。
-
-> OBS の場合
->
-> > ソースを選択 → プロパティ → カーソルをキャプチャをオフ
+- OBS をインストールします。  
+  [OBS Studio](https://obsproject.com/ja/download)
+- OBS-NDI をインストールします。  
+  Windows の場合 `obs-ndi-4.9.0-Windows-Installer.exe` を選択します。  
+  [OBS-NDI](https://github.com/Palakis/obs-ndi/releases)
+- SportsCoder Volleyball を起動します。
+- OBS で ソースを追加 → NDI Source → Source name → SportsCoder Volleyball を選択します。
 
 ## STEP 1 (試合設定)
 
