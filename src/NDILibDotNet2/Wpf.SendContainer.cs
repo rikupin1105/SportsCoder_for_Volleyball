@@ -516,19 +516,6 @@ namespace NewTek.NDI.WPF
 
                 if (sendInstanceLock.TryEnterReadLock(0))
                 {
-                    // if this is not here, then we must be being reconfigured
-                    if (sendInstancePtr == null)
-                    {
-                        // unlock
-                        sendInstanceLock.ExitReadLock();
-
-                        // give up some time
-                        Thread.Sleep(20);
-
-                        // loop again
-                        continue;
-                    }
-
                     try
                     {
                         // get the next available frame
@@ -611,17 +598,17 @@ namespace NewTek.NDI.WPF
         }
 
         private ReaderWriterLockSlim sendInstanceLock = new ReaderWriterLockSlim();
-        private IntPtr? sendInstancePtr = IntPtr.Zero;
+        private IntPtr sendInstancePtr = IntPtr.Zero;
 
-        RenderTargetBitmap? targetBitmap = null;
-        FormatConvertedBitmap? fmtConvertedBmp = null;
+        RenderTargetBitmap targetBitmap = null;
+        FormatConvertedBitmap fmtConvertedBmp = null;
 
         private int stride;
         private int bufferSize;
         private float aspectRatio;
 
         // a thread to send frames on so that the UI isn't dragged down
-        Thread? sendThread = null;
+        Thread sendThread = null;
 
         // a way to exit the thread safely
         bool exitThread = false;
