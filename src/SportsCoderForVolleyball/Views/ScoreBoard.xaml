@@ -1,0 +1,173 @@
+﻿<UserControl
+    x:Class="SportsCoderForVolleyball.Views.ScoreBoard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convertar="clr-namespace:SportsCoderForVolleyball.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ScoreBoardViewModel}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
+    </UserControl.Resources>
+    <Grid
+        Width="600"
+        Height="50"
+        Margin="0,0,0,0"
+        Background="#2e30ac">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="0" Fill="{Binding ColorCodeLeftTeam.Value}" />
+        <Rectangle Grid.Column="7" Fill="{Binding ColorCodeRightTeam.Value}" />
+        <Rectangle Grid.Column="3" Fill="#fd5644" />
+        <Rectangle Grid.Column="4" Fill="#fd5644" />
+
+        <Border
+            Grid.ColumnSpan="9"
+            BorderBrush="White"
+            BorderThickness="3" />
+        <Border
+            Grid.Column="1"
+            BorderBrush="White"
+            BorderThickness="0,0,1.5,0" />
+        <Border
+            Grid.Column="2"
+            BorderBrush="White"
+            BorderThickness="1.5,0,1.5,0" />
+        <Border
+            Grid.Column="3"
+            BorderBrush="White"
+            BorderThickness="1.5,0,1.5,0" />
+        <Border
+            Grid.Column="4"
+            BorderBrush="White"
+            BorderThickness="1.5,0,1.5,0" />
+        <Border
+            Grid.Column="5"
+            BorderBrush="White"
+            BorderThickness="1.5,0,1.5,0" />
+        <Border
+            Grid.Column="6"
+            BorderBrush="White"
+            BorderThickness="1.5,0,0,0" />
+
+        <TextBlock
+            Grid.Column="1"
+            Margin="0,3,10,10"
+            HorizontalAlignment="Right"
+            FontSize="25"
+            Foreground="White"
+            Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
+            Text="●" />
+        <TextBlock
+            Grid.Column="6"
+            Margin="10,3,0,10"
+            HorizontalAlignment="Left"
+            FontSize="25"
+            Foreground="White"
+            Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
+            Text="●" />
+
+        <TextBlock
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding TeamLeft.Value}" />
+        <TextBlock
+            Grid.Column="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding SetLeft.Value}" />
+        <TextBlock
+            Grid.Column="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding PointLeft.Value}" />
+
+        <TextBlock
+            Grid.Column="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding PointRight.Value}" />
+        <TextBlock
+            Grid.Column="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding SetRight.Value}" />
+        <TextBlock
+            Grid.Column="6"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="White"
+            Text="{Binding TeamRight.Value}" />
+
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsAnimation.Value}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="600"
+                                        Duration="0:0:0.1" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:0.2"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0"
+                                        To="100"
+                                        Duration="0:0:30" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Width"
+                                        From="600"
+                                        To="0"
+                                        Duration="0:0:0.2" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:0.4"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="100"
+                                        To="0"
+                                        Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+    </Grid>
+</UserControl>

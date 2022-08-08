@@ -12,10 +12,5 @@ namespace SportsCoderForVolleyball.Views
         {
             InitializeComponent();
         }
-        private void dataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            dataGrid.UnselectAllCells();
-            dataGrid.UnselectAll();
-        }
     }
 }

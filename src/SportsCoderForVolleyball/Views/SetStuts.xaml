@@ -1,0 +1,277 @@
+﻿<UserControl
+    x:Class="SportsCoderForVolleyball.Views.SetStuts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    Width="500"
+    Height="315"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Opacity="0">
+        <StackPanel>
+            <Grid
+                Width="150"
+                Height="60"
+                HorizontalAlignment="Left"
+                Background="#ea5240">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Text="{Binding Set.Value, StringFormat=SET {0}}" />
+            </Grid>
+            <Grid Height="50" Background="#3133bd">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+
+                <Rectangle Grid.Column="0" Fill="AliceBlue" />
+                <Rectangle Grid.Column="5" Fill="AliceBlue" />
+                <Rectangle
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    Fill="#ea5240" />
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{Binding TeamLeft.Value}" />
+                <TextBlock
+                    Grid.Column="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{Binding TeamRight.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{Binding PointLeft.Value}" />
+                <TextBlock
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="{Binding PointRight.Value}" />
+            </Grid>
+            <Grid
+                x:Name="grid2"
+                Height="40"
+                Background="#161848">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="SETS" />
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding SetLeft.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding SetRight.Value}" />
+            </Grid>
+            <Grid
+                x:Name="grid3"
+                Height="40"
+                Background="#2e33b7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="ATTACKS" />
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding LeftTeamAttackPoint.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding RightTeamAttackPoint.Value}" />
+            </Grid>
+            <Grid Height="40" Background="#161848">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="BLOCKS" />
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding LeftTeamBlockPoint.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding RightTeamBlockPoint.Value}" />
+            </Grid>
+            <Grid
+                x:Name="grid5"
+                Height="40"
+                Background="#2e33b7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="SERVES" />
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding LeftTeamServePoint.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding RightTeamServePoint.Value}" />
+            </Grid>
+            <Grid Height="40" Background="#161848">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="OPPONENT ERRORS" />
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding LeftTeamOpponentError.Value}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="{Binding RightTeamOpponentError.Value}" />
+            </Grid>
+        </StackPanel>
+
+        <Border Margin="0,0,350,0" BorderThickness="0,5,0,0" />
+        <Border Margin="0,60,0,0" BorderThickness="0,5,0,0" />
+        <Border Margin="0,105,0,0" BorderThickness="0,5,0,0" />
+        <Border Margin="0,310,0,0" BorderThickness="0,5,0,0" />
+        <Border Margin="0,0,0,0" BorderThickness="5,0,0,0" />
+        <Border Margin="0,60,0,0" BorderThickness="0,0,5,0" />
+        <Border Margin="150,0,0,250" BorderThickness="5,0,0,0" />
+        <Border Margin="170,60,0,205" BorderThickness="5,0,0,0" />
+        <Border Margin="248.5,60,0,205" BorderThickness="5,0,0,0" />
+        <Border Margin="0,60,170,205" BorderThickness="0,0,5,0" />
+
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsDisplaySetStuts.Value}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0"
+                                        To="1"
+                                        Duration="0:0:0.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1"
+                                        To="0"
+                                        Duration="0:0:0.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+    </Grid>
+</UserControl>
