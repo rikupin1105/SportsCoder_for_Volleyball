@@ -12,8 +12,13 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
+
     <Grid Opacity="0">
         <StackPanel>
             <Grid
@@ -21,12 +26,7 @@
                 Height="60"
                 HorizontalAlignment="Left"
                 Background="#ea5240">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="30"
-                    Foreground="White"
-                    Text="{Binding Set.Value, StringFormat=SET {0}}" />
+                <TextBlock FontSize="30" Text="{Binding Set.Value, StringFormat=SET {0}}" />
             </Grid>
             <Grid Height="50" Background="#3133bd">
                 <Grid.ColumnDefinitions>
@@ -48,31 +48,19 @@
 
                 <TextBlock
                     Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
                     FontSize="25"
-                    Foreground="White"
                     Text="{Binding TeamLeft.Value}" />
                 <TextBlock
                     Grid.Column="4"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
                     FontSize="25"
-                    Foreground="White"
                     Text="{Binding TeamRight.Value}" />
                 <TextBlock
                     Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
                     FontSize="25"
-                    Foreground="White"
                     Text="{Binding PointLeft.Value}" />
                 <TextBlock
                     Grid.Column="3"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
                     FontSize="25"
-                    Foreground="White"
                     Text="{Binding PointRight.Value}" />
             </Grid>
             <Grid
@@ -85,27 +73,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="SETS" />
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding SetLeft.Value}" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding SetRight.Value}" />
+                <TextBlock Grid.Column="1" Text="SETS" />
+                <TextBlock Grid.Column="0" Text="{Binding SetLeft.Value}" />
+                <TextBlock Grid.Column="2" Text="{Binding SetRight.Value}" />
             </Grid>
             <Grid
                 x:Name="grid3"
@@ -117,27 +87,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="ATTACKS" />
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding LeftTeamAttackPoint.Value}" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding RightTeamAttackPoint.Value}" />
+                <TextBlock Grid.Column="1" Text="ATTACKS" />
+                <TextBlock Grid.Column="0" Text="{Binding LeftTeamAttackPoint.Value}" />
+                <TextBlock Grid.Column="2" Text="{Binding RightTeamAttackPoint.Value}" />
             </Grid>
             <Grid Height="40" Background="#161848">
                 <Grid.ColumnDefinitions>
@@ -146,27 +98,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="BLOCKS" />
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding LeftTeamBlockPoint.Value}" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding RightTeamBlockPoint.Value}" />
+                <TextBlock Grid.Column="1" Text="BLOCKS" />
+                <TextBlock Grid.Column="0" Text="{Binding LeftTeamBlockPoint.Value}" />
+                <TextBlock Grid.Column="2" Text="{Binding RightTeamBlockPoint.Value}" />
             </Grid>
             <Grid
                 x:Name="grid5"
@@ -178,27 +112,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="SERVES" />
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding LeftTeamServePoint.Value}" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding RightTeamServePoint.Value}" />
+                <TextBlock Grid.Column="1" Text="SERVES" />
+                <TextBlock Grid.Column="0" Text="{Binding LeftTeamServePoint.Value}" />
+                <TextBlock Grid.Column="2" Text="{Binding RightTeamServePoint.Value}" />
             </Grid>
             <Grid Height="40" Background="#161848">
                 <Grid.ColumnDefinitions>
@@ -207,27 +123,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="OPPONENT ERRORS" />
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding LeftTeamOpponentError.Value}" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Foreground="White"
-                    Text="{Binding RightTeamOpponentError.Value}" />
+                <TextBlock Grid.Column="1" Text="OPPONENT ERRORS" />
+                <TextBlock Grid.Column="0" Text="{Binding LeftTeamOpponentError.Value}" />
+                <TextBlock Grid.Column="2" Text="{Binding RightTeamOpponentError.Value}" />
             </Grid>
         </StackPanel>
 

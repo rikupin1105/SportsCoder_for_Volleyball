@@ -12,6 +12,10 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
     <Grid Opacity="0">
@@ -22,12 +26,7 @@
                     Height="60"
                     HorizontalAlignment="Left"
                     Background="#ea5240">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="30"
-                        Foreground="White"
-                        Text="MATCH" />
+                    <TextBlock FontSize="30" Text="MATCH" />
                 </Grid>
                 <Grid Height="50" Background="#3133bd">
                     <Grid.ColumnDefinitions>
@@ -49,31 +48,19 @@
 
                     <TextBlock
                         Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="25"
-                        Foreground="White"
                         Text="{Binding TeamLeft.Value}" />
                     <TextBlock
                         Grid.Column="4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="25"
-                        Foreground="White"
                         Text="{Binding TeamRight.Value}" />
                     <TextBlock
                         Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="25"
-                        Foreground="White"
                         Text="{Binding SetLeft.Value}" />
                     <TextBlock
                         Grid.Column="3"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="25"
-                        Foreground="White"
                         Text="{Binding SetRight.Value}" />
                 </Grid>
                 <Grid Height="40" Background="#161848">
@@ -83,27 +70,9 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="TOTAL POINTS" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameLeftTeamPoint.Value}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameRightTeamPoint.Value}" />
+                    <TextBlock Grid.Column="1" Text="TOTAL POINTS" />
+                    <TextBlock Grid.Column="0" Text="{Binding GameLeftTeamPoint.Value}" />
+                    <TextBlock Grid.Column="2" Text="{Binding GameRightTeamPoint.Value}" />
                 </Grid>
                 <Grid Height="40" Background="#2e33b7">
                     <Grid.ColumnDefinitions>
@@ -112,27 +81,9 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="ATTACKS" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameLeftTeamAttackPoint.Value}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameRightTeamAttackPoint.Value}" />
+                    <TextBlock Grid.Column="1" Text="ATTACKS" />
+                    <TextBlock Grid.Column="0" Text="{Binding GameLeftTeamAttackPoint.Value}" />
+                    <TextBlock Grid.Column="2" Text="{Binding GameRightTeamAttackPoint.Value}" />
                 </Grid>
                 <Grid Height="40" Background="#161848">
                     <Grid.ColumnDefinitions>
@@ -141,27 +92,9 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="BLOCKS" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameLeftTeamBlockPoint.Value}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameRightTeamBlockPoint.Value}" />
+                    <TextBlock Grid.Column="1" Text="BLOCKS" />
+                    <TextBlock Grid.Column="0" Text="{Binding GameLeftTeamBlockPoint.Value}" />
+                    <TextBlock Grid.Column="2" Text="{Binding GameRightTeamBlockPoint.Value}" />
                 </Grid>
                 <Grid Height="40" Background="#2e33b7">
                     <Grid.ColumnDefinitions>
@@ -170,27 +103,9 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="SERVES" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameLeftTeamServePoint.Value}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameRightTeamServePoint.Value}" />
+                    <TextBlock Grid.Column="1" Text="SERVES" />
+                    <TextBlock Grid.Column="0" Text="{Binding GameLeftTeamServePoint.Value}" />
+                    <TextBlock Grid.Column="2" Text="{Binding GameRightTeamServePoint.Value}" />
                 </Grid>
                 <Grid Height="40" Background="#161848">
                     <Grid.ColumnDefinitions>
@@ -199,27 +114,9 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="OPPONENT ERRORS" />
-                    <TextBlock
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameLeftTeamOpponentError.Value}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Foreground="White"
-                        Text="{Binding GameRightTeamOpponentError.Value}" />
+                    <TextBlock Grid.Column="1" Text="OPPONENT ERRORS" />
+                    <TextBlock Grid.Column="0" Text="{Binding GameLeftTeamOpponentError.Value}" />
+                    <TextBlock Grid.Column="2" Text="{Binding GameRightTeamOpponentError.Value}" />
                 </Grid>
             </StackPanel>
             <Border Margin="0,0,350,0" BorderThickness="0,5,0,0" />

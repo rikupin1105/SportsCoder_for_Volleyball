@@ -4,6 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
     <Grid
         Width="600"
         Height="35"
@@ -15,29 +23,15 @@
             BorderBrush="White"
             BorderThickness="3" />
 
-        <TextBlock
-            VerticalAlignment="Center"
-            FontSize="20"
-            FontWeight="SemiBold"
-            Foreground="White"
-            Text="BLOCK POINTS"
-            TextAlignment="Center" />
+        <TextBlock Text="BLOCK POINTS" TextAlignment="Center" />
 
         <TextBlock
             Margin="30,0,0,0"
-            VerticalAlignment="Center"
-            FontSize="20"
-            FontWeight="SemiBold"
-            Foreground="White"
             Text="{Binding GameLeftTeamBlockPoint.Value}"
             TextAlignment="Left" />
 
         <TextBlock
             Margin="0,0,30,0"
-            VerticalAlignment="Center"
-            FontSize="20"
-            FontWeight="SemiBold"
-            Foreground="White"
             Text="{Binding GameRightTeamBlockPoint.Value}"
             TextAlignment="Right" />
 

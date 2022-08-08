@@ -4,6 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <!--  左マッチポイント  -->
         <Grid
@@ -20,27 +33,10 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
-            <Rectangle
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Fill="#2e30ac" />
-            <Border
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                BorderBrush="White"
-                BorderThickness="3,3,1.5,3" />
-            <Border
-                Grid.Column="3"
-                BorderBrush="White"
-                BorderThickness="1.5,0,0,0" />
-            <TextBlock
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                VerticalAlignment="Center"
-                FontSize="20"
-                Foreground="White"
-                Text="MATCH POINT"
-                TextAlignment="Center" />
+            <Rectangle Grid.ColumnSpan="3" Fill="#2e30ac" />
+            <Border Grid.ColumnSpan="3" BorderThickness="3,3,1.5,3" />
+            <Border Grid.Column="3" BorderThickness="1.5,0,0,0" />
+            <TextBlock Grid.ColumnSpan="3" Text="MATCH POINT" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
@@ -104,20 +100,12 @@
             <Border
                 Grid.Column="5"
                 Grid.ColumnSpan="3"
-                BorderBrush="White"
                 BorderThickness="1.5,3,3,3" />
-            <Border
-                Grid.Column="4"
-                BorderBrush="White"
-                BorderThickness="0,0,1.5,0" />
+            <Border Grid.Column="4" BorderThickness="0,0,1.5,0" />
             <TextBlock
                 Grid.Column="5"
                 Grid.ColumnSpan="4"
-                VerticalAlignment="Center"
-                FontSize="20"
-                Foreground="White"
-                Text="MATCH POINT"
-                TextAlignment="Center" />
+                Text="MATCH POINT" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
@@ -126,8 +114,8 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
-                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,90" />
-                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,90" />
                                         </ThicknessAnimationUsingKeyFrames>
                                         <DoubleAnimation
                                             Storyboard.TargetProperty="Opacity"

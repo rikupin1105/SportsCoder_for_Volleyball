@@ -12,7 +12,18 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
     </UserControl.Resources>
+
     <Grid
         Width="600"
         Height="50"
@@ -37,95 +48,34 @@
         <Rectangle Grid.Column="3" Fill="#fd5644" />
         <Rectangle Grid.Column="4" Fill="#fd5644" />
 
-        <Border
-            Grid.ColumnSpan="9"
-            BorderBrush="White"
-            BorderThickness="3" />
-        <Border
-            Grid.Column="1"
-            BorderBrush="White"
-            BorderThickness="0,0,1.5,0" />
-        <Border
-            Grid.Column="2"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="3"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="4"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="5"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="6"
-            BorderBrush="White"
-            BorderThickness="1.5,0,0,0" />
+        <Border Grid.ColumnSpan="9" BorderThickness="3" />
+        <Border Grid.Column="1" BorderThickness="0,0,1.5,0" />
+        <Border Grid.Column="2" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="3" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="4" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="5" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="6" BorderThickness="1.5,0,0,0" />
 
         <TextBlock
             Grid.Column="1"
             Margin="0,3,10,10"
             HorizontalAlignment="Right"
-            FontSize="25"
-            Foreground="White"
             Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
             Text="●" />
         <TextBlock
             Grid.Column="6"
             Margin="10,3,0,10"
             HorizontalAlignment="Left"
-            FontSize="25"
-            Foreground="White"
             Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
             Text="●" />
 
-        <TextBlock
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding TeamLeft.Value}" />
-        <TextBlock
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding SetLeft.Value}" />
-        <TextBlock
-            Grid.Column="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding PointLeft.Value}" />
+        <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
+        <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
+        <TextBlock Grid.Column="3" Text="{Binding PointLeft.Value}" />
 
-        <TextBlock
-            Grid.Column="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding PointRight.Value}" />
-        <TextBlock
-            Grid.Column="5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding SetRight.Value}" />
-        <TextBlock
-            Grid.Column="6"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding TeamRight.Value}" />
+        <TextBlock Grid.Column="4" Text="{Binding PointRight.Value}" />
+        <TextBlock Grid.Column="5" Text="{Binding SetRight.Value}" />
+        <TextBlock Grid.Column="6" Text="{Binding TeamRight.Value}" />
 
         <Grid.Style>
             <Style TargetType="Grid">

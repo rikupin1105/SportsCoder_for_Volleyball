@@ -9,6 +9,20 @@
     d:DataContext="{d:DesignInstance Type=viewmodels:SetViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid
         Width="600"
         Height="50"
@@ -30,55 +44,16 @@
         <Rectangle Grid.Column="0" Fill="{Binding ColorCodeLeftTeam.Value}" />
         <Rectangle Grid.Column="6" Fill="{Binding ColorCodeRightTeam.Value}" />
 
-        <Border
-            Grid.ColumnSpan="6"
-            BorderBrush="White"
-            BorderThickness="3" />
-        <Border
-            Grid.Column="1"
-            BorderBrush="White"
-            BorderThickness="0,0,1.5,0" />
-        <Border
-            Grid.Column="2"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="3"
-            BorderBrush="White"
-            BorderThickness="1.5,0,1.5,0" />
-        <Border
-            Grid.Column="4"
-            BorderBrush="White"
-            BorderThickness="1.5,0,0,0" />
+        <Border Grid.ColumnSpan="6" BorderThickness="3" />
+        <Border Grid.Column="1" BorderThickness="0,0,1.5,0" />
+        <Border Grid.Column="2" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="3" BorderThickness="1.5,0,1.5,0" />
+        <Border Grid.Column="4" BorderThickness="1.5,0,0,0" />
 
-        <TextBlock
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding TeamLeft.Value}" />
-        <TextBlock
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding SetLeft.Value}" />
-        <TextBlock
-            Grid.Column="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding SetRight.Value}" />
-        <TextBlock
-            Grid.Column="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="25"
-            Foreground="White"
-            Text="{Binding TeamRight.Value}" />
+        <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
+        <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
+        <TextBlock Grid.Column="3" Text="{Binding SetRight.Value}" />
+        <TextBlock Grid.Column="4" Text="{Binding TeamRight.Value}" />
 
         <Grid.Style>
             <Style TargetType="Grid">
