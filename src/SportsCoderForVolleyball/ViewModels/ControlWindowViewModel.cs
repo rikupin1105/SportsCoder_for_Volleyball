@@ -20,41 +20,41 @@ namespace SportsCoderForVolleyball.ViewModels
         {
             _dialogService = dialogService;
 
-            Control.Instance.SetService(_dialogService);
+            Data.Instance.Control.SetService(_dialogService);
 
             new Views.MainWindow().Show();
 
-            DisplayCommand.Subscribe(_ => Control.Instance.InfomationScore());
-            TechnicalTimeoutCommand.Subscribe(_ => Control.Instance.TechnicalTimeOut());
-            LeftTimeoutCommand.Subscribe(_ => Control.Instance.LeftTimeout());
-            RightTimeoutCommand.Subscribe(_ => Control.Instance.RightTimeOut());
-            GetSetDisplayCommand.Subscribe(_ => Control.InfomationSet());
+            DisplayCommand.Subscribe(_ => Data.Instance.Option.InfomationScore());
+            TechnicalTimeoutCommand.Subscribe(_ => Data.Instance.Option.TechnicalTimeOut());
+            LeftTimeoutCommand.Subscribe(_ => Data.Instance.Option.LeftTimeout());
+            RightTimeoutCommand.Subscribe(_ => Data.Instance.Option.RightTimeOut());
+            GetSetDisplayCommand.Subscribe(_ => Option.InfomationSet());
 
-            CourtChangeCommand.Subscribe(_ => Control.Instance.CourtChange());
+            CourtChangeCommand.Subscribe(_ => Data.Instance.Control.CourtChange());
             SettingCommand.Subscribe(_ => { _dialogService.Show("SettingDialog", new DialogParameters(), result => { }, "DialogWindow"); });
 
-            LeftTeamServePointCommand.Subscribe(_ => Control.Instance.ServePoint(true));
-            RightTeamServePointCommand.Subscribe(_ => Control.Instance.ServePoint(false));
-            LeftTeamBlockPointCommand.Subscribe(_ => Control.Instance.BlockPoint(true));
-            RightTeamBlockPointCommand.Subscribe(_ => Control.Instance.BlockPoint(false));
-            LeftTeamAttackPointCommand.Subscribe(_ => Control.Instance.AttackPoint(true));
-            RightTeamAttackPointCommand.Subscribe(_ => Control.Instance.AttackPoint(false));
-            LeftTeamServeErrorCommand.Subscribe(_ => Control.Instance.ServeError(true));
-            RightTeamServeErrorCommand.Subscribe(_ => Control.Instance.ServeError(false));
-            LeftTeamErrorCommand.Subscribe(_ => Control.Instance.Error(true));
-            RightTeamErrorCommand.Subscribe(_ => Control.Instance.Error(false));
-            UndoCommand.Subscribe(_ => Control.Instance.Undo());
+            LeftTeamServePointCommand.Subscribe(_ => Data.Instance.Point.ServePoint(true));
+            RightTeamServePointCommand.Subscribe(_ => Data.Instance.Point.ServePoint(false));
+            LeftTeamBlockPointCommand.Subscribe(_ => Data.Instance.Point.BlockPoint(true));
+            RightTeamBlockPointCommand.Subscribe(_ => Data.Instance.Point.BlockPoint(false));
+            LeftTeamAttackPointCommand.Subscribe(_ => Data.Instance.Point.AttackPoint(true));
+            RightTeamAttackPointCommand.Subscribe(_ => Data.Instance.Point.AttackPoint(false));
+            LeftTeamServeErrorCommand.Subscribe(_ => Data.Instance.Point.ServeError(true));
+            RightTeamServeErrorCommand.Subscribe(_ => Data.Instance.Point.ServeError(false));
+            LeftTeamErrorCommand.Subscribe(_ => Data.Instance.Point.Error(true));
+            RightTeamErrorCommand.Subscribe(_ => Data.Instance.Point.Error(false));
+            UndoCommand.Subscribe(_ => Data.Instance.Control.Undo());
             SwitchServerCommand.Subscribe(_ => Control.SwitchServer());
 
             //プレー統計
-            StatisticsAttackPointCommand.Subscribe(_ => Control.Instance.InfomationAttackPoint());
-            StatisticsBlockPointCommand.Subscribe(_ => Control.Instance.InfomationBlockPoint());
-            StatisticsServePointCommand.Subscribe(_ => Control.Instance.InfomationServePoint());
-            StatisticsServeErrorCommand.Subscribe(_ => Control.Instance.InfomationServeError());
+            StatisticsAttackPointCommand.Subscribe(_ => Data.Instance.Option.InfomationAttackPoint());
+            StatisticsBlockPointCommand.Subscribe(_ => Data.Instance.Option.InfomationBlockPoint());
+            StatisticsServePointCommand.Subscribe(_ => Data.Instance.Option.InfomationServePoint());
+            StatisticsServeErrorCommand.Subscribe(_ => Data.Instance.Option.InfomationServeError());
 
             //色
-            ColorCodeLeftTeam = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-            ColorCodeRightTeam = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+            ColorCodeLeftTeam = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+            ColorCodeRightTeam = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
         }
         public ReactiveCommand DisplayCommand { get; set; } = new();
         public ReactiveCommand TechnicalTimeoutCommand { get; set; } = new();
@@ -89,47 +89,47 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand StatisticsNoIndicatedCommand { get; set; } = new();
 
         //セット統計用
-        public ReactiveProperty<int> LeftTeamServePoint { get; set; } = Control.Instance.LeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> RightTeamServePoint { get; set; } = Control.Instance.RightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> LeftTeamAttackPoint { get; set; } = Control.Instance.LeftTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> RightTeamAttackPoint { get; set; } = Control.Instance.RightTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> LeftTeamBlockPoint { get; set; } = Control.Instance.LeftTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> RightTeamBlockPoint { get; set; } = Control.Instance.RightTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> LeftTeamServeError { get; set; } = Control.Instance.LeftTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> RightTeamServeError { get; set; } = Control.Instance.RightTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> LeftTeamError { get; set; } = Control.Instance.LeftTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> RightTeamError { get; set; } = Control.Instance.RightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LeftTeamServePoint { get; set; } = Data.Instance.LeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> RightTeamServePoint { get; set; } = Data.Instance.RightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LeftTeamAttackPoint { get; set; } = Data.Instance.LeftTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> RightTeamAttackPoint { get; set; } = Data.Instance.RightTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LeftTeamBlockPoint { get; set; } = Data.Instance.LeftTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> RightTeamBlockPoint { get; set; } = Data.Instance.RightTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LeftTeamServeError { get; set; } = Data.Instance.LeftTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> RightTeamServeError { get; set; } = Data.Instance.RightTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> LeftTeamError { get; set; } = Data.Instance.LeftTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> RightTeamError { get; set; } = Data.Instance.RightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //プレー統計表示
-        public ReactiveProperty<int> GameLeftTeamServePoint { get; set; } = Control.Instance.GameLeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamServePoint { get; set; } = Control.Instance.GameRightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameLeftTeamAttackPoint { get; set; } = Control.Instance.GameLeftTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamAttackPoint { get; set; } = Control.Instance.GameRightTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameLeftTeamBlockPoint { get; set; } = Control.Instance.GameLeftTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamBlockPoint { get; set; } = Control.Instance.GameRightTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameLeftTeamServeError { get; set; } = Control.Instance.GameLeftTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamServeError { get; set; } = Control.Instance.GameRightTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameLeftTeamError { get; set; } = Control.Instance.GameLeftTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> GameRightTeamError { get; set; } = Control.Instance.GameRightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameLeftTeamServePoint { get; set; } = Data.Instance.GameLeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamServePoint { get; set; } = Data.Instance.GameRightTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameLeftTeamAttackPoint { get; set; } = Data.Instance.GameLeftTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamAttackPoint { get; set; } = Data.Instance.GameRightTeamAttackPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameLeftTeamBlockPoint { get; set; } = Data.Instance.GameLeftTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamBlockPoint { get; set; } = Data.Instance.GameRightTeamBlockPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameLeftTeamServeError { get; set; } = Data.Instance.GameLeftTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamServeError { get; set; } = Data.Instance.GameRightTeamServeError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameLeftTeamError { get; set; } = Data.Instance.GameLeftTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> GameRightTeamError { get; set; } = Data.Instance.GameRightTeamError.ObserveProperty(x => x.Value).ToReactiveProperty();
 
-        public ReactiveProperty<bool> GuiEnable { get; set; } = Control.Instance.GuiEnable.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> GuiEnable { get; set; } = Data.Instance.GuiEnable.ObserveProperty(x => x.Value).ToReactiveProperty();
 
 
         //UI部品
-        public ReactiveProperty<int> Set { get; set; } = Control.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> TeamRight { get; set; } = Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> TeamLeft { get; set; } = Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> PointLeft { get; set; } = Control.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> PointRight { get; set; } = Control.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> SetLeft { get; set; } = Control.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> SetRight { get; set; } = Control.Instance.SetRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> TimeOutRight { get; set; } = Control.Instance.TimeOutRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> TimeOutLeft { get; set; } = Control.Instance.TimeOutLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> IsLeftServe { get; set; } = Control.Instance.IsLeftServe.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> IsRightServe { get; set; } = Control.Instance.IsRightServe.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> Set { get; set; } = Data.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> TeamRight { get; set; } = Data.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> TeamLeft { get; set; } = Data.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> PointLeft { get; set; } = Data.Instance.PointLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> PointRight { get; set; } = Data.Instance.PointRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> SetLeft { get; set; } = Data.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> SetRight { get; set; } = Data.Instance.SetRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOutRight { get; set; } = Data.Instance.TimeOutRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOutLeft { get; set; } = Data.Instance.TimeOutLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsLeftServe { get; set; } = Data.Instance.IsLeftServe.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsRightServe { get; set; } = Data.Instance.IsRightServe.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //色
-        public ReactiveProperty<string> ColorCodeLeftTeam { get; set; } = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> ColorCodeRightTeam { get; set; } = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ColorCodeLeftTeam { get; set; } = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ColorCodeRightTeam { get; set; } = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
     }
 }

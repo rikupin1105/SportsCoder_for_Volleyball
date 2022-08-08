@@ -7,6 +7,6 @@ namespace SportsCoderForVolleyball.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BackGroundColor { get; set; } = Data.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
     }
 }

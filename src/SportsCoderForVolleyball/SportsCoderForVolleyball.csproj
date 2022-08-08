@@ -23,4 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NDILibDotNet2\NDILibDotNet2.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>

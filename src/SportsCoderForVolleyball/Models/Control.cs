@@ -2,275 +2,19 @@
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using static SportsCoderForVolleyball.Models.Data;
 
 namespace SportsCoderForVolleyball.Models
 {
     public class Control
     {
         private IDialogService _dialogService;
-        private bool _stopTechnicalTimeout = false;
-        private bool _stopLeftTimeOut = false;
-        private bool _stopRightTimeOut = false;
         public void SetService(IDialogService dialogService)
         {
             _dialogService = dialogService;
-        }
-        private async Task DeleteOption(bool wait = true)
-        {
-            var flag = IsDispleyOption();
-
-            _stopTechnicalTimeout = true;
-            _stopRightTimeOut = true;
-            _stopLeftTimeOut = true;
-
-            Instance.IsDisplayRightSetPoint.Value = false;
-            Instance.IsDisplayLeftSetPoint.Value = false;
-            Instance.IsDisplayRightMatchPoint.Value = false;
-            Instance.IsDisplayLeftMatchPoint.Value = false;
-            Instance.IsDisplayTimeoutRemaining.Value = false;
-            Instance.IsDisplayRightSetPoint.Value = false;
-            Instance.IsDisplayRightMatchPoint.Value = false;
-            Instance.IsDisplayLeftSetPoint.Value = false;
-            Instance.IsDisplayLeftMatchPoint.Value = false;
-            Instance.IsDisplayPointParSet.Value = false;
-            Instance.IsDisplayAttackPointInfomation.Value = false;
-            Instance.IsDisplayBlockPointInfomation.Value = false;
-            Instance.IsDisplayServePointInfomation.Value = false;
-            Instance.IsDisplayServeErrorInfomation.Value = false;
-
-            if (flag && wait) await Task.Delay(1000);
-        }
-        private bool IsDispleyOption()
-        {
-            if (IsDisplayTechnicalTimeout.Value) return true;
-            if (IsDisplayLeftTimeout.Value) return true;
-            if (IsDisplayRightTimeout.Value) return true;
-            if (IsDisplayRightSetPoint.Value) return true;
-            if (IsDisplayRightMatchPoint.Value) return true;
-            if (IsDisplayLeftSetPoint.Value) return true;
-            if (IsDisplayLeftMatchPoint.Value) return true;
-            if (IsDisplayTimeoutRemaining.Value) return true;
-            if (Instance.IsDisplayRightSetPoint.Value) return true;
-            if (Instance.IsDisplayRightMatchPoint.Value) return true;
-            if (Instance.IsDisplayLeftSetPoint.Value) return true;
-            if (Instance.IsDisplayLeftMatchPoint.Value) return true;
-            if (Instance.IsDisplayPointParSet.Value) return true;
-
-            if (Instance.IsDisplayAttackPointInfomation.Value) return true;
-            if (Instance.IsDisplayBlockPointInfomation.Value) return true;
-            if (Instance.IsDisplayServePointInfomation.Value) return true;
-            if (Instance.IsDisplayServeErrorInfomation.Value) return true;
-
-            if (IsDisplayGetSet.Value) return true;
-            return false;
-        }
-        public async void LeftTimeout()
-        {
-            if (Instance.IsDisplayLeftTimeout.Value  || Instance.IsDisplayTimeoutRemaining.Value)
-            {
-                //すでに表示されている
-                await Instance.DeleteOption();
-            }
-            else
-            {
-                Instance.TimeOutLeft.Value++;
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await Instance.DeleteOption();
-
-
-                Instance.History.Add("TL");
-
-                Instance.IsDisplayLeftTimeout.Value = true;
-                _stopLeftTimeOut = false;
-                for (int i = 0; i < 160; i++)
-                {
-                    if (_stopLeftTimeOut)
-                    {
-                        _stopLeftTimeOut = false;
-                        break;
-                    }
-                    if (i == 80)
-                    {
-                        Instance.IsDisplayLeftTimeout.Value = false;
-                        await Task.Delay(500);
-                        Instance.IsDisplayTimeoutRemaining.Value = true;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayLeftTimeout.Value = false;
-                Instance.IsDisplayTimeoutRemaining.Value = false;
-
-
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-        }
-        public async void RightTimeOut()
-        {
-            if (Instance.IsDisplayRightTimeout.Value  || Instance.IsDisplayTimeoutRemaining.Value)
-            {
-                //すでに表示されている
-                await Instance.DeleteOption();
-            }
-            else
-            {
-                Instance.TimeOutRight.Value++;
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await Instance.DeleteOption();
-
-
-                Instance.History.Add("TR");
-                Instance.IsDisplayRightTimeout.Value = true;
-                _stopRightTimeOut = false;
-
-                for (int i = 0; i < 160; i++)
-                {
-                    if (_stopRightTimeOut)
-                    {
-                        _stopRightTimeOut = false;
-                        break;
-                    }
-                    if (i == 80)
-                    {
-                        Instance.IsDisplayRightTimeout.Value = false;
-                        await Task.Delay(500);
-                        Instance.IsDisplayTimeoutRemaining.Value = true;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayRightTimeout.Value = false;
-                Instance.IsDisplayTimeoutRemaining.Value = false;
-
-
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-        }
-        public async void TechnicalTimeOut()
-        {
-            if (Instance.IsDisplayTechnicalTimeout.Value)
-            {
-                await Instance.DeleteOption();
-            }
-            else
-            {
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await Instance.DeleteOption();
-                Instance.IsDisplayTechnicalTimeout.Value = true;
-                _stopTechnicalTimeout = false;
-                for (int i = 0; i < 300; i++)
-                {
-                    if (_stopTechnicalTimeout)
-                    {
-                        Instance.IsDisplayTechnicalTimeout.Value = false;
-                        _stopTechnicalTimeout = false;
-                        await Task.Delay(1000);
-                        //await DetectSetPoint();
-                        return;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayTechnicalTimeout.Value = false;
-            }
-        }
-        public async void InfomationScore()
-        {
-            if (Instance.IsAnimation.Value)
-            {
-                //表示されているとき
-                if (Instance.IsDisplayGetSet.Value)
-                {
-                    Instance.IsDisplayGetSet.Value = false;
-                }
-                else
-                {
-                    await DeleteOption();
-                    Instance.IsAnimation.Value = false;
-                }
-            }
-            else
-            {
-                //未表示のとき
-
-                Instance.IsAnimation.Value = true;
-                if (Instance.IsDisplayGetSet.Value)
-                {
-                    Instance.IsDisplayGetSet.Value = false;
-                }
-                //await DetectSetPoint();
-            }
-        }
-        public static void InfomationStatistics()
-        {
-            if (Instance.IsDisplaySetStuts.Value)
-            {
-                Instance.IsDisplaySetStuts.Value = false;
-            }
-            else
-            {
-                Instance.IsDisplaySetStuts.Value = true;
-            }
-        }
-        public void InfomationPointParSet()
-        {
-            if (Instance.IsDisplayPointParSet.Value)
-            {
-                Instance.IsDisplayPointParSet.Value = false;
-            }
-            else
-            {
-
-                var itemsorce = new List<PointParSetInfomationSource>();
-                foreach (var item in Instance.Sets.Value)
-                {
-                    if (IsATeamLeft.Value)
-                    {
-                        itemsorce.Add(new PointParSetInfomationSource()
-                        {
-                            Left = item.ATeamPoint,
-                            Right= item.BTeamPoint
-                        });
-                    }
-                    else
-                    {
-                        itemsorce.Add(new PointParSetInfomationSource()
-                        {
-                            Right = item.ATeamPoint,
-                            Left = item.BTeamPoint
-                        });
-                    }
-                }
-                PointParSetSource.Value = itemsorce;
-
-                Instance.IsDisplayPointParSet.Value = true;
-            }
-        }
-        public static void InfomationSet()
-        {
-            if (Instance.IsDisplayGetSet.Value)
-            {
-                Instance.IsDisplayGetSet.Value = false;
-            }
-            else
-            {
-                Instance.IsDisplayGetSet.Value = true;
-            }
         }
         public class PointParSetInfomationSource
         {
@@ -292,212 +36,6 @@ namespace SportsCoderForVolleyball.Models
         {
             Instance.GuiEnable.Value = look;
         }
-
-
-        //プレー統計表示
-        public async void InfomationAttackPoint()
-        {
-            if (IsDisplayAttackPointInfomation.Value)
-            {
-                IsDisplayAttackPointInfomation.Value = false;
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await DeleteOption();
-                IsDisplayAttackPointInfomation.Value = true;
-            }
-        }
-        public async void InfomationBlockPoint()
-        {
-            if (IsDisplayBlockPointInfomation.Value)
-            {
-                IsDisplayBlockPointInfomation.Value = false;
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                IsDisplayBlockPointInfomation.Value = true;
-            }
-        }
-        public async void InfomationServePoint()
-        {
-            if (IsDisplayServePointInfomation.Value)
-            {
-                IsDisplayServePointInfomation.Value = false;
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                IsDisplayServePointInfomation.Value = true;
-            }
-        }
-        public async void InfomationServeError()
-        {
-            if (IsDisplayServeErrorInfomation.Value)
-            {
-                IsDisplayServeErrorInfomation.Value = false;
-                await Task.Delay(1000);
-                await DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsAnimation.Value == false)
-                {
-                    Instance.IsAnimation.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                IsDisplayServeErrorInfomation.Value = true;
-            }
-        }
-
-        private async void PointPlusLeft(bool IsDetectSetPoint = true)
-        {
-            Instance.GameLeftTeamPoint.Value++;
-            Instance.PointLeft.Value++;
-
-            //サーバー表示
-            Instance.IsLeftServe.Value = true;
-            Instance.IsRightServe.Value = false;
-
-            if (IsDetectSetPoint)
-                await DetectSetPoint();
-        }
-        private async void PointPlusRight(bool IsDetectSetPoint = true)
-        {
-            Instance.GameRightTeamPoint.Value++;
-            Instance.PointRight.Value++;
-
-            //サーバー表示
-            Instance.IsLeftServe.Value = false;
-            Instance.IsRightServe.Value = true;
-
-            if (IsDetectSetPoint)
-                await DetectSetPoint();
-        }
-
-        public void ServePoint(bool IsLeftTeam)
-        {
-            if (IsLeftTeam)
-            {
-                PointPlusLeft(false);
-                LeftTeamServePoint.Value++;
-                GameLeftTeamServePoint.Value++;
-
-                History.Add("PL.S");
-            }
-            else
-            {
-                PointPlusRight(false);
-                RightTeamServePoint.Value++;
-                GameRightTeamServePoint.Value++;
-
-                History.Add("PR.S");
-            }
-        }
-        public void BlockPoint(bool IsLeftTeam)
-        {
-            if (IsLeftTeam)
-            {
-                PointPlusLeft();
-                LeftTeamBlockPoint.Value++;
-                GameLeftTeamBlockPoint.Value++;
-
-                History.Add("PL.B");
-            }
-            else
-            {
-                PointPlusRight();
-                RightTeamBlockPoint.Value++;
-                GameRightTeamBlockPoint.Value++;
-
-                History.Add("PR.B");
-            }
-        }
-        public void AttackPoint(bool IsLeftTeam)
-        {
-            if (IsLeftTeam)
-            {
-                PointPlusLeft();
-                LeftTeamAttackPoint.Value++;
-                GameLeftTeamAttackPoint.Value++;
-
-                History.Add("PL.A");
-            }
-            else
-            {
-                PointPlusRight();
-                RightTeamAttackPoint.Value++;
-                GameRightTeamAttackPoint.Value++;
-
-                History.Add("PR.A");
-            }
-        }
-        public void ServeError(bool IsLeftTeam)
-        {
-            if (IsLeftTeam)
-            {
-                PointPlusRight();
-                LeftTeamServeError.Value++;
-                GameLeftTeamServeError.Value++;
-                GameRightTeamOpponentError.Value++;
-
-                History.Add("PR.SE");
-            }
-            else
-            {
-                PointPlusLeft();
-                RightTeamServeError.Value++;
-                GameRightTeamServeError.Value++;
-                GameLeftTeamOpponentError.Value++;
-
-                History.Add("PL.SE");
-            }
-        }
-        public void Error(bool IsLeftTeam)
-        {
-            if (IsLeftTeam)
-            {
-                PointPlusRight();
-                LeftTeamError.Value++;
-                GameLeftTeamError.Value++;
-                GameRightTeamOpponentError.Value++;
-
-                History.Add("PR.SE");
-            }
-            else
-            {
-                PointPlusLeft();
-                RightTeamError.Value++;
-                GameRightTeamError.Value++;
-                GameLeftTeamOpponentError.Value++;
-
-                History.Add("PL.E");
-            }
-        }
-
         public async void CourtChange(bool detectSetpoint = true, bool History = true)
         {
             Swap(ref Instance.PointLeft, ref Instance.PointRight);
@@ -535,10 +73,10 @@ namespace SportsCoderForVolleyball.Models
             //操作のロック
             LockControl(false);
 
-            await DeleteOption();
+            await Instance.Option.DeleteOption();
 
-            LeftTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
-            RightTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
+            Instance.LeftTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
+            Instance.RightTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
 
             //記録の書き込み
             if (Instance.IsATeamLeft.Value)
@@ -600,16 +138,16 @@ namespace SportsCoderForVolleyball.Models
 
             //セット数
             await Task.Delay(5000);
-            InfomationSet();
+            Option.InfomationSet();
 
             //セットごとのポイント
             await Task.Delay(4000);
-            Instance.InfomationPointParSet();
+            Instance.Option.InfomationPointParSet();
             Instance.IsAnimation.Value = false;
 
             //セットごとのポイントを削除
             await Task.Delay(10000);
-            await DeleteOption();
+            await Instance.Option.DeleteOption();
 
 
             //スコアとセットを非表示
@@ -617,12 +155,12 @@ namespace SportsCoderForVolleyball.Models
 
             //統計表示
             await Task.Delay(2000);
-            IsDisplaySetStuts.Value = true;
+            Instance.IsDisplaySetStuts.Value = true;
 
 
             //統計非表示
             await Task.Delay(15000);
-            IsDisplaySetStuts.Value = false;
+            Instance.IsDisplaySetStuts.Value = false;
 
 
             //最終セットの場合
@@ -631,11 +169,11 @@ namespace SportsCoderForVolleyball.Models
                 //ゲーム終了ならスコアボードを再表示させない
                 await Task.Delay(2000);
 
-                IsDisplayGameStuts.Value = true;
+                Instance.IsDisplayGameStuts.Value = true;
 
                 await Task.Delay(15000);
 
-                IsDisplayGameStuts.Value = false;
+                Instance.IsDisplayGameStuts.Value = false;
 
                 return;
             }
@@ -699,12 +237,12 @@ namespace SportsCoderForVolleyball.Models
             }
 
 
-            InfomationScore();
+            Instance.Option.InfomationScore();
 
             //操作ロックの解除
             LockControl(true);
         }
-        private async Task<StateSet> DetectSetPoint()
+        public async Task DetectSetPoint()
         {
             //ファイナルセットの場合
             if (Instance.Set.Value == Instance.SET.Value)
@@ -714,7 +252,7 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.PointLeft.Value - Instance.PointRight.Value >= 2 && Instance.PointLeft.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
-                    await DeleteOption(false);
+                    await Instance.Option.DeleteOption(false);
                     Instance.SetLeft.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
@@ -730,14 +268,14 @@ namespace SportsCoderForVolleyball.Models
                             LockControl(true);
                         }
                     }, "DialogWindow");
-                    return StateSet.EndMatch;
+                    return;
                 }
 
                 //右チーム
                 if (Instance.PointRight.Value - Instance.PointLeft.Value >= 2 && Instance.PointRight.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
-                    await DeleteOption(false);
+                    await Instance.Option.DeleteOption(false);
                     Instance.SetRight.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
@@ -753,7 +291,7 @@ namespace SportsCoderForVolleyball.Models
                             LockControl(true);
                         }
                     }, "DialogWindow");
-                    return StateSet.EndMatch;
+                    return;
                 }
 
 
@@ -762,7 +300,6 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.PointLeft.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
                 {
                     Instance.IsDisplayLeftMatchPoint.Value = true;
-                    return StateSet.MatchPoint;
                 }
                 else
                 {
@@ -773,13 +310,12 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.PointRight.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
                     Instance.IsDisplayRightMatchPoint.Value = true;
-                    return StateSet.MatchPoint;
                 }
                 else
                 {
                     Instance.IsDisplayRightMatchPoint.Value = false;
                 }
-                return StateSet.None;
+                return;
             }
             //ファイナルセット以外
             else
@@ -789,7 +325,7 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.PointLeft.Value >= Instance.POINT.Value && Instance.PointLeft.Value - Instance.PointRight.Value >= 2)
                 {
                     LockControl(false);
-                    await DeleteOption(false);
+                    await Instance.Option.DeleteOption(false);
                     if (Instance.SetLeft.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
@@ -809,7 +345,7 @@ namespace SportsCoderForVolleyball.Models
                                 LockControl(true);
                             }
                         }, "DialogWindow");
-                        return StateSet.EndMatch;
+                        return;
                     }
                     else
                     {
@@ -835,7 +371,7 @@ namespace SportsCoderForVolleyball.Models
                                 LockControl(true);
                             }
                         }, "DialogWindow");
-                        return StateSet.EndSet;
+                        return;
                     }
                 }
 
@@ -843,7 +379,7 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.PointRight.Value >= Instance.POINT.Value && Instance.PointRight.Value - Instance.PointLeft.Value >= 2)
                 {
                     LockControl(false);
-                    await DeleteOption(false);
+                    await Instance.Option.DeleteOption(false);
                     if (Instance.SetRight.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
@@ -863,7 +399,7 @@ namespace SportsCoderForVolleyball.Models
                                 LockControl(true);
                             }
                         }, "DialogWindow");
-                        return StateSet.EndSet;
+                        return;
                     }
                     else
                     {
@@ -890,18 +426,15 @@ namespace SportsCoderForVolleyball.Models
                                 LockControl(true);
                             }
                         }, "DialogWindow");
-                        return StateSet.EndSet;
+                        return;
                     }
                 }
 
-
-                var ans = StateSet.None;
                 //セットポイントの検出
                 //左チーム
                 if (Instance.SetLeft.Value+1 != Instance.NEEDSET.Value && Instance.PointLeft.Value+1 >= Instance.POINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
                 {
                     Instance.IsDisplayLeftSetPoint.Value = true;
-                    ans = StateSet.SetPoint;
                 }
                 else
                 {
@@ -912,7 +445,6 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.SetRight.Value+1 != Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
                     Instance.IsDisplayRightSetPoint.Value = true;
-                    ans = StateSet.SetPoint;
                 }
                 else
                 {
@@ -925,7 +457,6 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.SetLeft.Value+1 == Instance.NEEDSET.Value && Instance.PointLeft.Value+1 >= Instance.POINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
                 {
                     Instance.IsDisplayLeftMatchPoint.Value = true;
-                    ans = StateSet.MatchPoint;
                 }
                 else
                 {
@@ -935,29 +466,20 @@ namespace SportsCoderForVolleyball.Models
                 if (Instance.SetRight.Value+1 == Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
                     Instance.IsDisplayRightMatchPoint.Value = true;
-                    ans = StateSet.MatchPoint;
                 }
                 else
                 {
                     Instance.IsDisplayRightMatchPoint.Value = false;
                 }
 
-                return ans;
+                return;
             }
-        }
-        private enum StateSet
-        {
-            SetPoint,
-            MatchPoint,
-            EndSet,
-            EndMatch,
-            None
         }
         public async void Undo()
         {
-            if (History.Count == 0) return;
+            if (Instance.History.Count == 0) return;
 
-            var c = History[^1];
+            var c = Instance.History[^1];
 
             //ポイント
             if (c[0] == 'P')
@@ -965,58 +487,58 @@ namespace SportsCoderForVolleyball.Models
                 var skill = c.Split('.')[1];
                 if (c[1]=='R')
                 {
-                    GameRightTeamPoint.Value--;
-                    PointRight.Value--;
+                    Instance.GameRightTeamPoint.Value--;
+                    Instance.PointRight.Value--;
                     switch (skill)
                     {
                         case "A":
-                            RightTeamAttackPoint.Value--;
-                            GameRightTeamAttackPoint.Value--;
+                            Instance.RightTeamAttackPoint.Value--;
+                            Instance.GameRightTeamAttackPoint.Value--;
                             break;
                         case "B":
-                            RightTeamBlockPoint.Value--;
-                            GameRightTeamBlockPoint.Value--;
+                            Instance.RightTeamBlockPoint.Value--;
+                            Instance.GameRightTeamBlockPoint.Value--;
                             break;
                         case "S":
-                            RightTeamServePoint.Value--;
-                            GameRightTeamServeError.Value--;
+                            Instance.RightTeamServePoint.Value--;
+                            Instance.GameRightTeamServeError.Value--;
                             break;
                         case "E":
-                            LeftTeamError.Value--;
-                            GameLeftTeamError.Value--;
+                            Instance.LeftTeamError.Value--;
+                            Instance.GameLeftTeamError.Value--;
                             break;
                         case "SE":
-                            LeftTeamServeError.Value--;
-                            GameLeftTeamServeError.Value--;
+                            Instance.LeftTeamServeError.Value--;
+                            Instance.GameLeftTeamServeError.Value--;
                             break;
                     }
                 }
                 else if (c[1] == 'L')
                 {
 
-                    GameLeftTeamPoint.Value--;
-                    PointLeft.Value--;
+                    Instance.GameLeftTeamPoint.Value--;
+                    Instance.PointLeft.Value--;
                     switch (skill)
                     {
                         case "A":
-                            LeftTeamAttackPoint.Value--;
-                            GameLeftTeamAttackPoint.Value--;
+                            Instance.LeftTeamAttackPoint.Value--;
+                            Instance.GameLeftTeamAttackPoint.Value--;
                             break;
                         case "B":
-                            LeftTeamBlockPoint.Value--;
-                            GameLeftTeamBlockPoint.Value--;
+                            Instance.LeftTeamBlockPoint.Value--;
+                            Instance.GameLeftTeamBlockPoint.Value--;
                             break;
                         case "S":
-                            LeftTeamServePoint.Value--;
-                            GameLeftTeamServeError.Value--;
+                            Instance.LeftTeamServePoint.Value--;
+                            Instance.GameLeftTeamServeError.Value--;
                             break;
                         case "E":
-                            RightTeamError.Value--;
-                            GameRightTeamError.Value--;
+                            Instance.RightTeamError.Value--;
+                            Instance.GameRightTeamError.Value--;
                             break;
                         case "SE":
-                            RightTeamServeError.Value--;
-                            GameRightTeamServeError.Value--;
+                            Instance.RightTeamServeError.Value--;
+                            Instance.GameRightTeamServeError.Value--;
                             break;
                     }
                 }
@@ -1027,11 +549,11 @@ namespace SportsCoderForVolleyball.Models
             {
                 if (c[1]=='R')
                 {
-                    TimeOutRight.Value--;
+                    Instance.TimeOutRight.Value--;
                 }
                 else if (c[1] == 'L')
                 {
-                    TimeOutLeft.Value--;
+                    Instance.TimeOutLeft.Value--;
                 }
             }
             //終了
@@ -1047,39 +569,39 @@ namespace SportsCoderForVolleyball.Models
 
                     if (Instance.IsATeamLeft.Value)
                     {
-                        PointLeft.Value = a.ATeamPoint;
-                        LeftTeamAttackPoint.Value = a.ATeamAttackPoint;
-                        LeftTeamBlockPoint.Value = a.ATeamBlockPoint;
-                        LeftTeamServePoint.Value = a.ATeamServePoint;
-                        LeftTeamServeError.Value = a.ATeamServeError;
-                        LeftTeamError.Value = a.ATeamError;
-                        LeftTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
+                        Instance.PointLeft.Value = a.ATeamPoint;
+                        Instance.LeftTeamAttackPoint.Value = a.ATeamAttackPoint;
+                        Instance.LeftTeamBlockPoint.Value = a.ATeamBlockPoint;
+                        Instance.LeftTeamServePoint.Value = a.ATeamServePoint;
+                        Instance.LeftTeamServeError.Value = a.ATeamServeError;
+                        Instance.LeftTeamError.Value = a.ATeamError;
+                        Instance.LeftTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
 
-                        PointRight.Value = a.BTeamPoint;
-                        RightTeamAttackPoint.Value = a.BTeamAttackPoint;
-                        RightTeamBlockPoint.Value = a.BTeamBlockPoint;
-                        RightTeamServePoint.Value = a.BTeamServePoint;
-                        RightTeamServeError.Value = a.BTeamServeError;
-                        RightTeamError.Value = a.BTeamError;
-                        RightTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
+                        Instance.PointRight.Value = a.BTeamPoint;
+                        Instance.RightTeamAttackPoint.Value = a.BTeamAttackPoint;
+                        Instance.RightTeamBlockPoint.Value = a.BTeamBlockPoint;
+                        Instance.RightTeamServePoint.Value = a.BTeamServePoint;
+                        Instance.RightTeamServeError.Value = a.BTeamServeError;
+                        Instance.RightTeamError.Value = a.BTeamError;
+                        Instance.RightTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
                     }
                     else
                     {
-                        PointLeft.Value = a.BTeamPoint;
-                        LeftTeamAttackPoint.Value = a.BTeamAttackPoint;
-                        LeftTeamBlockPoint.Value = a.BTeamBlockPoint;
-                        LeftTeamServePoint.Value = a.BTeamServePoint;
-                        LeftTeamServeError.Value = a.BTeamServeError;
-                        LeftTeamError.Value = a.BTeamError;
-                        LeftTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
+                        Instance.PointLeft.Value = a.BTeamPoint;
+                        Instance.LeftTeamAttackPoint.Value = a.BTeamAttackPoint;
+                        Instance.LeftTeamBlockPoint.Value = a.BTeamBlockPoint;
+                        Instance.LeftTeamServePoint.Value = a.BTeamServePoint;
+                        Instance.LeftTeamServeError.Value = a.BTeamServeError;
+                        Instance.LeftTeamError.Value = a.BTeamError;
+                        Instance.LeftTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
 
-                        PointRight.Value = a.ATeamPoint;
-                        RightTeamAttackPoint.Value = a.ATeamAttackPoint;
-                        RightTeamBlockPoint.Value = a.ATeamBlockPoint;
-                        RightTeamServePoint.Value = a.ATeamServePoint;
-                        RightTeamServeError.Value = a.ATeamServeError;
-                        RightTeamError.Value = a.ATeamError;
-                        RightTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
+                        Instance.PointRight.Value = a.ATeamPoint;
+                        Instance.RightTeamAttackPoint.Value = a.ATeamAttackPoint;
+                        Instance.RightTeamBlockPoint.Value = a.ATeamBlockPoint;
+                        Instance.RightTeamServePoint.Value = a.ATeamServePoint;
+                        Instance.RightTeamServeError.Value = a.ATeamServeError;
+                        Instance.RightTeamError.Value = a.ATeamError;
+                        Instance.RightTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
                     }
 
                     Instance.Sets.Value.RemoveAt(set-1);
@@ -1089,14 +611,14 @@ namespace SportsCoderForVolleyball.Models
                         CourtChange(false, false);
                         if (c[2]=='R')
                         {
-                            SetRight.Value--;
+                            Instance.SetRight.Value--;
                         }
                         else if (c[2] == 'L')
                         {
-                            SetLeft.Value--;
+                            Instance.SetLeft.Value--;
                         }
                     }
-                    History.RemoveAt(History.Count - 1);
+                    Instance.History.RemoveAt(Instance.History.Count - 1);
                     Undo();
                     return;
                 }
@@ -1108,14 +630,14 @@ namespace SportsCoderForVolleyball.Models
                 {
                     //サーバーチェンジ
                     SwitchServer(false);
-                    History.RemoveAt(History.Count - 1);
+                    Instance.History.RemoveAt(Instance.History.Count - 1);
                     return;
                 }
                 else if (c[1] == 'C')
                 {
                     //コートチェンジ
                     CourtChange(History: false);
-                    History.RemoveAt(History.Count - 1);
+                    Instance.History.RemoveAt(Instance.History.Count - 1);
                     return;
                 }
             }
@@ -1125,28 +647,28 @@ namespace SportsCoderForVolleyball.Models
                 return;
             }
 
-            History.RemoveAt(History.Count - 1);
+            Instance.History.RemoveAt(Instance.History.Count - 1);
 
             //サーバー
-            for (int i = History.Count - 1; i >= 0; i--)
+            for (int i = Instance.History.Count - 1; i >= 0; i--)
             {
-                if (History[i][0] == 'P')
+                if (Instance.History[i][0] == 'P')
                 {
-                    if (History[i][1] == 'R')
+                    if (Instance.History[i][1] == 'R')
                     {
                         Instance.IsLeftServe.Value = false;
                         Instance.IsRightServe.Value = true;
                     }
-                    else if (History[i][1] == 'L')
+                    else if (Instance.History[i][1] == 'L')
                     {
                         Instance.IsLeftServe.Value = true;
                         Instance.IsRightServe.Value = false;
                     }
                     return;
                 }
-                else if (History[i][0]=='E')
+                else if (Instance.History[i][0]=='E')
                 {
-                    var set = int.Parse(History[i][3].ToString()) + 1;
+                    var set = int.Parse(Instance.History[i][3].ToString()) + 1;
                     if (Instance.COURTCHANGE.Value)
                     {
                         Instance.IsLeftServe.Value = true;
@@ -1182,7 +704,7 @@ namespace SportsCoderForVolleyball.Models
                         }
                     }
                 }
-                else if (History[i] == "S")
+                else if (Instance.History[i] == "S")
                 {
                     if (Instance.IsLeftFirstServe.Value)
                     {
@@ -1203,94 +725,6 @@ namespace SportsCoderForVolleyball.Models
             if (History)
                 Instance.History.Add("CS");
         }
-
-        public static Control Instance { get; } = new();
-        public ReactiveCollection<string> History { get; set; } = new ReactiveCollection<string>() { "S" };
-
-        public ReactiveProperty<List<Set>> Sets = new(new List<Set>());
-        public ReactiveProperty<List<PointParSetInfomationSource>> PointParSetSource { get; set; } = new();
-
-        //アニメーション
-        public ReactiveProperty<bool> IsAnimation = new(true);
-        public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayRightTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayRightSetPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayRightMatchPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftSetPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftMatchPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayTimeoutRemaining = new(false);
-        public ReactiveProperty<bool> IsDisplayGetSet = new(false);
-        public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
-        public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
-        public ReactiveProperty<bool> IsDisplayGameStuts = new(false);
-
-        //プレー統計アニメーション
-        public ReactiveProperty<bool> IsDisplayAttackPointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayBlockPointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
-
-        //セット統計
-        public ReactiveProperty<int> LeftTeamServePoint = new(0);
-        public ReactiveProperty<int> RightTeamServePoint = new(0);
-        public ReactiveProperty<int> LeftTeamAttackPoint = new(0);
-        public ReactiveProperty<int> RightTeamAttackPoint = new(0);
-        public ReactiveProperty<int> LeftTeamBlockPoint = new(0);
-        public ReactiveProperty<int> RightTeamBlockPoint = new(0);
-        public ReactiveProperty<int> LeftTeamServeError = new(0);
-        public ReactiveProperty<int> RightTeamServeError = new(0);
-        public ReactiveProperty<int> LeftTeamError = new(0);
-        public ReactiveProperty<int> RightTeamError = new(0);
-        public ReactiveProperty<int> LeftTeamOpponentError = new(0);
-        public ReactiveProperty<int> RightTeamOpponentError = new(0);
-
-        //ゲーム統計
-        public ReactiveProperty<int> GameLeftTeamPoint = new(0);
-        public ReactiveProperty<int> GameRightTeamPoint = new(0);
-        public ReactiveProperty<int> GameLeftTeamServePoint = new(0);
-        public ReactiveProperty<int> GameRightTeamServePoint = new(0);
-        public ReactiveProperty<int> GameLeftTeamAttackPoint = new(0);
-        public ReactiveProperty<int> GameRightTeamAttackPoint = new(0);
-        public ReactiveProperty<int> GameLeftTeamBlockPoint = new(0);
-        public ReactiveProperty<int> GameRightTeamBlockPoint = new(0);
-        public ReactiveProperty<int> GameLeftTeamServeError = new(0);
-        public ReactiveProperty<int> GameRightTeamServeError = new(0);
-        public ReactiveProperty<int> GameLeftTeamError = new(0);
-        public ReactiveProperty<int> GameRightTeamError = new(0);
-        public ReactiveProperty<int> GameLeftTeamOpponentError = new(0);
-        public ReactiveProperty<int> GameRightTeamOpponentError = new(0);
-
-        //UI部品
-        public ReactiveProperty<int> Set = new(1);
-        public ReactiveProperty<string> TeamLeft = new("USA");
-        public ReactiveProperty<string> TeamRight = new("JPN");
-        public ReactiveProperty<int> PointLeft = new(0);
-        public ReactiveProperty<int> PointRight = new(0);
-        public ReactiveProperty<int> SetLeft = new(0);
-        public ReactiveProperty<int> SetRight = new(0);
-        public ReactiveProperty<int> TimeOutRight = new(0);
-        public ReactiveProperty<int> TimeOutLeft = new(0);
-        public ReactiveProperty<bool> IsLeftServe = new(true);
-        public ReactiveProperty<bool> IsRightServe = new(false);
-        public ReactiveProperty<bool> IsATeamLeft = new(true);
-        public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
-        public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
-        public ReactiveProperty<string> BackGroundColor = new("#00ff00");
-
-        public ReactiveProperty<bool> GuiEnable = new(true);
-
-        //ルール
-        public ReactiveProperty<int> TIMEOUT = new(2);
-        public ReactiveProperty<int> SET = new(5);
-        public ReactiveProperty<int> NEEDSET = new(3);
-        public ReactiveProperty<int> POINT = new(25);
-        public ReactiveProperty<int> LASTSETPOINT = new(15);
-        public ReactiveProperty<bool> COURTCHANGE = new(true);
-
-        public ReactiveProperty<bool> IsLeftFirstServe = new(true);
-
-
         private static void Swap<T>(ref ReactiveProperty<T> a, ref ReactiveProperty<T> b)
         {
             (a.Value, b.Value) = (b.Value, a.Value);

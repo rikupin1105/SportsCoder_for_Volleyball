@@ -7,7 +7,7 @@ namespace SportsCoderForVolleyball.ViewModels
 {
     public class MatchPointViewModel : BindableBase
     {
-        public ReactiveProperty<bool> IsDisplayLeftMatchPoint { get; set; } = Control.Instance.IsDisplayLeftMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> IsDisplayRightMatchPoint { get; set; } = Control.Instance.IsDisplayRightMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayLeftMatchPoint { get; set; } = Data.Instance.IsDisplayLeftMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayRightMatchPoint { get; set; } = Data.Instance.IsDisplayRightMatchPoint.ObserveProperty(x => x.Value).ToReactiveProperty();
     }
 }

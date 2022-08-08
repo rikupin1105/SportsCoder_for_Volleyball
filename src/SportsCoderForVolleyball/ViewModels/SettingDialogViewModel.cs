@@ -13,35 +13,35 @@ namespace SportsCoderForVolleyball.ViewModels
         {
             SubmitCommand.Subscribe(_ =>
             {
-                Control.Instance.POINT.Value = int.Parse(ComboPoint.Value);
-                Control.Instance.SET.Value = int.Parse(ComboSet.Value);
-                Control.Instance.NEEDSET.Value = (int.Parse(ComboSet.Value) - 1) /2 + 1;
-                Control.Instance.LASTSETPOINT.Value = int.Parse(ComboLastSet.Value);
-                Control.Instance.COURTCHANGE.Value = CourtChange.Value;
+                Data.Instance.POINT.Value = int.Parse(ComboPoint.Value);
+                Data.Instance.SET.Value = int.Parse(ComboSet.Value);
+                Data.Instance.NEEDSET.Value = (int.Parse(ComboSet.Value) - 1) /2 + 1;
+                Data.Instance.LASTSETPOINT.Value = int.Parse(ComboLastSet.Value);
+                Data.Instance.COURTCHANGE.Value = CourtChange.Value;
 
-                Control.Instance.TIMEOUT.Value = TimeOut.Value;
+                Data.Instance.TIMEOUT.Value = TimeOut.Value;
 
-                Control.Instance.TeamLeft.Value = ATeamName.Value;
-                Control.Instance.TeamRight.Value = BTeamName.Value;
+                Data.Instance.TeamLeft.Value = ATeamName.Value;
+                Data.Instance.TeamRight.Value = BTeamName.Value;
 
-                Control.Instance.ColorCodeLeftTeam.Value = ATeamColorCode.Value;
-                Control.Instance.ColorCodeRightTeam.Value = BTeamColorCode.Value;
+                Data.Instance.ColorCodeLeftTeam.Value = ATeamColorCode.Value;
+                Data.Instance.ColorCodeRightTeam.Value = BTeamColorCode.Value;
 
-                Control.Instance.BackGroundColor.Value = BackGroundColor.Value;
+                Data.Instance.BackGroundColor.Value = BackGroundColor.Value;
 
                 if (Server.Value == "左")
                 {
-                    Control.Instance.IsLeftServe.Value = true;
-                    Control.Instance.IsRightServe.Value = false;
+                    Data.Instance.IsLeftServe.Value = true;
+                    Data.Instance.IsRightServe.Value = false;
 
-                    Control.Instance.IsLeftFirstServe.Value = true;
+                    Data.Instance.IsLeftFirstServe.Value = true;
                 }
                 else
                 {
-                    Control.Instance.IsLeftServe.Value = false;
-                    Control.Instance.IsRightServe.Value = true;
+                    Data.Instance.IsLeftServe.Value = false;
+                    Data.Instance.IsRightServe.Value = true;
 
-                    Control.Instance.IsLeftFirstServe.Value = false;
+                    Data.Instance.IsLeftFirstServe.Value = false;
                 }
 
                 RequestClose.Invoke(null);
@@ -51,18 +51,18 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand SubmitCommand { get; } = new();
 
         //設定
-        public ReactiveProperty<string> ATeamName { get; set; } = Control.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BTeamName { get; set; } = Control.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> Set { get; set; } = Control.Instance.SET.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ATeamName { get; set; } = Data.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BTeamName { get; set; } = Data.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> Set { get; set; } = Data.Instance.SET.ObserveProperty(x => x.Value).ToReactiveProperty();
         //public ReactiveProperty<int> Point { get; set; } = Control.Instance.POINT.ObserveProperty(x => x.Value).ToReactiveProperty();
         //public ReactiveProperty<int> LastSetPoint { get; set; } = Control.Instance.LASTSETPOINT.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> CourtChange { get; set; } = Control.Instance.COURTCHANGE.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<int> TimeOut { get; set; } = Control.Instance.TIMEOUT.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> CourtChange { get; set; } = Data.Instance.COURTCHANGE.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<int> TimeOut { get; set; } = Data.Instance.TIMEOUT.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //色
-        public ReactiveProperty<string> ATeamColorCode { get; set; } = Control.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BTeamColorCode { get; set; } = Control.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BackGroundColor { get; set; } = Control.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ATeamColorCode { get; set; } = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BTeamColorCode { get; set; } = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BackGroundColor { get; set; } = Data.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
 
         //コンボボックス用
@@ -96,7 +96,7 @@ namespace SportsCoderForVolleyball.ViewModels
         {
             Control.LockControl(false);
 
-            if (Control.Instance.IsLeftFirstServe.Value)
+            if (Data.Instance.IsLeftFirstServe.Value)
             {
                 ServerIndex.Value = 0;
             }
@@ -105,7 +105,7 @@ namespace SportsCoderForVolleyball.ViewModels
                 ServerIndex.Value = 1;
             }
 
-            ComboSetIndex.Value = Control.Instance.SET.Value switch
+            ComboSetIndex.Value = Data.Instance.SET.Value switch
             {
                 7 => 0,
                 5 => 1,
@@ -114,7 +114,7 @@ namespace SportsCoderForVolleyball.ViewModels
                 _ => 1,
             };
 
-            ComboPointIndex.Value = Control.Instance.POINT.Value switch
+            ComboPointIndex.Value = Data.Instance.POINT.Value switch
             {
                 25 => 0,
                 21 => 1,
@@ -122,7 +122,7 @@ namespace SportsCoderForVolleyball.ViewModels
                 _ => 1,
             };
 
-            ComboLastSetIndex.Value = Control.Instance.LASTSETPOINT.Value switch
+            ComboLastSetIndex.Value = Data.Instance.LASTSETPOINT.Value switch
             {
                 25 => 0,
                 21 => 1,
@@ -130,7 +130,7 @@ namespace SportsCoderForVolleyball.ViewModels
                 _ => 2,
             };
 
-            ComboTimeOutIndex.Value = Control.Instance.TIMEOUT.Value switch
+            ComboTimeOutIndex.Value = Data.Instance.TIMEOUT.Value switch
             {
                 0 => 0,
                 1 => 1,

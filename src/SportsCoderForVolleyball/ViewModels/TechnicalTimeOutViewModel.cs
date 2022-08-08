@@ -7,6 +7,6 @@ namespace SportsCoderForVolleyball.ViewModels
 {
     public class TechnicalTimeOutViewModel : BindableBase
     {
-        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; set; } = Control.Instance.IsDisplayTechnicalTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; set; } = Data.Instance.IsDisplayTechnicalTimeout.ObserveProperty(x => x.Value).ToReactiveProperty();
     }
 }

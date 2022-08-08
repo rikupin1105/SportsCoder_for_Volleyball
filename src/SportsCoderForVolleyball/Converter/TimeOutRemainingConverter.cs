@@ -14,7 +14,7 @@ namespace SportsCoderForVolleyball.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var s = "";
-            var CanUseCount = Control.Instance.TIMEOUT.Value - System.Convert.ToInt32(value);
+            var CanUseCount = Data.Instance.TIMEOUT.Value - System.Convert.ToInt32(value);
             for (int i = 0; i < CanUseCount; i++)
             {
                 s+="⚫";
