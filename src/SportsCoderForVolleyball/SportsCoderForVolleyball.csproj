@@ -26,4 +26,9 @@
   <ItemGroup>
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Processing.NDI.Lib.x86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
