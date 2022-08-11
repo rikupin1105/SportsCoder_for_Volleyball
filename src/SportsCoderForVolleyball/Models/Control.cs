@@ -55,6 +55,8 @@ namespace SportsCoderForVolleyball.Models
             Swap(ref Instance.GameLeftTeamServeError, ref Instance.GameRightTeamServeError);
             Swap(ref Instance.GameLeftTeamError, ref Instance.GameRightTeamError);
 
+            Swap(ref Instance.ColorCodeLeftTeam, ref Instance.ColorCodeRightTeam);
+
             Swap(ref Instance.GameLeftTeamOpponentError, ref Instance.GameRightTeamOpponentError);
             SwitchServer();
 
