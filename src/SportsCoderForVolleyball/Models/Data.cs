@@ -20,7 +20,7 @@ namespace SportsCoderForVolleyball.Models
         public Control Control { get; set; } = new();
 
         //アニメーション
-        public ReactiveProperty<bool> IsAnimation = new(true);
+        public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
         public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
         public ReactiveProperty<bool> IsDisplayLeftTimeout = new(false);
         public ReactiveProperty<bool> IsDisplayRightTimeout = new(false);

@@ -82,7 +82,7 @@
         <Grid.Style>
             <Style TargetType="Grid">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsAnimation.Value}" Value="True">
+                    <DataTrigger Binding="{Binding IsDisplayScoreboard.Value}" Value="True">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>

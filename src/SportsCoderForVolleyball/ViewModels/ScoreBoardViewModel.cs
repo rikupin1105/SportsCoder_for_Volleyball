@@ -7,7 +7,7 @@ namespace SportsCoderForVolleyball.ViewModels
 {
     public class ScoreBoardViewModel : BindableBase
     {
-        public ReactiveProperty<bool> IsAnimation { get; set; } = Data.Instance.IsAnimation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayScoreboard { get; set; } = Data.Instance.IsDisplayScoreboard.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //UI部品
         public ReactiveProperty<int> Set { get; set; } = Data.Instance.Set.ObserveProperty(x => x.Value).ToReactiveProperty();

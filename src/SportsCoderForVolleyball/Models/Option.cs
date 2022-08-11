@@ -69,9 +69,9 @@ namespace SportsCoderForVolleyball.Models
             else
             {
                 Instance.TimeOutLeft.Value++;
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
 
@@ -115,9 +115,9 @@ namespace SportsCoderForVolleyball.Models
             else
             {
                 Instance.TimeOutRight.Value++;
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
 
@@ -159,9 +159,9 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
 
@@ -185,7 +185,7 @@ namespace SportsCoderForVolleyball.Models
         }
         public async void InfomationScore()
         {
-            if (Instance.IsAnimation.Value)
+            if (Instance.IsDisplayScoreboard.Value)
             {
                 //表示されているとき
                 if (Instance.IsDisplayGetSet.Value)
@@ -195,14 +195,14 @@ namespace SportsCoderForVolleyball.Models
                 else
                 {
                     await DeleteOption();
-                    Instance.IsAnimation.Value = false;
+                    Instance.IsDisplayScoreboard.Value = false;
                 }
             }
             else
             {
                 //未表示のとき
 
-                Instance.IsAnimation.Value = true;
+                Instance.IsDisplayScoreboard.Value = true;
                 if (Instance.IsDisplayGetSet.Value)
                 {
                     Instance.IsDisplayGetSet.Value = false;
@@ -276,9 +276,9 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
 
@@ -296,9 +296,9 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
                 await DeleteOption();
@@ -315,9 +315,9 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
                 await DeleteOption();
@@ -334,9 +334,9 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-                if (Instance.IsAnimation.Value == false)
+                if (Instance.IsDisplayScoreboard.Value == false)
                 {
-                    Instance.IsAnimation.Value = true;
+                    Instance.IsDisplayScoreboard.Value = true;
                     await Task.Delay(1000);
                 }
                 await DeleteOption();

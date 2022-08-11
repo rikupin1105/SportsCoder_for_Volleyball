@@ -145,7 +145,7 @@ namespace SportsCoderForVolleyball.Models
             //セットごとのポイント
             await Task.Delay(4000);
             Instance.Option.InfomationPointParSet();
-            Instance.IsAnimation.Value = false;
+            Instance.IsDisplayScoreboard.Value = false;
 
             //セットごとのポイントを削除
             await Task.Delay(10000);
