@@ -58,14 +58,16 @@
 
         <TextBlock
             Grid.Column="1"
-            Margin="0,3,10,10"
+            Margin="0,0,10,0"
             HorizontalAlignment="Right"
+            FontSize="10"
             Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
             Text="●" />
         <TextBlock
             Grid.Column="6"
-            Margin="10,3,0,10"
+            Margin="10,0,0,0"
             HorizontalAlignment="Left"
+            FontSize="10"
             Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
             Text="●" />
 
