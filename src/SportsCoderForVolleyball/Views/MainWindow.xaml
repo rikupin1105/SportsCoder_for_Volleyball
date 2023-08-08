@@ -17,10 +17,7 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
 
-    <NDI:NdiSendContainer
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        NdiName="SportsCoder Volleyball">
+    <NDI:NdiSendContainer HorizontalAlignment="Center" VerticalAlignment="Center" NdiName="SportsCoder Volleyball">
 
         <Grid Width="1280" Height="720">
             <!--  ゲーム統計情報  -->
@@ -29,32 +26,14 @@
             <!--  セット統計情報  -->
             <local:SetStuts VerticalAlignment="Center" />
 
-            <!--  残りタイムアウト  -->
-            <local:TimeOutRemaining Margin="0,570,0,0" />
 
-            <!--  セットポイント  -->
-            <local:SetPoint Margin="0,570,0,0" />
+            <!--  メッセージ  -->
+            <local:Message Margin="0,570,0,0" />
 
-            <!--  マッチポイント  -->
-            <local:MatchPoint Margin="0,570,0,0" />
 
-            <!--  タイムアウト  -->
-            <local:TimeOut Margin="0,570,0,0" />
+            <!--  インフォメーション  -->
+            <local:Infomation Margin="0,570,0,0" />
 
-            <!--  テクニカルタイムアウト  -->
-            <local:TechnicalTimeOut Margin="0,570,0,0" />
-
-            <!--  サーブポイント  -->
-            <local:ServePoint Margin="0,570,0,0" />
-
-            <!--  サーブエラー  -->
-            <local:ServeError Margin="0,570,0,0" />
-
-            <!--  アタックポイント  -->
-            <local:AttackPoint Margin="0,570,0,0" />
-
-            <!--  ブロックポイント  -->
-            <local:BlockPoint Margin="0,570,0,0" />
 
             <!--  セットごとの点数  -->
             <local:PointPerSet />
