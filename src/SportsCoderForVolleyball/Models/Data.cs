@@ -22,7 +22,7 @@ namespace SportsCoderForVolleyball.Models
         //アニメーション
 
         /// <summary>
-        /// 
+        /// メッセージを表示します
         /// </summary>
         /// <param name="message">表示内容</param>
         /// <param name="LeftTeam"></param>
@@ -33,17 +33,17 @@ namespace SportsCoderForVolleyball.Models
             //表示中にもう一度押されたら非表示にする。
             if (message == Message.Value &&  forceNoHide == false)
             {
-                if (LeftTeam is null && isDisplayMessage.Value == true)
+                if (LeftTeam is null && IsDisplayMessage.Value == true)
                 {
                     HideMessage();
                     return;
                 }
-                else if (LeftTeam! == true && isDisplayMessageLeft.Value == true)
+                else if (LeftTeam! == true && IsDisplayMessageLeft.Value == true)
                 {
                     HideMessage();
                     return;
                 }
-                else if (LeftTeam! == false && isDisplayMessageRight.Value == true)
+                else if (LeftTeam! == false && IsDisplayMessageRight.Value == true)
                 {
                     HideMessage();
                     return;
@@ -58,33 +58,33 @@ namespace SportsCoderForVolleyball.Models
             }
 
             //別のメッセージが表示されている場合は、閉じる
-            if (isMessageShow && forceNoHide == false)
+            if (IsMessageShow && forceNoHide == false)
             {
                 HideMessage();
                 await Task.Delay(1000);
             }
 
-            isMessageShow = true;
+            IsMessageShow = true;
             Message.Value = message;
 
             if (LeftTeam is null)
             {
-                isDisplayMessage.Value = true;
+                IsDisplayMessage.Value = true;
             }
             else if ((bool)LeftTeam)
             {
-                isDisplayMessageLeft.Value = true;
+                IsDisplayMessageLeft.Value = true;
             }
             else
             {
-                isDisplayMessageRight.Value = true;
+                IsDisplayMessageRight.Value = true;
             }
 
             if (autoHideSeconds is not null)
             {
                 for (int i = 0; i < autoHideSeconds; i++)
                 {
-                    if (isMessageShow == false)
+                    if (IsMessageShow == false)
                     {
                         return;
                     }
@@ -93,12 +93,21 @@ namespace SportsCoderForVolleyball.Models
                 HideMessage();
             }
         }
+
+        /// <summary>
+        /// メッセージを表示します
+        /// </summary>
+        /// <param name="message">表示内容</param>
+        /// <param name="messageLeft">左側</param>
+        /// <param name="messageRight">右側</param>
+        /// <param name="autoHideSeconds">自動非表示(秒数)</param>
+        /// <param name="forceNoHide">強制的に非表示をオフ</param>
         public async void ShowMessage(string message, string messageLeft, string messageRight, int? autoHideSeconds = null, bool? forceNoHide = false)
         {
             //表示中にもう一度押されたら非表示にする。
             if (message == Message.Value && messageLeft == MessageLeft.Value  && messageRight==MessageRight.Value && forceNoHide == false)
             {
-                if (isDisplayMessage.Value == true)
+                if (IsDisplayMessage.Value == true)
                 {
                     HideMessage();
                     return;
@@ -113,23 +122,23 @@ namespace SportsCoderForVolleyball.Models
             }
 
             //別のメッセージが表示されている場合は、閉じる
-            if (isMessageShow && forceNoHide == false)
+            if (IsMessageShow && forceNoHide == false)
             {
                 HideMessage();
                 await Task.Delay(1000);
             }
 
-            isMessageShow = true;
+            IsMessageShow = true;
             Message.Value = message;
             MessageLeft.Value = messageLeft;
             MessageRight.Value = messageRight;
-            isDisplayInfomation.Value = true;
+            IsDisplayInfomation.Value = true;
 
             if (autoHideSeconds is not null)
             {
                 for (int i = 0; i < autoHideSeconds; i++)
                 {
-                    if (isMessageShow == false)
+                    if (IsMessageShow == false)
                     {
                         return;
                     }
@@ -138,28 +147,32 @@ namespace SportsCoderForVolleyball.Models
                 HideMessage();
             }
         }
+        
+        /// <summary>
+        /// メッセージを非表示にします
+        /// </summary>
         public void HideMessage()
         {
-            isDisplayMessageLeft.Value = false;
-            isDisplayMessageRight.Value = false;
-            isDisplayMessage.Value = false;
-            isDisplayInfomation.Value = false;
+            IsDisplayMessageLeft.Value = false;
+            IsDisplayMessageRight.Value = false;
+            IsDisplayMessage.Value = false;
+            IsDisplayInfomation.Value = false;
 
-            isMessageShow = false;
+            IsMessageShow = false;
         }
-        private bool isMessageShow { get; set; }
+        private bool IsMessageShow { get; set; }
         public ReactiveProperty<string> Message { get; private set; } = new();
         public ReactiveProperty<string> MessageLeft { get; private set; } = new();
         public ReactiveProperty<string> MessageRight { get; private set; } = new();
-        public ReactiveProperty<bool> isDisplayMessageLeft { get; private set; } = new();
-        public ReactiveProperty<bool> isDisplayMessageRight { get; private set; } = new();
-        public ReactiveProperty<bool> isDisplayMessage { get; private set; } = new();
-        public ReactiveProperty<bool> isDisplayInfomation { get; private set; } = new();
+        public ReactiveProperty<bool> IsDisplayMessageLeft { get; private set; } = new();
+        public ReactiveProperty<bool> IsDisplayMessageRight { get; private set; } = new();
+        public ReactiveProperty<bool> IsDisplayMessage { get; private set; } = new();
+        public ReactiveProperty<bool> IsDisplayInfomation { get; private set; } = new();
 
         public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
 
         public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayTimeoutRemaining = new(false);
+
         public ReactiveProperty<bool> IsDisplayGetSet = new(false);
         public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
         public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
