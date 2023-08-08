@@ -10,6 +10,6 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<string> Message { get; set; } = Data.Instance.Message.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<string> GameLeftTeamAttackPoint { get; set; } = Data.Instance.MessageLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<string> GameRightTeamAttackPoint { get; set; } = Data.Instance.MessageRight.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<bool> IsDisplayAttackPointInfomation { get; set; } = Data.Instance.isDisplayInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayAttackPointInfomation { get; set; } = Data.Instance.IsDisplayInfomation.ObserveProperty(x => x.Value).ToReactiveProperty();
     }
 }
