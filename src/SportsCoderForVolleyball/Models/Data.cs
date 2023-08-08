@@ -93,30 +93,77 @@ namespace SportsCoderForVolleyball.Models
                 HideMessage();
             }
         }
+        public async void ShowMessage(string message, string messageLeft, string messageRight, int? autoHideSeconds = null, bool? forceNoHide = false)
+        {
+            //表示中にもう一度押されたら非表示にする。
+            if (message == Message.Value && messageLeft == MessageLeft.Value  && messageRight==MessageRight.Value && forceNoHide == false)
+            {
+                if (isDisplayMessage.Value == true)
+                {
+                    HideMessage();
+                    return;
+                }
+            }
+
+            //スコアが表示されていない場合、表示する
+            if (IsDisplayScoreboard.Value == false)
+            {
+                Instance.IsDisplayScoreboard.Value = true;
+                await Task.Delay(1000);
+            }
+
+            //別のメッセージが表示されている場合は、閉じる
+            if (isMessageShow && forceNoHide == false)
+            {
+                HideMessage();
+                await Task.Delay(1000);
+            }
+
+            isMessageShow = true;
+            Message.Value = message;
+            MessageLeft.Value = messageLeft;
+            MessageRight.Value = messageRight;
+            isDisplayInfomation.Value = true;
+
+            if (autoHideSeconds is not null)
+            {
+                for (int i = 0; i < autoHideSeconds; i++)
+                {
+                    if (isMessageShow == false)
+                    {
+                        return;
+                    }
+                    await Task.Delay(1000);
+                }
+                HideMessage();
+            }
+        }
         public void HideMessage()
         {
             isDisplayMessageLeft.Value = false;
             isDisplayMessageRight.Value = false;
+            isDisplayMessage.Value = false;
+            isDisplayInfomation.Value = false;
+
             isMessageShow = false;
         }
         private bool isMessageShow { get; set; }
         public ReactiveProperty<string> Message { get; private set; } = new();
+        public ReactiveProperty<string> MessageLeft { get; private set; } = new();
+        public ReactiveProperty<string> MessageRight { get; private set; } = new();
         public ReactiveProperty<bool> isDisplayMessageLeft { get; private set; } = new();
         public ReactiveProperty<bool> isDisplayMessageRight { get; private set; } = new();
         public ReactiveProperty<bool> isDisplayMessage { get; private set; } = new();
+        public ReactiveProperty<bool> isDisplayInfomation { get; private set; } = new();
+
         public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
+
         public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
         public ReactiveProperty<bool> IsDisplayTimeoutRemaining = new(false);
         public ReactiveProperty<bool> IsDisplayGetSet = new(false);
         public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
         public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
         public ReactiveProperty<bool> IsDisplayGameStuts = new(false);
-
-        //プレー統計アニメーション
-        public ReactiveProperty<bool> IsDisplayAttackPointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayBlockPointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayServePointInfomation = new(false);
-        public ReactiveProperty<bool> IsDisplayServeErrorInfomation = new(false);
 
         //セット統計
         public ReactiveProperty<int> LeftTeamServePoint = new(0);

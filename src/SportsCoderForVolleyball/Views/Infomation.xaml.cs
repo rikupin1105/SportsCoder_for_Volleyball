@@ -3,11 +3,11 @@
 namespace SportsCoderForVolleyball.Views
 {
     /// <summary>
-    /// Interaction logic for AttackPoint
+    /// Interaction logic for Infomation
     /// </summary>
-    public partial class AttackPoint : UserControl
+    public partial class Infomation : UserControl
     {
-        public AttackPoint()
+        public Infomation()
         {
             InitializeComponent();
         }

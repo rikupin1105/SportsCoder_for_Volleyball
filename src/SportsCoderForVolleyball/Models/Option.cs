@@ -138,82 +138,21 @@ namespace SportsCoderForVolleyball.Models
                 Instance.IsDisplayGetSet.Value = true;
             }
         }
-        public async void InfomationAttackPoint()
+        public void InfomationAttackPoint()
         {
-            if (Instance.IsDisplayAttackPointInfomation.Value)
-            {
-                Instance.IsDisplayAttackPointInfomation.Value = false;
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await DeleteOption();
-                Instance.IsDisplayAttackPointInfomation.Value = true;
-            }
+            Instance.ShowMessage("ATTACK POINT", Instance.GameLeftTeamAttackPoint.Value.ToString(), Instance.GameRightTeamAttackPoint.Value.ToString(), autoHideSeconds: 5);
         }
-        public async void InfomationBlockPoint()
+        public void InfomationBlockPoint()
         {
-            if (Instance.IsDisplayBlockPointInfomation.Value)
-            {
-                Instance.IsDisplayBlockPointInfomation.Value = false;
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                Instance.IsDisplayBlockPointInfomation.Value = true;
-            }
+            Instance.ShowMessage("BLOCK POINT", Instance.GameLeftTeamBlockPoint.Value.ToString(), Instance.GameRightTeamBlockPoint.Value.ToString(), autoHideSeconds: 5);
         }
-        public async void InfomationServePoint()
+        public void InfomationServePoint()
         {
-            if (Instance.IsDisplayServePointInfomation.Value)
-            {
-                Instance.IsDisplayServePointInfomation.Value = false;
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                Instance.IsDisplayServePointInfomation.Value = true;
-            }
+            Instance.ShowMessage("SERVE POINT", Instance.GameLeftTeamServePoint.Value.ToString(), Instance.GameRightTeamServePoint.Value.ToString(), autoHideSeconds: 5);
         }
-        public async void InfomationServeError()
+        public void InfomationServeError()
         {
-            if (Instance.IsDisplayServeErrorInfomation.Value)
-            {
-                Instance.IsDisplayServeErrorInfomation.Value = false;
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
-            else
-            {
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-                await DeleteOption();
-                Instance.IsDisplayServeErrorInfomation.Value = true;
-            }
+            Instance.ShowMessage("SERVE ERROR", Instance.GameLeftTeamServeError.Value.ToString(), Instance.GameRightTeamServeError.Value.ToString(), autoHideSeconds: 5);
         }
     }
 }
