@@ -7,55 +7,21 @@ namespace SportsCoderForVolleyball.Models
 {
     public class Option
     {
-        private bool _stopTechnicalTimeout = false;
-        private bool _stopLeftTimeOut = false;
-        private bool _stopRightTimeOut = false;
-        public async Task DeleteOption(bool wait = true)
+        public void LeftTimeout()
         {
-            var flag = IsDispleyOption();
-            Instance.IsDisplayRightSetPoint.Value = false;
             Instance.TimeOutLeft.Value++;
             Instance.ShowMessage("TIME OUT", true, 5);
         }
         public void RightTimeOut()
         {
-                await DeleteOption();
-            }
-            else
-            {
             Instance.TimeOutRight.Value++;
             Instance.ShowMessage("TIME OUT", false, 5);
         }
         public void TechnicalTimeOut()
         {
-            }
-            else
-            {
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await DeleteOption();
-                Instance.IsDisplayTechnicalTimeout.Value = true;
-                _stopTechnicalTimeout = false;
-                for (int i = 0; i < 300; i++)
-                {
-                    if (_stopTechnicalTimeout)
-                    {
-                        Instance.IsDisplayTechnicalTimeout.Value = false;
-                        _stopTechnicalTimeout = false;
-                        await Task.Delay(1000);
-                        //await.Control DetectSetPoint();
-                        return;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayTechnicalTimeout.Value = false;
-            }
+            Instance.ShowMessage("TECHNICAL TIMEOUT", autoHideSeconds: 10);
         }
-        public async void InfomationScore()
+        public void InfomationScore()
         {
             if (Instance.IsDisplayScoreboard.Value)
             {
@@ -66,7 +32,7 @@ namespace SportsCoderForVolleyball.Models
                 }
                 else
                 {
-                    await DeleteOption();
+                    Instance.HideMessage();
                     Instance.IsDisplayScoreboard.Value = false;
                 }
             }
