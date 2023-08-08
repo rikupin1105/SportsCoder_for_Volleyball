@@ -1,29 +1,22 @@
 ﻿<UserControl
-    x:Class="SportsCoderForVolleyball.Views.SetPoint"
+    x:Class="SportsCoderForVolleyball.Views.Message"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="White" />
-        </Style>
         <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-
     <Grid>
-        <!--  左セットポイント  -->
-        <Grid
-            Width="600"
-            Height="40"
-            Opacity="0">
+        <!--  左メッセージ  -->
+        <Grid Width="570" Height="40" Opacity="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="3*" />
@@ -34,14 +27,17 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.ColumnSpan="3" Fill="#2e30ac" />
-            <Border Grid.ColumnSpan="3" BorderThickness="3,3,1.5,3" />
-            <Border Grid.Column="3" BorderThickness="1.5,0,0,0" />
-            <TextBlock Grid.ColumnSpan="3" Text="SET POINT" />
+            <Border
+                Grid.ColumnSpan="4"
+                Background="#242526"
+                BorderThickness="0"
+                CornerRadius="10,10,0,0"
+                Opacity="1" />
+            <TextBlock Grid.ColumnSpan="4" Foreground="White" Text="{Binding Message.Value}" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayLeftSetPoint.Value}" Value="True">
+                        <DataTrigger Binding="{Binding IsDisplayLeftMessage.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -49,11 +45,7 @@
                                             <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,0" />
                                             <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,90" />
                                         </ThicknessAnimationUsingKeyFrames>
-                                        <DoubleAnimation
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="0"
-                                            To="100"
-                                            Duration="0:0:0.1" />
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="100" Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -78,11 +70,8 @@
                 </Style>
             </Grid.Style>
         </Grid>
-        <!--  右セットポイント  -->
-        <Grid
-            Width="600"
-            Height="40"
-            Opacity="0">
+        <!--  右メッセージ  -->
+        <Grid Width="570" Height="40" Opacity="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="3*" />
@@ -93,26 +82,18 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
-            <Rectangle
-                Grid.Row="1"
-                Grid.Column="5"
-                Grid.ColumnSpan="3"
-                Fill="#2e30ac" />
-            <Border Grid.Column="4" BorderThickness="0,0,1.5,0" />
-
             <Border
-                Grid.Column="5"
-                Grid.ColumnSpan="3"
-                BorderThickness="1.5,3,3,3" />
-
-            <TextBlock
-                Grid.Column="5"
-                Grid.ColumnSpan="3"
-                Text="SET POINT" />
+                Grid.Column="4"
+                Grid.ColumnSpan="4"
+                Background="#242526"
+                BorderThickness="0"
+                CornerRadius="10,10,0,0"
+                Opacity="1" />
+            <TextBlock Grid.Column="4" Grid.ColumnSpan="4" Text="{Binding Message.Value}" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayRightSetPoint.Value}" Value="True">
+                        <DataTrigger Binding="{Binding IsDisplayRightMessage.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -120,11 +101,61 @@
                                             <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,0" />
                                             <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,90" />
                                         </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="100" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,90" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
                                         <DoubleAnimation
+                                            BeginTime="0:0:0.3"
                                             Storyboard.TargetProperty="Opacity"
-                                            From="0"
-                                            To="100"
+                                            From="100"
+                                            To="0"
                                             Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+        <!--  全体メッセージ  -->
+        <Grid Width="570" Height="35" Margin="0,0,0,0" Opacity="0">
+
+            <Border CornerRadius="10,10,0,0">
+                <Border.Background>
+                    <SolidColorBrush Color="#242526" />
+                </Border.Background>
+            </Border>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="{Binding Message.Value}"
+                TextAlignment="Center" />
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisplayTechnicalTimeout.Value}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames BeginTime="0:0:0.1" Storyboard.TargetProperty="Margin">
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0,0,0,0" />
+                                            <SplineThicknessKeyFrame KeyTime="0:0:0.3" Value="0,0,0,90" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="100" Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>

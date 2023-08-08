@@ -20,14 +20,92 @@ namespace SportsCoderForVolleyball.Models
         public Control Control { get; set; } = new();
 
         //アニメーション
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message">表示内容</param>
+        /// <param name="LeftTeam"></param>
+        /// <param name="autoHideSeconds">自動非表示(秒数)</param>
+        /// <param name="forceNoHide">強制的に非表示をオフ</param>
+        public async void ShowMessage(string message, bool? LeftTeam = null, int? autoHideSeconds = null, bool? forceNoHide = false)
+        {
+            //表示中にもう一度押されたら非表示にする。
+            if (message == Message.Value &&  forceNoHide == false)
+            {
+                if (LeftTeam is null && isDisplayMessage.Value == true)
+                {
+                    HideMessage();
+                    return;
+                }
+                else if (LeftTeam! == true && isDisplayMessageLeft.Value == true)
+                {
+                    HideMessage();
+                    return;
+                }
+                else if (LeftTeam! == false && isDisplayMessageRight.Value == true)
+                {
+                    HideMessage();
+                    return;
+                }
+            }
+
+            //スコアが表示されていない場合、表示する
+            if (IsDisplayScoreboard.Value == false)
+            {
+                Instance.IsDisplayScoreboard.Value = true;
+                await Task.Delay(1000);
+            }
+
+            //別のメッセージが表示されている場合は、閉じる
+            if (isMessageShow && forceNoHide == false)
+            {
+                HideMessage();
+                await Task.Delay(1000);
+            }
+
+            isMessageShow = true;
+            Message.Value = message;
+
+            if (LeftTeam is null)
+            {
+                isDisplayMessage.Value = true;
+            }
+            else if ((bool)LeftTeam)
+            {
+                isDisplayMessageLeft.Value = true;
+            }
+            else
+            {
+                isDisplayMessageRight.Value = true;
+            }
+
+            if (autoHideSeconds is not null)
+            {
+                for (int i = 0; i < autoHideSeconds; i++)
+                {
+                    if (isMessageShow == false)
+                    {
+                        return;
+                    }
+                    await Task.Delay(1000);
+                }
+                HideMessage();
+            }
+        }
+        public void HideMessage()
+        {
+            isDisplayMessageLeft.Value = false;
+            isDisplayMessageRight.Value = false;
+            isMessageShow = false;
+        }
+        private bool isMessageShow { get; set; }
+        public ReactiveProperty<string> Message { get; private set; } = new();
+        public ReactiveProperty<bool> isDisplayMessageLeft { get; private set; } = new();
+        public ReactiveProperty<bool> isDisplayMessageRight { get; private set; } = new();
+        public ReactiveProperty<bool> isDisplayMessage { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
         public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayRightTimeout = new(false);
-        public ReactiveProperty<bool> IsDisplayRightSetPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayRightMatchPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftSetPoint = new(false);
-        public ReactiveProperty<bool> IsDisplayLeftMatchPoint = new(false);
         public ReactiveProperty<bool> IsDisplayTimeoutRemaining = new(false);
         public ReactiveProperty<bool> IsDisplayGetSet = new(false);
         public ReactiveProperty<bool> IsDisplayPointParSet = new(false);

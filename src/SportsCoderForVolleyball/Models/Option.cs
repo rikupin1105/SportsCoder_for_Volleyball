@@ -13,149 +13,21 @@ namespace SportsCoderForVolleyball.Models
         public async Task DeleteOption(bool wait = true)
         {
             var flag = IsDispleyOption();
-
-            _stopTechnicalTimeout = true;
-            _stopRightTimeOut = true;
-            _stopLeftTimeOut = true;
-
             Instance.IsDisplayRightSetPoint.Value = false;
-            Instance.IsDisplayLeftSetPoint.Value = false;
-            Instance.IsDisplayRightMatchPoint.Value = false;
-            Instance.IsDisplayLeftMatchPoint.Value = false;
-            Instance.IsDisplayTimeoutRemaining.Value = false;
-            Instance.IsDisplayRightSetPoint.Value = false;
-            Instance.IsDisplayRightMatchPoint.Value = false;
-            Instance.IsDisplayLeftSetPoint.Value = false;
-            Instance.IsDisplayLeftMatchPoint.Value = false;
-            Instance.IsDisplayPointParSet.Value = false;
-            Instance.IsDisplayAttackPointInfomation.Value = false;
-            Instance.IsDisplayBlockPointInfomation.Value = false;
-            Instance.IsDisplayServePointInfomation.Value = false;
-            Instance.IsDisplayServeErrorInfomation.Value = false;
-
-            if (flag && wait) await Task.Delay(1000);
+            Instance.TimeOutLeft.Value++;
+            Instance.ShowMessage("TIME OUT", true, 5);
         }
-        private bool IsDispleyOption()
+        public void RightTimeOut()
         {
-            if (Instance.IsDisplayTechnicalTimeout.Value) return true;
-            if (Instance.IsDisplayLeftTimeout.Value) return true;
-            if (Instance.IsDisplayRightTimeout.Value) return true;
-            if (Instance.IsDisplayRightSetPoint.Value) return true;
-            if (Instance.IsDisplayRightMatchPoint.Value) return true;
-            if (Instance.IsDisplayLeftSetPoint.Value) return true;
-            if (Instance.IsDisplayLeftMatchPoint.Value) return true;
-            if (Instance.IsDisplayTimeoutRemaining.Value) return true;
-            if (Instance.IsDisplayRightSetPoint.Value) return true;
-            if (Instance.IsDisplayRightMatchPoint.Value) return true;
-            if (Instance.IsDisplayLeftSetPoint.Value) return true;
-            if (Instance.IsDisplayLeftMatchPoint.Value) return true;
-            if (Instance.IsDisplayPointParSet.Value) return true;
-
-            if (Instance.IsDisplayAttackPointInfomation.Value) return true;
-            if (Instance.IsDisplayBlockPointInfomation.Value) return true;
-            if (Instance.IsDisplayServePointInfomation.Value) return true;
-            if (Instance.IsDisplayServeErrorInfomation.Value) return true;
-
-            if (Instance.IsDisplayGetSet.Value) return true;
-            return false;
-        }
-        public async void LeftTimeout()
-        {
-            if (Instance.IsDisplayLeftTimeout.Value  || Instance.IsDisplayTimeoutRemaining.Value)
-            {
-                //すでに表示されている
                 await DeleteOption();
             }
             else
             {
-                Instance.TimeOutLeft.Value++;
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await DeleteOption();
-
-
-                Instance.History.Add("TL");
-
-                Instance.IsDisplayLeftTimeout.Value = true;
-                _stopLeftTimeOut = false;
-                for (int i = 0; i < 160; i++)
-                {
-                    if (_stopLeftTimeOut)
-                    {
-                        _stopLeftTimeOut = false;
-                        break;
-                    }
-                    if (i == 80)
-                    {
-                        Instance.IsDisplayLeftTimeout.Value = false;
-                        await Task.Delay(500);
-                        Instance.IsDisplayTimeoutRemaining.Value = true;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayLeftTimeout.Value = false;
-                Instance.IsDisplayTimeoutRemaining.Value = false;
-
-
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
+            Instance.TimeOutRight.Value++;
+            Instance.ShowMessage("TIME OUT", false, 5);
         }
-        public async void RightTimeOut()
+        public void TechnicalTimeOut()
         {
-            if (Instance.IsDisplayRightTimeout.Value  || Instance.IsDisplayTimeoutRemaining.Value)
-            {
-                //すでに表示されている
-                await DeleteOption();
-            }
-            else
-            {
-                Instance.TimeOutRight.Value++;
-                if (Instance.IsDisplayScoreboard.Value == false)
-                {
-                    Instance.IsDisplayScoreboard.Value = true;
-                    await Task.Delay(1000);
-                }
-
-                await DeleteOption();
-
-
-                Instance.History.Add("TR");
-                Instance.IsDisplayRightTimeout.Value = true;
-                _stopRightTimeOut = false;
-
-                for (int i = 0; i < 160; i++)
-                {
-                    if (_stopRightTimeOut)
-                    {
-                        _stopRightTimeOut = false;
-                        break;
-                    }
-                    if (i == 80)
-                    {
-                        Instance.IsDisplayRightTimeout.Value = false;
-                        await Task.Delay(500);
-                        Instance.IsDisplayTimeoutRemaining.Value = true;
-                    }
-                    await Task.Delay(100);
-                }
-                Instance.IsDisplayRightTimeout.Value = false;
-                Instance.IsDisplayTimeoutRemaining.Value = false;
-
-
-                await Task.Delay(1000);
-                await Instance.Control.DetectSetPoint();
-            }
-        }
-        public async void TechnicalTimeOut()
-        {
-            if (Instance.IsDisplayTechnicalTimeout.Value)
-            {
-                await DeleteOption();
             }
             else
             {

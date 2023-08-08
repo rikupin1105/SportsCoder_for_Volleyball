@@ -3,11 +3,11 @@
 namespace SportsCoderForVolleyball.Views
 {
     /// <summary>
-    /// Interaction logic for TimeOut
+    /// Interaction logic for Message
     /// </summary>
-    public partial class TimeOut : UserControl
+    public partial class Message : UserControl
     {
-        public TimeOut()
+        public Message()
         {
             InitializeComponent();
         }
