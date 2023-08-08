@@ -8,7 +8,7 @@ namespace SportsCoderForVolleyball.Models
 {
     internal class Game
     {
-        public List<Set> Sets = new List<Set>();
+        public List<Set> Sets = new();
     }
     public class Set
     {
