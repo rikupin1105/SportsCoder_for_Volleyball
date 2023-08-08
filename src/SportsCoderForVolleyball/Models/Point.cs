@@ -116,7 +116,7 @@ namespace SportsCoderForVolleyball.Models
                 Instance.GameLeftTeamError.Value++;
                 Instance.GameRightTeamOpponentError.Value++;
 
-                Instance.History.Add("PR.SE");
+                Instance.History.Add("PR.E");
             }
             else
             {
