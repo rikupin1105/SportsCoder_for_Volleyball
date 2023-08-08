@@ -12,85 +12,70 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="White" />
-        </Style>
+
         <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="25" />
-            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
 
-    <Grid
-        Width="600"
-        Height="50"
-        Margin="0,0,0,0"
-        Background="#2e30ac">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="20" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <Border Width="600" Height="50" CornerRadius="5">
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Offset="0" Color="#011640" />
+                <GradientStop Offset="1.5" Color="#F26938" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <Rectangle Grid.Column="0" Fill="{Binding ColorCodeLeftTeam.Value}" />
-        <Rectangle Grid.Column="7" Fill="{Binding ColorCodeRightTeam.Value}" />
-        <Rectangle Grid.Column="3" Fill="#fd5644" />
-        <Rectangle Grid.Column="4" Fill="#fd5644" />
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Right"
+                FontSize="15"
+                Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
+                Text="▶" />
+            <TextBlock
+                Grid.Column="7"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Left"
+                FontSize="15"
+                Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
+                Text="◀" />
 
-        <Border Grid.ColumnSpan="9" BorderThickness="3" />
-        <Border Grid.Column="1" BorderThickness="0,0,1.5,0" />
-        <Border Grid.Column="2" BorderThickness="1.5,0,1.5,0" />
-        <Border Grid.Column="3" BorderThickness="1.5,0,1.5,0" />
-        <Border Grid.Column="4" BorderThickness="1.5,0,1.5,0" />
-        <Border Grid.Column="5" BorderThickness="1.5,0,1.5,0" />
-        <Border Grid.Column="6" BorderThickness="1.5,0,0,0" />
+            <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
+            <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
+            <TextBlock Grid.Column="3" Text="{Binding PointLeft.Value}" />
 
-        <TextBlock
-            Grid.Column="1"
-            Margin="0,0,10,0"
-            HorizontalAlignment="Right"
-            FontSize="10"
-            Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
-            Text="●" />
-        <TextBlock
-            Grid.Column="6"
-            Margin="10,0,0,0"
-            HorizontalAlignment="Left"
-            FontSize="10"
-            Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}"
-            Text="●" />
+            <TextBlock Grid.Column="4" Text="{Binding PointRight.Value}" />
+            <TextBlock Grid.Column="5" Text="{Binding SetRight.Value}" />
+            <TextBlock Grid.Column="6" Text="{Binding TeamRight.Value}" />
 
-        <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
-        <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
-        <TextBlock Grid.Column="3" Text="{Binding PointLeft.Value}" />
-
-        <TextBlock Grid.Column="4" Text="{Binding PointRight.Value}" />
-        <TextBlock Grid.Column="5" Text="{Binding SetRight.Value}" />
-        <TextBlock Grid.Column="6" Text="{Binding TeamRight.Value}" />
-
-        <Grid.Style>
-            <Style TargetType="Grid">
+        </Grid>
+        <Border.Style>
+            <Style TargetType="Border">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsDisplayScoreboard.Value}" Value="True">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetProperty="Width"
-                                        From="0"
-                                        To="600"
-                                        Duration="0:0:0.1" />
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="600" Duration="0:0:0.1" />
                                     <DoubleAnimation
                                         BeginTime="0:0:0.2"
                                         Storyboard.TargetProperty="Opacity"
@@ -103,11 +88,7 @@
                         <DataTrigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetProperty="Width"
-                                        From="600"
-                                        To="0"
-                                        Duration="0:0:0.2" />
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="600" To="0" Duration="0:0:0.2" />
                                     <DoubleAnimation
                                         BeginTime="0:0:0.4"
                                         Storyboard.TargetProperty="Opacity"
@@ -120,6 +101,6 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-        </Grid.Style>
-    </Grid>
+        </Border.Style>
+    </Border>
 </UserControl>
