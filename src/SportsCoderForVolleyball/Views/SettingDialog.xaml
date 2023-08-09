@@ -73,11 +73,7 @@
                         FontSize="20"
                         Text="セット数" />
 
-                    <ComboBox
-                        Grid.Column="1"
-                        SelectedIndex="{Binding ComboSetIndex.Value}"
-                        Text="{Binding ComboSet.Value}">
-                        <ComboBoxItem Content="7" />
+                    <ComboBox Grid.Column="1" SelectedIndex="{Binding ComboSetIndex.Value}" Text="{Binding ComboSet.Value}">
                         <ComboBoxItem Content="5" />
                         <ComboBoxItem Content="3" />
                         <ComboBoxItem Content="1" />
