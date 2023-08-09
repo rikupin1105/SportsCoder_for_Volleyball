@@ -1,22 +1,19 @@
 ﻿namespace SportsCoderForVolleyball.Models
 {
-    public partial class Control
+    public class PointParSetInfomationSource
     {
-        public class PointParSetInfomationSource
+        public int Left { get; set; }
+        public int Right { get; set; }
+        public bool IsLeftWin
         {
-            public int Left { get; set; }
-            public int Right { get; set; }
-            public bool IsLeftWin
+            get
             {
-                get
-                {
-                    if (Left>Right)
-                        return true;
-                    else
-                        return false;
-                }
+                if (Left>Right)
+                    return true;
+                else
+                    return false;
             }
-            public bool IsRightWin { get => !IsLeftWin; }
         }
+        public bool IsRightWin { get => !IsLeftWin; }
     }
 }
