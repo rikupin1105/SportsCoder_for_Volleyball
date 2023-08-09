@@ -1,9 +1,5 @@
 ﻿using Prism.Services.Dialogs;
 using Reactive.Bindings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static SportsCoderForVolleyball.Models.Data;
 
@@ -437,7 +433,7 @@ namespace SportsCoderForVolleyball.Models
                 //右チーム
                 if (Instance.SetRight.Value+1 != Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
-                    Instance.ShowMessage("SET POINT", false,  forceNoHide: true);
+                    Instance.ShowMessage("SET POINT", false, forceNoHide: true);
                     return;
                 }
                 else
@@ -460,7 +456,7 @@ namespace SportsCoderForVolleyball.Models
                 //右チーム
                 if (Instance.SetRight.Value+1 == Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
                 {
-                    Instance.ShowMessage("MATCH POINT", false,  forceNoHide: true);
+                    Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
                     return;
                 }
                 else
