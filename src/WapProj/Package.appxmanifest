@@ -9,7 +9,7 @@
   <Identity
     Name="30642rikupin1105.341540686AFB6"
     Publisher="CN=9A20E896-8467-409D-8BC4-4F8B18DE8522"
-    Version="1.1.1.0" />
+    Version="2.0.0.0" />
 
   <Properties>
     <DisplayName>SportsCoder Volleyball</DisplayName>
