@@ -11,7 +11,7 @@ namespace SportsCoderForVolleyball.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var a = value as int?;
-            return 55 + ((a-1) * 45);
+            return 60 + ((a-1) * 45);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
