@@ -144,7 +144,7 @@ namespace SportsCoderForVolleyball.Models
 
             //セットごとのポイント
             await Task.Delay(4000);
-            Instance.Option.InfomationPointParSet();
+            Option.InfomationPointParSet();
             Instance.IsDisplayScoreboard.Value = false;
 
             //セットごとのポイントを削除
@@ -241,7 +241,7 @@ namespace SportsCoderForVolleyball.Models
             }
 
 
-            Instance.Option.InfomationScore();
+            Option.InfomationScore();
 
             //操作ロックの解除
             LockControl(true);

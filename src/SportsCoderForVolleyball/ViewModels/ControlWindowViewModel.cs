@@ -24,10 +24,10 @@ namespace SportsCoderForVolleyball.ViewModels
 
             new Views.MainWindow().Show();
 
-            DisplayCommand.Subscribe(_ => Data.Instance.Option.InfomationScore());
-            TechnicalTimeoutCommand.Subscribe(_ => Data.Instance.Option.TechnicalTimeOut());
-            LeftTimeoutCommand.Subscribe(_ => Data.Instance.Option.LeftTimeout());
-            RightTimeoutCommand.Subscribe(_ => Data.Instance.Option.RightTimeOut());
+            DisplayCommand.Subscribe(_ => Option.InfomationScore());
+            TechnicalTimeoutCommand.Subscribe(_ => Option.TechnicalTimeOut());
+            LeftTimeoutCommand.Subscribe(_ => Option.LeftTimeout());
+            RightTimeoutCommand.Subscribe(_ => Option.RightTimeOut());
             GetSetDisplayCommand.Subscribe(_ => Option.InfomationSet());
 
             CourtChangeCommand.Subscribe(_ => Data.Instance.Control.CourtChange());
@@ -47,10 +47,10 @@ namespace SportsCoderForVolleyball.ViewModels
             SwitchServerCommand.Subscribe(_ => Control.SwitchServer());
 
             //プレー統計
-            StatisticsAttackPointCommand.Subscribe(_ => Data.Instance.Option.InfomationAttackPoint());
-            StatisticsBlockPointCommand.Subscribe(_ => Data.Instance.Option.InfomationBlockPoint());
-            StatisticsServePointCommand.Subscribe(_ => Data.Instance.Option.InfomationServePoint());
-            StatisticsServeErrorCommand.Subscribe(_ => Data.Instance.Option.InfomationServeError());
+            StatisticsAttackPointCommand.Subscribe(_ => Option.InfomationAttackPoint());
+            StatisticsBlockPointCommand.Subscribe(_ => Option.InfomationBlockPoint());
+            StatisticsServePointCommand.Subscribe(_ => Option.InfomationServePoint());
+            StatisticsServeErrorCommand.Subscribe(_ => Option.InfomationServeError());
 
             //色
             ColorCodeLeftTeam = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
