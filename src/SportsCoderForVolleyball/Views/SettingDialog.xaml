@@ -13,18 +13,15 @@
 
     <prism:Dialog.WindowStyle>
         <Style BasedOn="{StaticResource UiWindow}" TargetType="Window">
-            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
             <Setter Property="ResizeMode" Value="NoResize" />
-            <Setter Property="Width" Value="500" />
             <Setter Property="SizeToContent" Value="Height" />
+            <Setter Property="Width" Value="500" />
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterOwner" />
         </Style>
     </prism:Dialog.WindowStyle>
 
     <StackPanel>
-        <ui:TitleBar
-            Title="{Binding Title}"
-            ShowMaximize="False"
-            ShowMinimize="False" />
+        <ui:TitleBar Title="{Binding Title}" ShowMaximize="False" ShowMinimize="False" />
 
         <StackPanel>
 
@@ -35,10 +32,7 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBox
-                        Grid.Column="0"
-                        Margin="0,0,5,0"
-                        Text="{Binding ATeamName.Value}" />
+                    <TextBox Grid.Column="0" Margin="0,0,5,0" Text="{Binding ATeamName.Value}" />
 
                     <TextBox Grid.Column="1" Text="{Binding BTeamName.Value}" />
                 </Grid>
@@ -51,10 +45,7 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBox
-                        Grid.Column="0"
-                        Margin="0,0,5,0"
-                        Text="{Binding ATeamColorCode.Value}" />
+                    <TextBox Grid.Column="0" Margin="0,0,5,0" Text="{Binding ATeamColorCode.Value}" />
 
                     <TextBox Grid.Column="1" Text="{Binding BTeamColorCode.Value}" />
                 </Grid>
@@ -95,10 +86,7 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="点数" />
-                    <ComboBox
-                        Grid.Column="1"
-                        SelectedIndex="{Binding ComboPointIndex.Value}"
-                        Text="{Binding ComboPoint.Value}">
+                    <ComboBox Grid.Column="1" SelectedIndex="{Binding ComboPointIndex.Value}" Text="{Binding ComboPoint.Value}">
                         <ComboBoxItem Content="25" />
                         <ComboBoxItem Content="21" />
                         <ComboBoxItem Content="15" />
@@ -120,10 +108,7 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="最終セットの点数" />
-                    <ComboBox
-                        Grid.Column="1"
-                        SelectedIndex="{Binding ComboLastSetIndex.Value}"
-                        Text="{Binding ComboLastSet.Value}">
+                    <ComboBox Grid.Column="1" SelectedIndex="{Binding ComboLastSetIndex.Value}" Text="{Binding ComboLastSet.Value}">
                         <ComboBoxItem Content="25" />
                         <ComboBoxItem Content="21" />
                         <ComboBoxItem Content="15" />
@@ -146,10 +131,7 @@
                         FontSize="20"
                         Text="最初のサーブ" />
 
-                    <ComboBox
-                        Grid.Column="1"
-                        SelectedIndex="{Binding ServerIndex.Value}"
-                        Text="{Binding Server.Value}">
+                    <ComboBox Grid.Column="1" SelectedIndex="{Binding ServerIndex.Value}" Text="{Binding Server.Value}">
                         <ComboBoxItem Content="左" />
                         <ComboBoxItem Content="右" />
                     </ComboBox>
@@ -164,16 +146,9 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <TextBlock
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        Text="コートチェンジ" />
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="20" Text="コートチェンジ" />
 
-                    <ui:ToggleSwitch
-                        Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        IsChecked="{Binding CourtChange.Value}" />
+                    <ui:ToggleSwitch Grid.Column="1" HorizontalAlignment="Right" IsChecked="{Binding CourtChange.Value}" />
                 </Grid>
             </StackPanel>
             <StackPanel Margin="10">
@@ -190,10 +165,7 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         Text="タイムアウトの回数" />
-                    <ComboBox
-                        Grid.Column="1"
-                        SelectedIndex="{Binding ComboTimeOutIndex.Value}"
-                        Text="{Binding ComboTimeOut.Value}">
+                    <ComboBox Grid.Column="1" SelectedIndex="{Binding ComboTimeOutIndex.Value}" Text="{Binding ComboTimeOut.Value}">
                         <ComboBoxItem Content="0" />
                         <ComboBoxItem Content="1" />
                         <ComboBoxItem Content="2" />
