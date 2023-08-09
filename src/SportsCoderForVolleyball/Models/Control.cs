@@ -149,7 +149,9 @@ namespace SportsCoderForVolleyball.Models
 
             //セットごとのポイントを削除
             await Task.Delay(10000);
-            Instance.HideMessage();
+
+            Instance.IsDisplayPointParSet.Value = false;
+            await Task.Delay(1000);
 
 
             //スコアとセットを非表示

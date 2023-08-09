@@ -2,135 +2,102 @@
     x:Class="SportsCoderForVolleyball.Views.PointPerSet"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:SportsCoderForVolleyball.Converter"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid
-        Width="600"
-        Margin="0,0,0,105"
-        Opacity="100">
-        <Grid.RenderTransform>
-            <ScaleTransform x:Name="PointParSet" CenterY="630" ScaleY="0" />
-        </Grid.RenderTransform>
+    <UserControl.Resources>
+        <converter:CollectionCountToHeightConverter x:Key="CollectionCountToHeightConverter" />
 
-        <DataGrid
-            Name="dataGrid"
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
-            VerticalAlignment="Bottom"
-            AutoGenerateColumns="False"
-            Background="White"
-            BorderBrush="White"
-            BorderThickness="1"
-            CanUserAddRows="False"
-            GridLinesVisibility="None"
-            HeadersVisibility="None"
-            HorizontalScrollBarVisibility="Disabled"
-            IsReadOnly="True"
-            ItemsSource="{Binding PointParSetSource.Value}"
-            SelectionChanged="dataGrid_SelectionChanged"
-            VerticalScrollBarVisibility="Disabled">
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
 
+        <Style TargetType="DataGrid">
 
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
 
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Height" Value="50" />
-                    <Setter Property="BorderThickness" Value="1.5,3,1.5,0" />
-                    <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="HeadersVisibility" Value="None" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <Border
+        Width="100"
+        Height="{Binding PointParSetSource.Count, Converter={StaticResource CollectionCountToHeightConverter}}"
+        Margin="0,0,0,100"
+        VerticalAlignment="Bottom"
+        Background="#242526"
+        CornerRadius="10,10,0,0"
+        Opacity="1">
+        <Border.RenderTransform>
+            <ScaleTransform CenterY="{Binding PointParSetSource.Count, Converter={StaticResource CollectionCountToHeightConverter}}" ScaleY="0" />
+        </Border.RenderTransform>
+        <Grid Margin="5" Opacity="0">
+            <DataGrid VerticalAlignment="top" ItemsSource="{Binding PointParSetSource}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Binding="{Binding Left}" />
+                    <DataGridTextColumn Width="*" Binding="{Binding Right}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisplayPointParSet.Value}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard BeginTime="0:0:0.3">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
-            </DataGrid.CellStyle>
-
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Left}"
-                    FontSize="25"
-                    FontWeight="DemiBold">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsLeftWin}" Value="true">
-                                    <Setter Property="Background" Value="#fd5644" />
-                                    <Setter Property="Foreground" Value="White" />
-                                </DataTrigger>
-                            </Style.Triggers>
-
-                            <Setter Property="Foreground" Value="#fd5644" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Padding" Value="20" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Right}"
-                    FontSize="25"
-                    FontWeight="DemiBold">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsRightWin}" Value="true">
-                                    <Setter Property="Background" Value="#fd5644" />
-                                    <Setter Property="Foreground" Value="White" />
-                                </DataTrigger>
-                            </Style.Triggers>
-
-                            <Setter Property="Foreground" Value="#fd5644" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Padding" Value="20" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="54" />
-            <ColumnDefinition Width="54" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="20" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-
-        <!--  IsDisplayPointParSet  -->
-        <Grid.Style>
-            <Style TargetType="Grid">
+            </Grid.Style>
+        </Grid>
+        <Border.Style>
+            <Style TargetType="Border">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsDisplayPointParSet.Value}" Value="True">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                        From="0"
-                                        To="1"
-                                        Duration="0:0:0.3" />
+                                    <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" Duration="0:0:0.3" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.EnterActions>
                         <DataTrigger.ExitActions>
                             <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                        From="1"
-                                        To="0"
-                                        Duration="0:0:0.3" />
+                                <Storyboard BeginTime="0:0:0.3">
+                                    <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="0" Duration="0:0:0.3" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.ExitActions>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-        </Grid.Style>
-    </Grid>
+        </Border.Style>
+    </Border>
 </UserControl>

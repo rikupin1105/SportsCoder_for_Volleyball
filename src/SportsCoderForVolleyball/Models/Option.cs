@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using static SportsCoderForVolleyball.Models.Control;
 using static SportsCoderForVolleyball.Models.Data;
@@ -88,7 +89,9 @@ namespace SportsCoderForVolleyball.Models
                         });
                     }
                 }
-                Instance.PointParSetSource.Value = itemsorce;
+
+                Instance.PointParSetSource.Clear();
+                Instance.PointParSetSource.AddRange(itemsorce);
 
                 Instance.IsDisplayPointParSet.Value = true;
             }
