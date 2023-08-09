@@ -155,13 +155,13 @@ namespace SportsCoderForVolleyball.Models
             if (Instance.SetRight.Value == Instance.NEEDSET.Value || Instance.SetLeft.Value == Instance.NEEDSET.Value)
             {
                 //ゲーム終了ならスコアボードを再表示させない
-                await Task.Delay(2000);
+                //await Task.Delay(2000);
 
-                Instance.IsDisplayGameStuts.Value = true;
+                //Instance.IsDisplayGameStuts.Value = true;
 
-                await Task.Delay(15000);
+                //await Task.Delay(15000);
 
-                Instance.IsDisplayGameStuts.Value = false;
+                //Instance.IsDisplayGameStuts.Value = false;
 
                 return;
             }
