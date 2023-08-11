@@ -1,7 +1,6 @@
 ﻿using SportsCoderForVolleyball.Shared;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using static SportsCoderForVolleyball.Models.Control;
 using static SportsCoderForVolleyball.Models.Data;
 
 namespace SportsCoderForVolleyball.Models

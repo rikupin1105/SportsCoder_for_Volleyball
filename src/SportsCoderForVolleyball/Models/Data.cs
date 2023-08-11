@@ -1,10 +1,5 @@
-﻿using Prism.Services.Dialogs;
-using Reactive.Bindings;
-using SportsCoderForVolleyball.Shared;
-using System;
+﻿using Reactive.Bindings;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using static SportsCoderForVolleyball.Models.Control;
 
 namespace SportsCoderForVolleyball.Models
 {
@@ -19,15 +14,6 @@ namespace SportsCoderForVolleyball.Models
         public Option Option { get; set; } = new();
         public Point Point { get; set; } = new();
         public Control Control { get; set; } = new();
-
-        //アニメーション
-
-        
-        
-
-     
-
-       
 
         //セット統計
         public ReactiveProperty<int> LeftTeamServePoint = new(0);
@@ -59,7 +45,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<int> GameLeftTeamOpponentError = new(0);
         public ReactiveProperty<int> GameRightTeamOpponentError = new(0);
 
-        
+
 
         public ReactiveProperty<bool> GuiEnable = new(true);
 
@@ -74,6 +60,6 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<bool> IsLeftFirstServe = new(true);
 
 
-        
+
     }
 }

@@ -551,7 +551,7 @@ namespace SportsCoderForVolleyball.Models
                 else if (c[1] == 'L')
                 {
                     UI.Instance.TimeOutLeft.Value--;
-                }   
+                }
             }
             //終了
             else if (c[0] == 'E')
