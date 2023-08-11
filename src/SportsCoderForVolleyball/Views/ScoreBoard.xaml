@@ -67,6 +67,28 @@
             <TextBlock Grid.Column="5" Text="{Binding SetRight.Value}" />
             <TextBlock Grid.Column="6" Text="{Binding TeamRight.Value}" />
 
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDisplayScoreboard.Value}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard BeginTime="0:0:0.2">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
         </Grid>
         <Border.Style>
             <Style TargetType="Border">
@@ -75,26 +97,34 @@
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="600" Duration="0:0:0.1" />
-                                    <DoubleAnimation
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="600" Duration="0:0:0.2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CubicEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <!--<DoubleAnimation
                                         BeginTime="0:0:0.2"
                                         Storyboard.TargetProperty="Opacity"
                                         From="0"
                                         To="100"
-                                        Duration="0:0:30" />
+                                        Duration="0:0:30" />-->
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.EnterActions>
                         <DataTrigger.ExitActions>
                             <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="600" To="0" Duration="0:0:0.2" />
-                                    <DoubleAnimation
+                                <Storyboard BeginTime="0:0:0.2">
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" From="600" To="0" Duration="0:0:0.2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CubicEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <!--<DoubleAnimation
                                         BeginTime="0:0:0.4"
                                         Storyboard.TargetProperty="Opacity"
                                         From="100"
                                         To="0"
-                                        Duration="0:0:0.1" />
+                                        Duration="0:0:0.1" />-->
                                 </Storyboard>
                             </BeginStoryboard>
                         </DataTrigger.ExitActions>
