@@ -1,5 +1,6 @@
 ﻿using Prism.Services.Dialogs;
 using Reactive.Bindings;
+using SportsCoderForVolleyball.Shared;
 using System.Threading.Tasks;
 using static SportsCoderForVolleyball.Models.Data;
 
@@ -18,9 +19,9 @@ namespace SportsCoderForVolleyball.Models
         }
         public async void CourtChange(bool detectSetpoint = true, bool History = true)
         {
-            Swap(ref Instance.PointLeft, ref Instance.PointRight);
-            Swap(ref Instance.SetLeft, ref Instance.SetRight);
-            Swap(ref Instance.TeamLeft, ref Instance.TeamRight);
+            Swap(ref UI.Instance.PointLeft, ref UI.Instance.PointRight);
+            Swap(ref UI.Instance.SetLeft, ref UI.Instance.SetRight);
+            Swap(ref UI.Instance.TeamLeft, ref UI.Instance.TeamRight);
 
             Swap(ref Instance.LeftTeamAttackPoint, ref Instance.RightTeamAttackPoint);
             Swap(ref Instance.LeftTeamBlockPoint, ref Instance.RightTeamBlockPoint);
@@ -35,12 +36,10 @@ namespace SportsCoderForVolleyball.Models
             Swap(ref Instance.GameLeftTeamServeError, ref Instance.GameRightTeamServeError);
             Swap(ref Instance.GameLeftTeamError, ref Instance.GameRightTeamError);
 
-            Swap(ref Instance.ColorCodeLeftTeam, ref Instance.ColorCodeRightTeam);
-
             Swap(ref Instance.GameLeftTeamOpponentError, ref Instance.GameRightTeamOpponentError);
             SwitchServer();
 
-            Instance.IsATeamLeft.Value = !Instance.IsATeamLeft.Value;
+            UI.Instance.IsATeamLeft.Value = !UI.Instance.IsATeamLeft.Value;
 
             if (History)
                 Instance.History.Add("CC");
@@ -61,15 +60,15 @@ namespace SportsCoderForVolleyball.Models
             Instance.RightTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
 
             //記録の書き込み
-            if (Instance.IsATeamLeft.Value)
+            if (UI.Instance.IsATeamLeft.Value)
             {
                 Instance.Sets.Value.Add(new Set()
                 {
-                    ATeamPoint = Instance.PointLeft.Value,
-                    BTeamPoint = Instance.PointRight.Value,
+                    ATeamPoint = UI.Instance.PointLeft.Value,
+                    BTeamPoint = UI.Instance.PointRight.Value,
 
-                    ATeamTimeOut = Instance.TimeOutLeft.Value,
-                    BTeamTimeOut = Instance.TimeOutRight.Value,
+                    ATeamTimeOut = UI.Instance.TimeOutLeft.Value,
+                    BTeamTimeOut = UI.Instance.TimeOutRight.Value,
 
                     ATeamAttackPoint = Instance.LeftTeamAttackPoint.Value,
                     BTeamAttackPoint = Instance.RightTeamAttackPoint.Value,
@@ -91,11 +90,11 @@ namespace SportsCoderForVolleyball.Models
             {
                 Instance.Sets.Value.Add(new Set()
                 {
-                    ATeamPoint = Instance.PointRight.Value,
-                    BTeamPoint = Instance.PointLeft.Value,
+                    ATeamPoint = UI.Instance.PointRight.Value,
+                    BTeamPoint = UI.Instance.PointLeft.Value,
 
-                    ATeamTimeOut = Instance.TimeOutRight.Value,
-                    BTeamTimeOut = Instance.TimeOutLeft.Value,
+                    ATeamTimeOut = UI.Instance.TimeOutRight.Value,
+                    BTeamTimeOut = UI.Instance.TimeOutLeft.Value,
 
                     ATeamAttackPoint = Instance.RightTeamAttackPoint.Value,
                     BTeamAttackPoint = Instance.LeftTeamAttackPoint.Value,
@@ -125,7 +124,7 @@ namespace SportsCoderForVolleyball.Models
             //セットごとのポイント
             await Task.Delay(4000);
             Option.InfomationPointParSet();
-            Instance.IsDisplayScoreboard.Value = false;
+            UI.Instance.IsDisplayScoreboard.Value = false;
 
             //セットごとのポイントを削除
             await Task.Delay(10000);
@@ -148,7 +147,7 @@ namespace SportsCoderForVolleyball.Models
 
 
             //最終セットの場合
-            if (Instance.SetRight.Value == Instance.NEEDSET.Value || Instance.SetLeft.Value == Instance.NEEDSET.Value)
+            if (UI.Instance.SetRight.Value == Instance.NEEDSET.Value || UI.Instance.SetLeft.Value == Instance.NEEDSET.Value)
             {
                 //ゲーム終了ならスコアボードを再表示させない
                 //await Task.Delay(2000);
@@ -166,10 +165,10 @@ namespace SportsCoderForVolleyball.Models
             await Task.Delay(5000);
 
             //次のセットへ
-            Instance.PointLeft.Value = 0;
-            Instance.PointRight.Value = 0;
-            Instance.TimeOutLeft.Value = 0;
-            Instance.TimeOutRight.Value = 0;
+            UI.Instance.PointLeft.Value = 0;
+            UI.Instance.PointRight.Value = 0;
+            UI.Instance.TimeOutLeft.Value = 0;
+            UI.Instance.TimeOutRight.Value = 0;
             Instance.LeftTeamAttackPoint.Value = 0;
             Instance.RightTeamAttackPoint.Value = 0;
             Instance.LeftTeamBlockPoint.Value = 0;
@@ -180,42 +179,42 @@ namespace SportsCoderForVolleyball.Models
             Instance.RightTeamServeError.Value = 0;
             Instance.LeftTeamError.Value = 0;
             Instance.RightTeamError.Value = 0;
-            Instance.Set.Value++;
+            UI.Instance.Set.Value++;
 
-            if (Instance.COURTCHANGE.Value && Instance.Set.Value != Instance.SET.Value)
+            if (Instance.COURTCHANGE.Value && UI.Instance.Set.Value != Instance.SET.Value)
             {
                 //コートチェンジあり
                 CourtChange(false, false);
-                Instance.IsLeftServe.Value = true;
-                Instance.IsRightServe.Value = false;
+                UI.Instance.IsLeftServe.Value = true;
+                UI.Instance.IsRightServe.Value = false;
             }
             else
             {
                 //コートチェンジなし
-                if (Instance.Set.Value % 2 == 0)
+                if (UI.Instance.Set.Value % 2 == 0)
                 {
                     if (Instance.IsLeftFirstServe.Value)
                     {
-                        Instance.IsLeftServe.Value = false;
-                        Instance.IsRightServe.Value = true;
+                        UI.Instance.IsLeftServe.Value = false;
+                        UI.Instance.IsRightServe.Value = true;
                     }
                     else
                     {
-                        Instance.IsLeftServe.Value = true;
-                        Instance.IsRightServe.Value = false;
+                        UI.Instance.IsLeftServe.Value = true;
+                        UI.Instance.IsRightServe.Value = false;
                     }
                 }
                 else
                 {
                     if (Instance.IsLeftFirstServe.Value)
                     {
-                        Instance.IsLeftServe.Value = true;
-                        Instance.IsRightServe.Value = false;
+                        UI.Instance.IsLeftServe.Value = true;
+                        UI.Instance.IsRightServe.Value = false;
                     }
                     else
                     {
-                        Instance.IsLeftServe.Value = false;
-                        Instance.IsRightServe.Value = true;
+                        UI.Instance.IsLeftServe.Value = false;
+                        UI.Instance.IsRightServe.Value = true;
                     }
                 }
             }
@@ -229,15 +228,15 @@ namespace SportsCoderForVolleyball.Models
         public async Task DetectSetPoint()
         {
             //ファイナルセットの場合
-            if (Instance.Set.Value == Instance.SET.Value)
+            if (UI.Instance.Set.Value == Instance.SET.Value)
             {
                 //ゲーム終了の検出
                 //左チーム
-                if (Instance.PointLeft.Value - Instance.PointRight.Value >= 2 && Instance.PointLeft.Value >= Instance.LASTSETPOINT.Value)
+                if (UI.Instance.PointLeft.Value - UI.Instance.PointRight.Value >= 2 && UI.Instance.PointLeft.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
                     Instance.HideMessage();
-                    Instance.SetLeft.Value++;
+                    UI.Instance.SetLeft.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                     _dialogService.Show("EndofSetDialog", parmaters, async result =>
@@ -256,11 +255,11 @@ namespace SportsCoderForVolleyball.Models
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value - Instance.PointLeft.Value >= 2 && Instance.PointRight.Value >= Instance.LASTSETPOINT.Value)
+                if (UI.Instance.PointRight.Value - UI.Instance.PointLeft.Value >= 2 && UI.Instance.PointRight.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
                     Instance.HideMessage();
-                    Instance.SetRight.Value++;
+                    UI.Instance.SetRight.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                     _dialogService.Show("EndofSetDialog", parmaters, async result =>
@@ -281,7 +280,7 @@ namespace SportsCoderForVolleyball.Models
 
                 //マッチポイントの検出
                 //左チーム
-                if (Instance.PointLeft.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
+                if (UI.Instance.PointLeft.Value + 1 >= Instance.LASTSETPOINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
                     Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
                     return;
@@ -292,7 +291,7 @@ namespace SportsCoderForVolleyball.Models
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value + 1 >= Instance.LASTSETPOINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
+                if (UI.Instance.PointRight.Value + 1 >= Instance.LASTSETPOINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
                     Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
                     return;
@@ -308,16 +307,16 @@ namespace SportsCoderForVolleyball.Models
             {
                 //セット終了の検出
                 //左チーム
-                if (Instance.PointLeft.Value >= Instance.POINT.Value && Instance.PointLeft.Value - Instance.PointRight.Value >= 2)
+                if (UI.Instance.PointLeft.Value >= Instance.POINT.Value && UI.Instance.PointLeft.Value - UI.Instance.PointRight.Value >= 2)
                 {
                     LockControl(false);
 
                     Instance.HideMessage();
 
-                    if (Instance.SetLeft.Value + 1 == Instance.NEEDSET.Value)
+                    if (UI.Instance.SetLeft.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
-                        Instance.SetLeft.Value++;
+                        UI.Instance.SetLeft.Value++;
                         var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
@@ -328,7 +327,7 @@ namespace SportsCoderForVolleyball.Models
                             }
                             else
                             {
-                                Instance.SetLeft.Value--;
+                                UI.Instance.SetLeft.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -338,7 +337,7 @@ namespace SportsCoderForVolleyball.Models
                     else
                     {
                         //セット獲得
-                        Instance.SetLeft.Value++;
+                        UI.Instance.SetLeft.Value++;
 
 
                         var parmaters = new DialogParameters($"message=セットを終了しますか？");
@@ -347,14 +346,14 @@ namespace SportsCoderForVolleyball.Models
                             if (result.Result == ButtonResult.Yes)
                             {
                                 if (Instance.COURTCHANGE.Value)
-                                    Instance.History.Add($"ESL{Instance.Set.Value}C");
+                                    Instance.History.Add($"ESL{UI.Instance.Set.Value}C");
                                 else
-                                    Instance.History.Add($"ESL{Instance.Set.Value}");
+                                    Instance.History.Add($"ESL{UI.Instance.Set.Value}");
                                 await GameSetAsync();
                             }
                             else
                             {
-                                Instance.SetLeft.Value--;
+                                UI.Instance.SetLeft.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -364,14 +363,14 @@ namespace SportsCoderForVolleyball.Models
                 }
 
                 //右チーム
-                if (Instance.PointRight.Value >= Instance.POINT.Value && Instance.PointRight.Value - Instance.PointLeft.Value >= 2)
+                if (UI.Instance.PointRight.Value >= Instance.POINT.Value && UI.Instance.PointRight.Value - UI.Instance.PointLeft.Value >= 2)
                 {
                     LockControl(false);
                     Instance.HideMessage();
-                    if (Instance.SetRight.Value + 1 == Instance.NEEDSET.Value)
+                    if (UI.Instance.SetRight.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
-                        Instance.SetRight.Value++;
+                        UI.Instance.SetRight.Value++;
                         var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
@@ -382,7 +381,7 @@ namespace SportsCoderForVolleyball.Models
                             }
                             else
                             {
-                                Instance.SetRight.Value--;
+                                UI.Instance.SetRight.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -392,7 +391,7 @@ namespace SportsCoderForVolleyball.Models
                     else
                     {
                         //セット獲得
-                        Instance.SetRight.Value++;
+                        UI.Instance.SetRight.Value++;
 
                         var parmaters = new DialogParameters($"message=セットを終了しますか？");
                         _dialogService.Show("EndofSetDialog", parmaters, async result =>
@@ -400,16 +399,16 @@ namespace SportsCoderForVolleyball.Models
                             if (result.Result == ButtonResult.Yes)
                             {
                                 if (Instance.COURTCHANGE.Value)
-                                    Instance.History.Add($"ESR{Instance.Set.Value}C");
+                                    Instance.History.Add($"ESR{UI.Instance.Set.Value}C");
                                 else
-                                    Instance.History.Add($"ESR{Instance.Set.Value}");
+                                    Instance.History.Add($"ESR{UI.Instance.Set.Value}");
 
 
                                 await GameSetAsync();
                             }
                             else
                             {
-                                Instance.SetRight.Value--;
+                                UI.Instance.SetRight.Value--;
                                 Undo();
                                 LockControl(true);
                             }
@@ -420,7 +419,7 @@ namespace SportsCoderForVolleyball.Models
 
                 //セットポイントの検出
                 //左チーム
-                if (Instance.SetLeft.Value+1 != Instance.NEEDSET.Value && Instance.PointLeft.Value+1 >= Instance.POINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
+                if (UI.Instance.SetLeft.Value+1 != Instance.NEEDSET.Value && UI.Instance.PointLeft.Value+1 >= Instance.POINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
                     Instance.ShowMessage("SET POINT", true, forceNoHide: true);
                     return;
@@ -431,7 +430,7 @@ namespace SportsCoderForVolleyball.Models
                 }
 
                 //右チーム
-                if (Instance.SetRight.Value+1 != Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
+                if (UI.Instance.SetRight.Value+1 != Instance.NEEDSET.Value && UI.Instance.PointRight.Value+1 >= Instance.POINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
                     Instance.ShowMessage("SET POINT", false, forceNoHide: true);
                     return;
@@ -444,7 +443,7 @@ namespace SportsCoderForVolleyball.Models
 
                 //マッチポイントの検出
                 //左チーム
-                if (Instance.SetLeft.Value+1 == Instance.NEEDSET.Value && Instance.PointLeft.Value+1 >= Instance.POINT.Value && Instance.PointLeft.Value > Instance.PointRight.Value)
+                if (UI.Instance.SetLeft.Value+1 == Instance.NEEDSET.Value && UI.Instance.PointLeft.Value+1 >= Instance.POINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
                     Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
                     return;
@@ -454,7 +453,7 @@ namespace SportsCoderForVolleyball.Models
                     Instance.HideMessage();
                 }
                 //右チーム
-                if (Instance.SetRight.Value+1 == Instance.NEEDSET.Value && Instance.PointRight.Value+1 >= Instance.POINT.Value && Instance.PointRight.Value > Instance.PointLeft.Value)
+                if (UI.Instance.SetRight.Value+1 == Instance.NEEDSET.Value && UI.Instance.PointRight.Value+1 >= Instance.POINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
                     Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
                     return;
@@ -482,7 +481,7 @@ namespace SportsCoderForVolleyball.Models
                 if (c[1]=='R')
                 {
                     Instance.GameRightTeamPoint.Value--;
-                    Instance.PointRight.Value--;
+                    UI.Instance.PointRight.Value--;
                     switch (skill)
                     {
                         case "A":
@@ -511,7 +510,7 @@ namespace SportsCoderForVolleyball.Models
                 {
 
                     Instance.GameLeftTeamPoint.Value--;
-                    Instance.PointLeft.Value--;
+                    UI.Instance.PointLeft.Value--;
                     switch (skill)
                     {
                         case "A":
@@ -547,12 +546,12 @@ namespace SportsCoderForVolleyball.Models
 
                 if (c[1]=='R')
                 {
-                    Instance.TimeOutRight.Value--;
+                    UI.Instance.TimeOutRight.Value--;
                 }
                 else if (c[1] == 'L')
                 {
-                    Instance.TimeOutLeft.Value--;
-                }
+                    UI.Instance.TimeOutLeft.Value--;
+                }   
             }
             //終了
             else if (c[0] == 'E')
@@ -563,11 +562,11 @@ namespace SportsCoderForVolleyball.Models
                     //セット終了
                     var a = Instance.Sets.Value[set-1];
 
-                    Instance.Set.Value--;
+                    UI.Instance.Set.Value--;
 
-                    if (Instance.IsATeamLeft.Value)
+                    if (UI.Instance.IsATeamLeft.Value)
                     {
-                        Instance.PointLeft.Value = a.ATeamPoint;
+                        UI.Instance.PointLeft.Value = a.ATeamPoint;
                         Instance.LeftTeamAttackPoint.Value = a.ATeamAttackPoint;
                         Instance.LeftTeamBlockPoint.Value = a.ATeamBlockPoint;
                         Instance.LeftTeamServePoint.Value = a.ATeamServePoint;
@@ -575,7 +574,7 @@ namespace SportsCoderForVolleyball.Models
                         Instance.LeftTeamError.Value = a.ATeamError;
                         Instance.LeftTeamOpponentError.Value = a.ATeamServeError + a.ATeamError;
 
-                        Instance.PointRight.Value = a.BTeamPoint;
+                        UI.Instance.PointRight.Value = a.BTeamPoint;
                         Instance.RightTeamAttackPoint.Value = a.BTeamAttackPoint;
                         Instance.RightTeamBlockPoint.Value = a.BTeamBlockPoint;
                         Instance.RightTeamServePoint.Value = a.BTeamServePoint;
@@ -585,7 +584,7 @@ namespace SportsCoderForVolleyball.Models
                     }
                     else
                     {
-                        Instance.PointLeft.Value = a.BTeamPoint;
+                        UI.Instance.PointLeft.Value = a.BTeamPoint;
                         Instance.LeftTeamAttackPoint.Value = a.BTeamAttackPoint;
                         Instance.LeftTeamBlockPoint.Value = a.BTeamBlockPoint;
                         Instance.LeftTeamServePoint.Value = a.BTeamServePoint;
@@ -593,7 +592,7 @@ namespace SportsCoderForVolleyball.Models
                         Instance.LeftTeamError.Value = a.BTeamError;
                         Instance.LeftTeamOpponentError.Value = a.BTeamServeError + a.BTeamError;
 
-                        Instance.PointRight.Value = a.ATeamPoint;
+                        UI.Instance.PointRight.Value = a.ATeamPoint;
                         Instance.RightTeamAttackPoint.Value = a.ATeamAttackPoint;
                         Instance.RightTeamBlockPoint.Value = a.ATeamBlockPoint;
                         Instance.RightTeamServePoint.Value = a.ATeamServePoint;
@@ -609,11 +608,11 @@ namespace SportsCoderForVolleyball.Models
                         CourtChange(false, false);
                         if (c[2]=='R')
                         {
-                            Instance.SetRight.Value--;
+                            UI.Instance.SetRight.Value--;
                         }
                         else if (c[2] == 'L')
                         {
-                            Instance.SetLeft.Value--;
+                            UI.Instance.SetLeft.Value--;
                         }
                     }
                     Instance.History.RemoveAt(Instance.History.Count - 1);
@@ -654,13 +653,13 @@ namespace SportsCoderForVolleyball.Models
                 {
                     if (Instance.History[i][1] == 'R')
                     {
-                        Instance.IsLeftServe.Value = false;
-                        Instance.IsRightServe.Value = true;
+                        UI.Instance.IsLeftServe.Value = false;
+                        UI.Instance.IsRightServe.Value = true;
                     }
                     else if (Instance.History[i][1] == 'L')
                     {
-                        Instance.IsLeftServe.Value = true;
-                        Instance.IsRightServe.Value = false;
+                        UI.Instance.IsLeftServe.Value = true;
+                        UI.Instance.IsRightServe.Value = false;
                     }
                     return;
                 }
@@ -669,20 +668,20 @@ namespace SportsCoderForVolleyball.Models
                     var set = int.Parse(Instance.History[i][3].ToString()) + 1;
                     if (Instance.COURTCHANGE.Value)
                     {
-                        Instance.IsLeftServe.Value = true;
-                        Instance.IsRightServe.Value = false;
+                        UI.Instance.IsLeftServe.Value = true;
+                        UI.Instance.IsRightServe.Value = false;
                     }
                     else if (set % 2 == 0)
                     {
                         if (Instance.IsLeftFirstServe.Value)
                         {
-                            Instance.IsLeftServe.Value = false;
-                            Instance.IsRightServe.Value = true;
+                            UI.Instance.IsLeftServe.Value = false;
+                            UI.Instance.IsRightServe.Value = true;
                         }
                         else
                         {
-                            Instance.IsLeftServe.Value = true;
-                            Instance.IsRightServe.Value = false;
+                            UI.Instance.IsLeftServe.Value = true;
+                            UI.Instance.IsRightServe.Value = false;
                         }
                         return;
                     }
@@ -690,14 +689,14 @@ namespace SportsCoderForVolleyball.Models
                     {
                         if (Instance.IsLeftFirstServe.Value)
                         {
-                            Instance.IsLeftServe.Value = true;
-                            Instance.IsRightServe.Value = false;
+                            UI.Instance.IsLeftServe.Value = true;
+                            UI.Instance.IsRightServe.Value = false;
                             return;
                         }
                         else
                         {
-                            Instance.IsLeftServe.Value = false;
-                            Instance.IsRightServe.Value = true;
+                            UI.Instance.IsLeftServe.Value = false;
+                            UI.Instance.IsRightServe.Value = true;
                             return;
                         }
                     }
@@ -706,20 +705,20 @@ namespace SportsCoderForVolleyball.Models
                 {
                     if (Instance.IsLeftFirstServe.Value)
                     {
-                        Instance.IsLeftServe.Value = true;
-                        Instance.IsRightServe.Value = false;
+                        UI.Instance.IsLeftServe.Value = true;
+                        UI.Instance.IsRightServe.Value = false;
                     }
                     else
                     {
-                        Instance.IsLeftServe.Value = false;
-                        Instance.IsRightServe.Value = true;
+                        UI.Instance.IsLeftServe.Value = false;
+                        UI.Instance.IsRightServe.Value = true;
                     }
                 }
             }
         }
         public static void SwitchServer(bool History = true)
         {
-            Swap(ref Instance.IsLeftServe, ref Instance.IsRightServe);
+            Swap(ref UI.Instance.IsLeftServe, ref UI.Instance.IsRightServe);
             if (History)
                 Instance.History.Add("CS");
         }

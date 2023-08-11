@@ -17,12 +17,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
-    <PackageReference Include="ReactiveProperty" Version="9.3.0" />
-    <PackageReference Include="ReactiveProperty.WPF" Version="9.3.0" />
+    <PackageReference Include="ReactiveProperty" Version="9.3.1" />
+    <PackageReference Include="ReactiveProperty.WPF" Version="9.3.1" />
     <PackageReference Include="WPF-UI" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDILibDotNet2\NDILibDotNet2.csproj" />
+    <ProjectReference Include="..\SportsCoderForVolleyball.VerticalLeft\SportsCoderForVolleyball.VerticalLeft.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Processing.NDI.Lib.x86.dll">

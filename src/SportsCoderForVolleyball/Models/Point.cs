@@ -1,4 +1,5 @@
-﻿using static SportsCoderForVolleyball.Models.Data;
+﻿using SportsCoderForVolleyball.Shared;
+using static SportsCoderForVolleyball.Models.Data;
 
 namespace SportsCoderForVolleyball.Models
 {
@@ -7,11 +8,11 @@ namespace SportsCoderForVolleyball.Models
         private async void PointPlusLeft(bool IsDetectSetPoint = true)
         {
             Instance.GameLeftTeamPoint.Value++;
-            Instance.PointLeft.Value++;
+            UI.Instance.PointLeft.Value++;
 
             //サーバー表示
-            Instance.IsLeftServe.Value = true;
-            Instance.IsRightServe.Value = false;
+            UI.Instance.IsLeftServe.Value = true;
+            UI.Instance.IsRightServe.Value = false;
 
             if (IsDetectSetPoint)
                 await Instance.Control.DetectSetPoint();
@@ -19,11 +20,11 @@ namespace SportsCoderForVolleyball.Models
         private async void PointPlusRight(bool IsDetectSetPoint = true)
         {
             Instance.GameRightTeamPoint.Value++;
-            Instance.PointRight.Value++;
+            UI.Instance.PointRight.Value++;
 
             //サーバー表示
-            Instance.IsLeftServe.Value = false;
-            Instance.IsRightServe.Value = true;
+            UI.Instance.IsLeftServe.Value = false;
+            UI.Instance.IsRightServe.Value = true;
 
             if (IsDetectSetPoint)
                 await Instance.Control.DetectSetPoint();

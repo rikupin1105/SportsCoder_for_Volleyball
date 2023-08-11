@@ -1,5 +1,6 @@
 ﻿using Prism.Services.Dialogs;
 using Reactive.Bindings;
+using SportsCoderForVolleyball.Shared;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -51,9 +52,9 @@ namespace SportsCoderForVolleyball.Models
             }
 
             //スコアが表示されていない場合、表示する
-            if (IsDisplayScoreboard.Value == false)
+            if (UI.Instance.IsDisplayScoreboard.Value == false)
             {
-                Instance.IsDisplayScoreboard.Value = true;
+                UI.Instance.IsDisplayScoreboard.Value = true;
                 await Task.Delay(1000);
             }
 
@@ -115,9 +116,9 @@ namespace SportsCoderForVolleyball.Models
             }
 
             //スコアが表示されていない場合、表示する
-            if (IsDisplayScoreboard.Value == false)
+            if (UI.Instance.IsDisplayScoreboard.Value == false)
             {
-                Instance.IsDisplayScoreboard.Value = true;
+                UI.Instance.IsDisplayScoreboard.Value = true;
                 await Task.Delay(1000);
             }
 
@@ -169,7 +170,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<bool> IsDisplayMessage { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayInfomation { get; private set; } = new();
 
-        public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
+     
 
         public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
 
@@ -208,22 +209,7 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveProperty<int> GameLeftTeamOpponentError = new(0);
         public ReactiveProperty<int> GameRightTeamOpponentError = new(0);
 
-        //UI部品
-        public ReactiveProperty<int> Set = new(1);
-        public ReactiveProperty<string> TeamLeft = new("USA");
-        public ReactiveProperty<string> TeamRight = new("JPN");
-        public ReactiveProperty<int> PointLeft = new(0);
-        public ReactiveProperty<int> PointRight = new(0);
-        public ReactiveProperty<int> SetLeft = new(0);
-        public ReactiveProperty<int> SetRight = new(0);
-        public ReactiveProperty<int> TimeOutRight = new(0);
-        public ReactiveProperty<int> TimeOutLeft = new(0);
-        public ReactiveProperty<bool> IsLeftServe = new(true);
-        public ReactiveProperty<bool> IsRightServe = new(false);
-        public ReactiveProperty<bool> IsATeamLeft = new(true);
-        public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
-        public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
-        public ReactiveProperty<string> BackGroundColor = new("#00ff00");
+        
 
         public ReactiveProperty<bool> GuiEnable = new(true);
 

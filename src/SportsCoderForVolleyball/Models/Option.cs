@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SportsCoderForVolleyball.Shared;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using static SportsCoderForVolleyball.Models.Control;
 using static SportsCoderForVolleyball.Models.Data;
@@ -9,19 +10,19 @@ namespace SportsCoderForVolleyball.Models
     {
         public static void LeftTimeout()
         {
-            Instance.TimeOutLeft.Value++;
+            UI.Instance.TimeOutLeft.Value++;
             Instance.ShowMessage("TIME OUT", true, 5);
         }
         public static void RightTimeOut()
         {
-            Instance.TimeOutRight.Value++;
+            UI.Instance.TimeOutRight.Value++;
             Instance.ShowMessage("TIME OUT", false, 5);
         }
         public static void TechnicalTimeOut() => Instance.ShowMessage("TECHNICAL TIMEOUT", autoHideSeconds: 10);
 
         public static void InfomationScore()
         {
-            if (Instance.IsDisplayScoreboard.Value)
+            if (UI.Instance.IsDisplayScoreboard.Value)
             {
                 //表示されているとき
                 if (Instance.IsDisplayGetSet.Value)
@@ -31,14 +32,14 @@ namespace SportsCoderForVolleyball.Models
                 else
                 {
                     Instance.HideMessage();
-                    Instance.IsDisplayScoreboard.Value = false;
+                    UI.Instance.IsDisplayScoreboard.Value = false;
                 }
             }
             else
             {
                 //未表示のとき
 
-                Instance.IsDisplayScoreboard.Value = true;
+                UI.Instance.IsDisplayScoreboard.Value = true;
                 if (Instance.IsDisplayGetSet.Value)
                 {
                     Instance.IsDisplayGetSet.Value = false;
@@ -69,7 +70,7 @@ namespace SportsCoderForVolleyball.Models
                 var itemsorce = new List<PointParSetInfomationSource>();
                 foreach (var item in Instance.Sets.Value)
                 {
-                    if (Instance.IsATeamLeft.Value)
+                    if (UI.Instance.IsATeamLeft.Value)
                     {
                         itemsorce.Add(new PointParSetInfomationSource()
                         {

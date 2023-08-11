@@ -1,16 +1,16 @@
 ﻿<UserControl
-    x:Class="SportsCoderForVolleyball.Views.VerticalLeft.ScoreBoardVertical"
+    x:Class="SportsCoderForVolleyball.VerticalLeft.Views.ScoreBoardVertical"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:convertar="clr-namespace:SportsCoderForVolleyball.Converter"
+    xmlns:convertar="clr-namespace:SportsCoderForVolleyball.VerticalLeft.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
+    xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.VerticalLeft.ViewModels"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
+        <!--<convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />-->
 
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="25" />
@@ -40,8 +40,8 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock FontSize="15" Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
-            <TextBlock Grid.Row="1" FontSize="15" Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
+            <!--<TextBlock FontSize="15" Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
+            <TextBlock Grid.Row="1" FontSize="15" Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />-->
 
             <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
             <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />

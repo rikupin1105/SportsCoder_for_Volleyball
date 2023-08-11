@@ -3,6 +3,7 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using SportsCoderForVolleyball.Models;
+using SportsCoderForVolleyball.Shared;
 using System;
 
 namespace SportsCoderForVolleyball.ViewModels
@@ -21,25 +22,25 @@ namespace SportsCoderForVolleyball.ViewModels
 
                 Data.Instance.TIMEOUT.Value = TimeOut.Value;
 
-                Data.Instance.TeamLeft.Value = ATeamName.Value;
-                Data.Instance.TeamRight.Value = BTeamName.Value;
+                UI.Instance.TeamLeft.Value = ATeamName.Value;
+                UI.Instance.TeamRight.Value = BTeamName.Value;
 
-                Data.Instance.ColorCodeLeftTeam.Value = ATeamColorCode.Value;
-                Data.Instance.ColorCodeRightTeam.Value = BTeamColorCode.Value;
+                //UI.Instance.ColorCodeLeftTeam.Value = ATeamColorCode.Value;
+                //UI.Instance.ColorCodeRightTeam.Value = BTeamColorCode.Value;
 
-                Data.Instance.BackGroundColor.Value = BackGroundColor.Value;
+                UI.Instance.BackGroundColor.Value = BackGroundColor.Value;
 
                 if (Server.Value == "左")
                 {
-                    Data.Instance.IsLeftServe.Value = true;
-                    Data.Instance.IsRightServe.Value = false;
+                    UI.Instance.IsLeftServe.Value = true;
+                    UI.Instance.IsRightServe.Value = false;
 
                     Data.Instance.IsLeftFirstServe.Value = true;
                 }
                 else
                 {
-                    Data.Instance.IsLeftServe.Value = false;
-                    Data.Instance.IsRightServe.Value = true;
+                    UI.Instance.IsLeftServe.Value = false;
+                    UI.Instance.IsRightServe.Value = true;
 
                     Data.Instance.IsLeftFirstServe.Value = false;
                 }
@@ -51,8 +52,8 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand SubmitCommand { get; } = new();
 
         //設定
-        public ReactiveProperty<string> ATeamName { get; set; } = Data.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BTeamName { get; set; } = Data.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> ATeamName { get; set; } = UI.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BTeamName { get; set; } = UI.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> Set { get; set; } = Data.Instance.SET.ObserveProperty(x => x.Value).ToReactiveProperty();
         //public ReactiveProperty<int> Point { get; set; } = Control.Instance.POINT.ObserveProperty(x => x.Value).ToReactiveProperty();
         //public ReactiveProperty<int> LastSetPoint { get; set; } = Control.Instance.LASTSETPOINT.ObserveProperty(x => x.Value).ToReactiveProperty();
@@ -60,9 +61,9 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveProperty<int> TimeOut { get; set; } = Data.Instance.TIMEOUT.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         //色
-        public ReactiveProperty<string> ATeamColorCode { get; set; } = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BTeamColorCode { get; set; } = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
-        public ReactiveProperty<string> BackGroundColor { get; set; } = Data.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
+        //public ReactiveProperty<string> ATeamColorCode { get; set; } = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        //public ReactiveProperty<string> BTeamColorCode { get; set; } = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<string> BackGroundColor { get; set; } = UI.Instance.BackGroundColor.ObserveProperty(x => x.Value).ToReactiveProperty();
 
 
         //コンボボックス用
