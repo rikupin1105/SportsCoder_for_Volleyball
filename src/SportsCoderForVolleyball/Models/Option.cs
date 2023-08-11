@@ -65,7 +65,6 @@ namespace SportsCoderForVolleyball.Models
             }
             else
             {
-
                 var itemsorce = new List<PointParSetInfomationSource>();
                 foreach (var item in Instance.Sets.Value)
                 {
@@ -87,10 +86,7 @@ namespace SportsCoderForVolleyball.Models
                     }
                 }
 
-                Instance.PointParSetSource.Clear();
-                Instance.PointParSetSource.AddRange(itemsorce);
-
-                UI.Instance.IsDisplayPointParSet.Value = true;
+                UI.Instance.ShowPointParSet(itemsorce);
             }
         }
         public static void InfomationSet()

@@ -145,6 +145,15 @@ namespace SportsCoderForVolleyball.Shared
             IsMessageShow = false;
         }
 
+        public void ShowPointParSet(List<PointParSetInfomationSource> source)
+        {
+            PointParSetSource.Clear();
+            PointParSetSource.AddRangeOnScheduler(source);
+
+            IsDisplayPointParSet.Value = true;
+        }
+        public void HidePointParSet() => IsDisplayPointParSet.Value = false;
+
 
         public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
         private bool IsMessageShow { get; set; }
@@ -155,12 +164,12 @@ namespace SportsCoderForVolleyball.Shared
         public ReactiveProperty<bool> IsDisplayMessageRight { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayMessage { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayInfomation { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayTechnicalTimeout = new(false);
+        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; private set; } = new(false);
 
-        public ReactiveProperty<bool> IsDisplayGetSet = new(false);
-        public ReactiveProperty<bool> IsDisplayPointParSet = new(false);
-        public ReactiveProperty<bool> IsDisplaySetStuts = new(false);
-        public ReactiveProperty<bool> IsDisplayGameStuts = new(false);
+        public ReactiveProperty<bool> IsDisplayGetSet { get; private set; } = new(false);
+        public ReactiveProperty<bool> IsDisplayPointParSet { get; private set; } = new(false);
+        public ReactiveProperty<bool> IsDisplaySetStuts { get; private set; } = new(false);
+        public ReactiveProperty<bool> IsDisplayGameStuts { get; private set; } = new(false);
 
         //UI部品
         public ReactiveProperty<int> Set = new(1);
@@ -178,5 +187,7 @@ namespace SportsCoderForVolleyball.Shared
         public ReactiveProperty<string> ColorCodeLeftTeam = new("#ffffff");
         public ReactiveProperty<string> ColorCodeRightTeam = new("#000000");
         public ReactiveProperty<string> BackGroundColor = new("#00ff00");
+
+        public ReactiveCollection<PointParSetInfomationSource> PointParSetSource { get; set; } = new();
     }
 }

@@ -14,6 +14,6 @@ namespace SportsCoderForVolleyball.HorizonalBottom.ViewModels
         public ReactiveProperty<int> TeamRightSet { get; set; } = UI.Instance.SetRight.ObserveProperty(x => x.Value).ToReactiveProperty();
 
         public ReactiveProperty<bool> IsDisplayPointParSet { get; set; } = UI.Instance.IsDisplayPointParSet.ObserveProperty(x => x.Value).ToReactiveProperty();
-        //public ReadOnlyReactiveCollection<PointParSetInfomationSource> PointParSetSource { get; set; } = Data.Instance.PointParSetSource.ToReadOnlyReactiveCollection();
+        public ReadOnlyReactiveCollection<PointParSetInfomationSource> PointParSetSource { get; set; } = UI.Instance.PointParSetSource.ToReadOnlyReactiveCollection();
     }
 }

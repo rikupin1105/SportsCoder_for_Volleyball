@@ -9,7 +9,6 @@ namespace SportsCoderForVolleyball.Models
         public ReactiveCollection<string> History { get; set; } = new ReactiveCollection<string>() { "S" };
 
         public ReactiveProperty<List<Set>> Sets = new(new List<Set>());
-        public ReactiveCollection<PointParSetInfomationSource> PointParSetSource { get; set; } = new();
 
         public Option Option { get; set; } = new();
         public Point Point { get; set; } = new();
