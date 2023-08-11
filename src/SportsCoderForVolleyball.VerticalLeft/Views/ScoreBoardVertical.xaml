@@ -43,11 +43,16 @@
             <TextBlock FontSize="15" Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
             <TextBlock Grid.Row="1" FontSize="15" Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
 
-            <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
+            <TextBlock Grid.Column="1" Margin="15,0,0,0" HorizontalAlignment="Left" Text="{Binding TeamLeft.Value}" />
             <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
             <TextBlock Grid.Column="3" Text="{Binding PointLeft.Value}" />
 
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TeamRight.Value}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                Text="{Binding TeamRight.Value}" />
             <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding SetRight.Value}" />
             <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding PointRight.Value}" />
 
