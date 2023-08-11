@@ -164,7 +164,7 @@ namespace SportsCoderForVolleyball.Shared
         public ReactiveProperty<bool> IsDisplayMessageRight { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayMessage { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayInfomation { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayTechnicalTimeout { get; private set; } = new(false);
+        public ReactiveProperty<bool> IsDisplayCommonMessage { get; private set; } = new(false);
 
         public ReactiveProperty<bool> IsDisplayGetSet { get; private set; } = new(false);
         public ReactiveProperty<bool> IsDisplayPointParSet { get; private set; } = new(false);

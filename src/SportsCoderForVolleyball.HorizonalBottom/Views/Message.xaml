@@ -160,7 +160,7 @@
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayTechnicalTimeout.Value}" Value="True">
+                        <DataTrigger Binding="{Binding IsDisplayCommonMessage.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
