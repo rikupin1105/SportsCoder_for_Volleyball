@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDILibDotNet2\NDILibDotNet2.csproj" />
+    <ProjectReference Include="..\SportsCoderForVolleyball.HorizonalBottom\SportsCoderForVolleyball.HorizonalBottom.csproj" />
     <ProjectReference Include="..\SportsCoderForVolleyball.VerticalLeft\SportsCoderForVolleyball.VerticalLeft.csproj" />
   </ItemGroup>
   <ItemGroup>

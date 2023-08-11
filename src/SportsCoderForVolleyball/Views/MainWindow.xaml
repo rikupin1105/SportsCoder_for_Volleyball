@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SportsCoderForVolleyball.Views"
     xmlns:local1="clr-namespace:SportsCoderForVolleyball.VerticalLeft.Views;assembly=SportsCoderForVolleyball.VerticalLeft"
+    xmlns:local2="clr-namespace:SportsCoderForVolleyball.HorizonalBottom.Views;assembly=SportsCoderForVolleyball.HorizonalBottom"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
@@ -22,29 +23,30 @@
 
         <Grid Width="1280" Height="720">
             <!--  ゲーム統計情報  -->
-            <local:MatchStuts VerticalAlignment="Center" />
+            <!--<local2:MatchStuts VerticalAlignment="Center" />-->
 
             <!--  セット統計情報  -->
-            <local:SetStuts VerticalAlignment="Center" />
+            <!--<local2:SetStuts VerticalAlignment="Center" />-->
 
 
             <!--  メッセージ  -->
-            <local:Message Margin="0,570,0,0" />
+            <local2:Message Margin="0,570,0,0" />
+            <local1:Message Margin="310,45,0,0" />
 
 
             <!--  インフォメーション  -->
-            <local:Infomation Margin="0,570,0,0" />
+            <local2:Infomation Margin="0,570,0,0" />
 
 
             <!--  セットごとの点数  -->
-            <local:PointPerSet />
+            <local2:PointPerSet />
 
             <!--  スコア  -->
             <local1:ScoreBoardVertical Margin="0,0,0,0" Padding="0,0,950,550" />
-            <local:ScoreBoard Margin="0,560,0,0" />
+            <local2:ScoreBoard Margin="0,560,0,0" />
 
             <!--  セット数  -->
-            <local:Set Margin="0,560,0,0" />
+            <local2:Set Margin="0,560,0,0" />
         </Grid>
     </NDI:NdiSendContainer>
 </Window>

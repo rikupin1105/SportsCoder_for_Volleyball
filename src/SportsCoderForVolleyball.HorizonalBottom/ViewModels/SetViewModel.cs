@@ -1,10 +1,9 @@
 ﻿using Prism.Mvvm;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using SportsCoderForVolleyball.Models;
 using SportsCoderForVolleyball.Shared;
 
-namespace SportsCoderForVolleyball.ViewModels
+namespace SportsCoderForVolleyball.HorizonalBottom.ViewModels
 {
     public class SetViewModel : BindableBase
     {

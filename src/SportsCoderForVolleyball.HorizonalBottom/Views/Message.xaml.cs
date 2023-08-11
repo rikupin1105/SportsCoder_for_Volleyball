@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SportsCoderForVolleyball.Views
+namespace SportsCoderForVolleyball.HorizonalBottom.Views
 {
     /// <summary>
     /// Interaction logic for Message

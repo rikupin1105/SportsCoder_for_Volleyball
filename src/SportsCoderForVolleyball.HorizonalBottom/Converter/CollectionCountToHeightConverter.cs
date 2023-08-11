@@ -2,9 +2,8 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using static SportsCoderForVolleyball.Models.Control;
 
-namespace SportsCoderForVolleyball.Converter
+namespace SportsCoderForVolleyball.HorizonalBottom.Converter
 {
     internal class CollectionCountToHeightConverter : IValueConverter
     {
