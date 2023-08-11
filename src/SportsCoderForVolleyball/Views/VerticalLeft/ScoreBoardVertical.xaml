@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SportsCoderForVolleyball.Views.ScoreBoardVertical"
+    x:Class="SportsCoderForVolleyball.Views.VerticalLeft.ScoreBoardVertical"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:convertar="clr-namespace:SportsCoderForVolleyball.Converter"

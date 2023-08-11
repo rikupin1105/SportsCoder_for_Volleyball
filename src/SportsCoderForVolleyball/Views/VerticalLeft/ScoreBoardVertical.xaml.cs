@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SportsCoderForVolleyball.Views
+namespace SportsCoderForVolleyball.Views.VerticalLeft
 {
     /// <summary>
     /// Interaction logic for ScoreBoardVertical

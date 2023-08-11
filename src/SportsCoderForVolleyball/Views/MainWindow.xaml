@@ -5,6 +5,7 @@
     xmlns:NDI="clr-namespace:NewTek.NDI.WPF;assembly=NDIlibDotNet2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SportsCoderForVolleyball.Views"
+    xmlns:local1="clr-namespace:SportsCoderForVolleyball.Views.VerticalLeft"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
@@ -39,7 +40,7 @@
             <local:PointPerSet />
 
             <!--  スコア  -->
-            <local:ScoreBoardVertical Margin="0,0,0,0" Padding="0,0,950,550" />
+            <local1:ScoreBoardVertical Margin="0,0,0,0" Padding="0,0,950,550" />
             <local:ScoreBoard Margin="0,560,0,0" />
 
             <!--  セット数  -->

@@ -3,7 +3,7 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using SportsCoderForVolleyball.Models;
 
-namespace SportsCoderForVolleyball.ViewModels
+namespace SportsCoderForVolleyball.ViewModels.VerticalLeft
 {
     public class ScoreBoardVerticalViewModel : BindableBase
     {
