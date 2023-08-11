@@ -21,13 +21,13 @@
         </Border>
 
         <TextBlock Text="{Binding Message.Value}" TextAlignment="Center" />
-        <TextBlock Margin="30,0,0,0" Text="{Binding GameLeftTeamAttackPoint.Value}" TextAlignment="Left" />
-        <TextBlock Margin="0,0,30,0" Text="{Binding GameRightTeamAttackPoint.Value}" TextAlignment="Right" />
+        <TextBlock Margin="30,0,0,0" Text="{Binding MessageLeft.Value}" TextAlignment="Left" />
+        <TextBlock Margin="0,0,30,0" Text="{Binding MessageRight.Value}" TextAlignment="Right" />
 
         <Grid.Style>
             <Style TargetType="Grid">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsDisplayAttackPointInfomation.Value}" Value="True">
+                    <DataTrigger Binding="{Binding IsDisplayInfomation.Value}" Value="True">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>

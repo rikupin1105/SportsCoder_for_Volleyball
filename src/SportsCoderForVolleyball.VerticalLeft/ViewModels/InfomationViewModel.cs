@@ -3,7 +3,7 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using SportsCoderForVolleyball.Shared;
 
-namespace SportsCoderForVolleyball.HorizonalBottom.ViewModels
+namespace SportsCoderForVolleyball.VerticalLeft.ViewModels
 {
     public class InfomationViewModel : BindableBase
     {

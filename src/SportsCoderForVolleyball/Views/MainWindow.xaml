@@ -33,7 +33,7 @@
             <local2:Message Margin="0,570,0,0" />
             <local1:Message Margin="310,45,0,0" />
             <local1:CommonMessage Margin="15,120,0,0" />
-
+            <local1:Infomation Margin="15,45,0,0" />
 
             <!--  インフォメーション  -->
             <local2:Infomation Margin="0,570,0,0" />
