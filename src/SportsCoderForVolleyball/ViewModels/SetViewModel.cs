@@ -8,7 +8,7 @@ namespace SportsCoderForVolleyball.ViewModels
 {
     public class SetViewModel : BindableBase
     {
-        public ReactiveProperty<bool> IsDisplayGetSet { get; set; } = Data.Instance.IsDisplayGetSet.ObserveProperty(x => x.Value).ToReactiveProperty();
+        public ReactiveProperty<bool> IsDisplayGetSet { get; set; } = UI.Instance.IsDisplayGetSet.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<string> TeamRight { get; set; } = UI.Instance.TeamRight.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<string> TeamLeft { get; set; } = UI.Instance.TeamLeft.ObserveProperty(x => x.Value).ToReactiveProperty();
         public ReactiveProperty<int> SetLeft { get; set; } = UI.Instance.SetLeft.ObserveProperty(x => x.Value).ToReactiveProperty();

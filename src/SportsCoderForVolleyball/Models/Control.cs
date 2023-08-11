@@ -54,7 +54,7 @@ namespace SportsCoderForVolleyball.Models
             //操作のロック
             LockControl(false);
 
-            Instance.HideMessage();
+            UI.Instance.HideMessage();
 
             Instance.LeftTeamOpponentError.Value = Instance.RightTeamError.Value + Instance.RightTeamServeError.Value;
             Instance.RightTeamOpponentError.Value = Instance.LeftTeamError.Value + Instance.LeftTeamServeError.Value;
@@ -129,12 +129,12 @@ namespace SportsCoderForVolleyball.Models
             //セットごとのポイントを削除
             await Task.Delay(10000);
 
-            Instance.IsDisplayPointParSet.Value = false;
+            UI.Instance.IsDisplayPointParSet.Value = false;
             await Task.Delay(1000);
 
 
             //スコアとセットを非表示
-            Instance.IsDisplayGetSet.Value = false;
+            UI.Instance.IsDisplayGetSet.Value = false;
 
             ////統計表示
             //await Task.Delay(2000);
@@ -235,7 +235,7 @@ namespace SportsCoderForVolleyball.Models
                 if (UI.Instance.PointLeft.Value - UI.Instance.PointRight.Value >= 2 && UI.Instance.PointLeft.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                     UI.Instance.SetLeft.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
@@ -258,7 +258,7 @@ namespace SportsCoderForVolleyball.Models
                 if (UI.Instance.PointRight.Value - UI.Instance.PointLeft.Value >= 2 && UI.Instance.PointRight.Value >= Instance.LASTSETPOINT.Value)
                 {
                     LockControl(false);
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                     UI.Instance.SetRight.Value++;
                     var parmaters = new DialogParameters($"message=ゲームを終了しますか？");
 
@@ -282,23 +282,23 @@ namespace SportsCoderForVolleyball.Models
                 //左チーム
                 if (UI.Instance.PointLeft.Value + 1 >= Instance.LASTSETPOINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
-                    Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
+                    UI.Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
 
                 //右チーム
                 if (UI.Instance.PointRight.Value + 1 >= Instance.LASTSETPOINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
-                    Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
+                    UI.Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
                 return;
             }
@@ -311,7 +311,7 @@ namespace SportsCoderForVolleyball.Models
                 {
                     LockControl(false);
 
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
 
                     if (UI.Instance.SetLeft.Value + 1 == Instance.NEEDSET.Value)
                     {
@@ -366,7 +366,7 @@ namespace SportsCoderForVolleyball.Models
                 if (UI.Instance.PointRight.Value >= Instance.POINT.Value && UI.Instance.PointRight.Value - UI.Instance.PointLeft.Value >= 2)
                 {
                     LockControl(false);
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                     if (UI.Instance.SetRight.Value + 1 == Instance.NEEDSET.Value)
                     {
                         //試合に勝利
@@ -421,23 +421,23 @@ namespace SportsCoderForVolleyball.Models
                 //左チーム
                 if (UI.Instance.SetLeft.Value+1 != Instance.NEEDSET.Value && UI.Instance.PointLeft.Value+1 >= Instance.POINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
-                    Instance.ShowMessage("SET POINT", true, forceNoHide: true);
+                    UI.Instance.ShowMessage("SET POINT", true, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
 
                 //右チーム
                 if (UI.Instance.SetRight.Value+1 != Instance.NEEDSET.Value && UI.Instance.PointRight.Value+1 >= Instance.POINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
-                    Instance.ShowMessage("SET POINT", false, forceNoHide: true);
+                    UI.Instance.ShowMessage("SET POINT", false, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
 
 
@@ -445,22 +445,22 @@ namespace SportsCoderForVolleyball.Models
                 //左チーム
                 if (UI.Instance.SetLeft.Value+1 == Instance.NEEDSET.Value && UI.Instance.PointLeft.Value+1 >= Instance.POINT.Value && UI.Instance.PointLeft.Value > UI.Instance.PointRight.Value)
                 {
-                    Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
+                    UI.Instance.ShowMessage("MATCH POINT", true, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
                 //右チーム
                 if (UI.Instance.SetRight.Value+1 == Instance.NEEDSET.Value && UI.Instance.PointRight.Value+1 >= Instance.POINT.Value && UI.Instance.PointRight.Value > UI.Instance.PointLeft.Value)
                 {
-                    Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
+                    UI.Instance.ShowMessage("MATCH POINT", false, forceNoHide: true);
                     return;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                 }
 
             }

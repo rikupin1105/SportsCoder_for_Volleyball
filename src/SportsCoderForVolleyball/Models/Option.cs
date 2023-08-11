@@ -11,27 +11,27 @@ namespace SportsCoderForVolleyball.Models
         public static void LeftTimeout()
         {
             UI.Instance.TimeOutLeft.Value++;
-            Instance.ShowMessage("TIME OUT", true, 5);
+            UI.Instance.ShowMessage("TIME OUT", true, 5);
         }
         public static void RightTimeOut()
         {
             UI.Instance.TimeOutRight.Value++;
-            Instance.ShowMessage("TIME OUT", false, 5);
+            UI.Instance.ShowMessage("TIME OUT", false, 5);
         }
-        public static void TechnicalTimeOut() => Instance.ShowMessage("TECHNICAL TIMEOUT", autoHideSeconds: 10);
+        public static void TechnicalTimeOut() => UI.Instance.ShowMessage("TECHNICAL TIMEOUT", autoHideSeconds: 10);
 
         public static void InfomationScore()
         {
             if (UI.Instance.IsDisplayScoreboard.Value)
             {
                 //表示されているとき
-                if (Instance.IsDisplayGetSet.Value)
+                if (UI.Instance.IsDisplayGetSet.Value)
                 {
-                    Instance.IsDisplayGetSet.Value = false;
+                    UI.Instance.IsDisplayGetSet.Value = false;
                 }
                 else
                 {
-                    Instance.HideMessage();
+                    UI.Instance.HideMessage();
                     UI.Instance.IsDisplayScoreboard.Value = false;
                 }
             }
@@ -40,29 +40,29 @@ namespace SportsCoderForVolleyball.Models
                 //未表示のとき
 
                 UI.Instance.IsDisplayScoreboard.Value = true;
-                if (Instance.IsDisplayGetSet.Value)
+                if (UI.Instance.IsDisplayGetSet.Value)
                 {
-                    Instance.IsDisplayGetSet.Value = false;
+                    UI.Instance.IsDisplayGetSet.Value = false;
                 }
                 //await.Control DetectSetPoint();
             }
         }
         public static void InfomationStatistics()
         {
-            if (Instance.IsDisplaySetStuts.Value)
+            if (UI.Instance.IsDisplaySetStuts.Value)
             {
-                Instance.IsDisplaySetStuts.Value = false;
+                UI.Instance.IsDisplaySetStuts.Value = false;
             }
             else
             {
-                Instance.IsDisplaySetStuts.Value = true;
+                UI.Instance.IsDisplaySetStuts.Value = true;
             }
         }
         public static void InfomationPointParSet()
         {
-            if (Instance.IsDisplayPointParSet.Value)
+            if (UI.Instance.IsDisplayPointParSet.Value)
             {
-                Instance.IsDisplayPointParSet.Value = false;
+                UI.Instance.IsDisplayPointParSet.Value = false;
             }
             else
             {
@@ -91,23 +91,23 @@ namespace SportsCoderForVolleyball.Models
                 Instance.PointParSetSource.Clear();
                 Instance.PointParSetSource.AddRange(itemsorce);
 
-                Instance.IsDisplayPointParSet.Value = true;
+                UI.Instance.IsDisplayPointParSet.Value = true;
             }
         }
         public static void InfomationSet()
         {
-            if (Instance.IsDisplayGetSet.Value)
+            if (UI.Instance.IsDisplayGetSet.Value)
             {
-                Instance.IsDisplayGetSet.Value = false;
+                UI.Instance.IsDisplayGetSet.Value = false;
             }
             else
             {
-                Instance.IsDisplayGetSet.Value = true;
+                UI.Instance.IsDisplayGetSet.Value = true;
             }
         }
-        public static void InfomationAttackPoint() => Instance.ShowMessage("ATTACK POINT", Instance.GameLeftTeamAttackPoint.Value.ToString(), Instance.GameRightTeamAttackPoint.Value.ToString(), autoHideSeconds: 5);
-        public static void InfomationBlockPoint() => Instance.ShowMessage("BLOCK POINT", Instance.GameLeftTeamBlockPoint.Value.ToString(), Instance.GameRightTeamBlockPoint.Value.ToString(), autoHideSeconds: 5);
-        public static void InfomationServePoint() => Instance.ShowMessage("SERVE POINT", Instance.GameLeftTeamServePoint.Value.ToString(), Instance.GameRightTeamServePoint.Value.ToString(), autoHideSeconds: 5);
-        public static void InfomationServeError() => Instance.ShowMessage("SERVE ERROR", Instance.GameLeftTeamServeError.Value.ToString(), Instance.GameRightTeamServeError.Value.ToString(), autoHideSeconds: 5);
+        public static void InfomationAttackPoint() => UI.Instance.ShowMessage("ATTACK POINT", Instance.GameLeftTeamAttackPoint.Value.ToString(), Instance.GameRightTeamAttackPoint.Value.ToString(), autoHideSeconds: 5);
+        public static void InfomationBlockPoint() => UI.Instance.ShowMessage("BLOCK POINT", Instance.GameLeftTeamBlockPoint.Value.ToString(), Instance.GameRightTeamBlockPoint.Value.ToString(), autoHideSeconds: 5);
+        public static void InfomationServePoint() => UI.Instance.ShowMessage("SERVE POINT", Instance.GameLeftTeamServePoint.Value.ToString(), Instance.GameRightTeamServePoint.Value.ToString(), autoHideSeconds: 5);
+        public static void InfomationServeError() => UI.Instance.ShowMessage("SERVE ERROR", Instance.GameLeftTeamServeError.Value.ToString(), Instance.GameRightTeamServeError.Value.ToString(), autoHideSeconds: 5);
     }
 }

@@ -10,7 +10,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <!--<convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />-->
+        <convertar:ServerIndicaterConverter x:Key="ServerIndicaterConverter" />
 
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="25" />
@@ -40,8 +40,8 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <!--<TextBlock FontSize="15" Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
-            <TextBlock Grid.Row="1" FontSize="15" Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />-->
+            <TextBlock FontSize="15" Opacity="{Binding IsLeftServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
+            <TextBlock Grid.Row="1" FontSize="15" Opacity="{Binding IsRightServe.Value, Converter={StaticResource ServerIndicaterConverter}}" Text="▶" />
 
             <TextBlock Grid.Column="1" Text="{Binding TeamLeft.Value}" />
             <TextBlock Grid.Column="2" Text="{Binding SetLeft.Value}" />
