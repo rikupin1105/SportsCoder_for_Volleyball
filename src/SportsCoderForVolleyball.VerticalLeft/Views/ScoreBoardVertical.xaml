@@ -62,7 +62,7 @@
                         <DataTrigger Binding="{Binding IsDisplayScoreboard.Value}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
-                                    <Storyboard BeginTime="0:0:0.2">
+                                    <Storyboard BeginTime="0:0:0.3">
                                         <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
