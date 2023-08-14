@@ -11,22 +11,19 @@
 
     <Window.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
             <Setter Property="IsEnabled" Value="{Binding GuiEnable.Value}" />
         </Style>
-        <Style
-            x:Key="CustomButton"
-            BasedOn="{StaticResource DefaultButtonStyle}"
-            TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="160" />
-            <Setter Property="Height" Value="40" />
-            <Setter Property="Margin" Value="5" />
+        <Style x:Key="CustomButton" BasedOn="{StaticResource DefaultButtonStyle}" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="Height" Value="40" />
             <Setter Property="IsEnabled" Value="{Binding GuiEnable.Value}" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="160" />
         </Style>
     </Window.Resources>
 
@@ -51,15 +48,9 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    Text="TEAM" />
+                <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="TEAM" />
 
-                <TextBlock
-                    Grid.Column="6"
-                    HorizontalAlignment="Right"
-                    Text="TEAM" />
+                <TextBlock Grid.Column="6" HorizontalAlignment="Right" Text="TEAM" />
 
                 <TextBlock
                     Grid.Row="1"
@@ -77,15 +68,8 @@
                     FontSize="30"
                     Text="{Binding TeamRight.Value}" />
 
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Text="SETS" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    FontSize="30"
-                    Text="{Binding Set.Value}" />
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="SETS" />
+                <TextBlock Grid.Row="1" Grid.Column="3" FontSize="30" Text="{Binding Set.Value}" />
 
                 <Rectangle
                     Grid.Row="2"
@@ -114,22 +98,10 @@
                 </Grid.RowDefinitions>
 
 
-                <TextBlock
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    Text="SET" />
-                <TextBlock
-                    Grid.Column="1"
-                    HorizontalAlignment="left"
-                    Text="POINT" />
-                <TextBlock
-                    Grid.Column="2"
-                    HorizontalAlignment="Right"
-                    Text="POINT" />
-                <TextBlock
-                    Grid.Column="3"
-                    HorizontalAlignment="Right"
-                    Text="SET" />
+                <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="SET" />
+                <TextBlock Grid.Column="1" HorizontalAlignment="left" Text="POINT" />
+                <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="POINT" />
+                <TextBlock Grid.Column="3" HorizontalAlignment="Right" Text="SET" />
 
 
 
@@ -160,298 +132,234 @@
                     Text="{Binding SetRight.Value}" />
 
             </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="170" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="170" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Text="SET" />
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.ColumnSpan="2"
-                    Text="Game統計" />
-                <TextBlock Grid.Column="4" Text="SET" />
-            </Grid>
-            <StackPanel>
-                <!--  アタックポイント  -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
 
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTeamAttackPointCommand}"
-                        Content="アタックポイント +"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTeamAttackPointCommand}"
-                        Content="+ アタックポイント"
-                        Style="{StaticResource CustomButton}" />
+            <Expander Margin="0,5,0,0" Header="点数操作">
+                <StackPanel>
+                    <!--  アタックポイント  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTeamAttackPointCommand}"
+                            Content="アタックポイント +"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTeamAttackPointCommand}"
+                            Content="+ アタックポイント"
+                            Style="{StaticResource CustomButton}" />
 
-                    <TextBlock Grid.Column="1" Text="{Binding LeftTeamAttackPoint.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding RightTeamAttackPoint.Value}" />
+                        <TextBlock Grid.Column="1" Text="{Binding LeftTeamAttackPoint.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding RightTeamAttackPoint.Value}" />
 
-                    <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamAttackPoint.Value}" />
-                    <TextBlock Grid.Column="3" Text="{Binding GameRightTeamAttackPoint.Value}" />
-                </Grid>
+                        <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamAttackPoint.Value}" />
+                        <TextBlock Grid.Column="3" Text="{Binding GameRightTeamAttackPoint.Value}" />
+                    </Grid>
 
-                <!--  ブロックポイント  -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                    <!--  ブロックポイント  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTeamBlockPointCommand}"
-                        Content="ブロックポイント +"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTeamBlockPointCommand}"
-                        Content="+ ブロックポイント"
-                        Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTeamBlockPointCommand}"
+                            Content="ブロックポイント +"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTeamBlockPointCommand}"
+                            Content="+ ブロックポイント"
+                            Style="{StaticResource CustomButton}" />
 
-                    <TextBlock Grid.Column="1" Text="{Binding LeftTeamBlockPoint.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding RightTeamBlockPoint.Value}" />
+                        <TextBlock Grid.Column="1" Text="{Binding LeftTeamBlockPoint.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding RightTeamBlockPoint.Value}" />
 
-                    <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamBlockPoint.Value}" />
-                    <TextBlock Grid.Column="3" Text="{Binding GameRightTeamBlockPoint.Value}" />
-                </Grid>
+                        <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamBlockPoint.Value}" />
+                        <TextBlock Grid.Column="3" Text="{Binding GameRightTeamBlockPoint.Value}" />
+                    </Grid>
 
-                <!--  サーブポイント  -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                    <!--  サーブポイント  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTeamServePointCommand}"
-                        Content="サーブポイント　+"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTeamServePointCommand}"
-                        Content="+　サーブポイント"
-                        Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTeamServePointCommand}"
+                            Content="サーブポイント　+"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTeamServePointCommand}"
+                            Content="+　サーブポイント"
+                            Style="{StaticResource CustomButton}" />
 
-                    <TextBlock Grid.Column="1" Text="{Binding LeftTeamServePoint.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding RightTeamServePoint.Value}" />
+                        <TextBlock Grid.Column="1" Text="{Binding LeftTeamServePoint.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding RightTeamServePoint.Value}" />
 
-                    <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamServePoint.Value}" />
-                    <TextBlock Grid.Column="3" Text="{Binding GameRightTeamServePoint.Value}" />
+                        <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamServePoint.Value}" />
+                        <TextBlock Grid.Column="3" Text="{Binding GameRightTeamServePoint.Value}" />
 
-                </Grid>
+                    </Grid>
 
-                <TextBlock
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Left"
-                    Text="以下の項目は反対のチームに点数が入ります。" />
+                    <TextBlock Margin="0,20,0,0" HorizontalAlignment="Left" Text="以下の項目は反対のチームに点数が入ります。" />
 
-                <!--  サーブミス  -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTeamServeErrorCommand}"
-                        Content="サーブミス       +"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTeamServeErrorCommand}"
-                        Content="+    サーブミス"
-                        Style="{StaticResource CustomButton}" />
+                    <!--  サーブミス  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTeamServeErrorCommand}"
+                            Content="サーブミス       +"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTeamServeErrorCommand}"
+                            Content="+    サーブミス"
+                            Style="{StaticResource CustomButton}" />
 
-                    <TextBlock Grid.Column="1" Text="{Binding LeftTeamServeError.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding RightTeamServeError.Value}" />
+                        <TextBlock Grid.Column="1" Text="{Binding LeftTeamServeError.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding RightTeamServeError.Value}" />
 
-                    <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamServeError.Value}" />
-                    <TextBlock Grid.Column="3" Text="{Binding GameRightTeamServeError.Value}" />
+                        <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamServeError.Value}" />
+                        <TextBlock Grid.Column="3" Text="{Binding GameRightTeamServeError.Value}" />
 
-                </Grid>
+                    </Grid>
 
-                <!--  その他ミス  -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTeamErrorCommand}"
-                        Content="その他ミス      +"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTeamErrorCommand}"
-                        Content="+   その他ミス"
-                        Style="{StaticResource CustomButton}" />
-                    <TextBlock Grid.Column="1" Text="{Binding LeftTeamError.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding RightTeamError.Value}" />
+                    <!--  その他ミス  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTeamErrorCommand}"
+                            Content="その他ミス      +"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTeamErrorCommand}"
+                            Content="+   その他ミス"
+                            Style="{StaticResource CustomButton}" />
+                        <TextBlock Grid.Column="1" Text="{Binding LeftTeamError.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding RightTeamError.Value}" />
 
-                    <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamError.Value}" />
-                    <TextBlock Grid.Column="3" Text="{Binding GameRightTeamError.Value}" />
+                        <TextBlock Grid.Column="2" Text="{Binding GameLeftTeamError.Value}" />
+                        <TextBlock Grid.Column="3" Text="{Binding GameRightTeamError.Value}" />
 
-                </Grid>
-
-                <!--  タイムアウト  -->
-                <Grid Margin="0,20,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding LeftTimeoutCommand}"
-                        Content="タイムアウト"
-                        Style="{StaticResource CustomButton}" />
-                    <Button
-                        Grid.Column="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding RightTimeoutCommand}"
-                        Content="タイムアウト"
-                        Style="{StaticResource CustomButton}" />
-                    <TextBlock Grid.Column="1" Text="{Binding TimeOutLeft.Value}" />
-                    <TextBlock Grid.Column="4" Text="{Binding TimeOutRight.Value}" />
-
-                </Grid>
+                    </Grid>
 
 
-            </StackPanel>
+                </StackPanel>
+            </Expander>
 
             <!--  コマンド  -->
-            <StackPanel>
-                <TextBlock
-                    Margin="5,20,0,0"
-                    HorizontalAlignment="Left"
-                    Text="その他操作" />
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Width="120"
-                        Margin="5"
-                        Command="{Binding UndoCommand}"
-                        Content="戻す" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        Command="{Binding SwitchServerCommand}"
-                        Content="サーバー交代" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        Command="{Binding CourtChangeCommand}"
-                        Content="コートチェンジ" />
-                    <Button
-                        Width="100"
-                        Margin="5"
-                        Command="{Binding SettingCommand}"
-                        Content="設定" />
+            <Expander Margin="0,5,0,0" Header="その他操作">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="120" Margin="5" Command="{Binding UndoCommand}" Content="戻す" />
+                        <Button Width="100" Margin="5" Command="{Binding SwitchServerCommand}" Content="サーバー交代" />
+                        <Button Width="100" Margin="5" Command="{Binding CourtChangeCommand}" Content="コートチェンジ" />
+                        <Button Width="100" Margin="5" Command="{Binding SettingCommand}" Content="設定" />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Expander>
 
             <!--  情報表示  -->
-            <StackPanel>
-                <TextBlock
-                    Margin="5,20,0,0"
-                    HorizontalAlignment="Left"
-                    Text="情報表示" />
-                <TextBlock
-                    Margin="5,0,0,0"
-                    HorizontalAlignment="Left"
-                    FontSize="15"
-                    Text="もう一度クリックすると非表示になります。" />
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Margin="5"
-                        Command="{Binding DisplayCommand}"
-                        Content="メイン点数表示" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding GetSetDisplayCommand}"
-                        Content="獲得セット表示" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding TechnicalTimeoutCommand}"
-                        Content="テクニカルタイムアウト" />
+            <Expander Margin="0,5,0,0" Header="情報表示">
+                <StackPanel>
+                    <TextBlock Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="15" Text="もう一度クリックすると非表示になります。" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="5" Command="{Binding DisplayCommand}" Content="メイン点数表示" />
+                        <Button Margin="5" Command="{Binding GetSetDisplayCommand}" Content="獲得セット表示" />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Expander>
+
+            <Expander Margin="0,5,0,0" Header="中断に関する操作">
+                <StackPanel>
+                    <!--  タイムアウト  -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LeftTimeoutCommand}"
+                            Content="タイムアウト"
+                            Style="{StaticResource CustomButton}" />
+                        <Button
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Command="{Binding RightTimeoutCommand}"
+                            Content="タイムアウト"
+                            Style="{StaticResource CustomButton}" />
+                        <TextBlock Grid.Column="1" Text="{Binding TimeOutLeft.Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding TimeOutRight.Value}" />
+
+                    </Grid>
+
+                    <Button Margin="5" Command="{Binding TechnicalTimeoutCommand}" Content="テクニカルタイムアウト" />
+                </StackPanel>
+            </Expander>
 
             <!--  統計表示ボタン  -->
             <StackPanel>
-                <TextBlock
-                    Margin="5,20,0,0"
-                    HorizontalAlignment="Left"
-                    Text="ゲーム統計表示" />
-                <TextBlock
-                    Margin="5,0,0,0"
-                    HorizontalAlignment="Left"
-                    FontSize="15"
-                    Text="もう一度クリックすると非表示になります。" />
+                <TextBlock Margin="5,20,0,0" HorizontalAlignment="Left" Text="ゲーム統計表示" />
+                <TextBlock Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="15" Text="もう一度クリックすると非表示になります。" />
                 <StackPanel Orientation="Horizontal">
-                    <Button
-                        Margin="5"
-                        Command="{Binding StatisticsAttackPointCommand}"
-                        Content="アタックポイント" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding StatisticsBlockPointCommand}"
-                        Content="ブロックポイント" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding StatisticsServePointCommand}"
-                        Content="サーブポイント" />
-                    <Button
-                        Margin="5"
-                        Command="{Binding StatisticsServeErrorCommand}"
-                        Content="サーブミス" />
+                    <Button Margin="5" Command="{Binding StatisticsAttackPointCommand}" Content="アタックポイント" />
+                    <Button Margin="5" Command="{Binding StatisticsBlockPointCommand}" Content="ブロックポイント" />
+                    <Button Margin="5" Command="{Binding StatisticsServePointCommand}" Content="サーブポイント" />
+                    <Button Margin="5" Command="{Binding StatisticsServeErrorCommand}" Content="サーブミス" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

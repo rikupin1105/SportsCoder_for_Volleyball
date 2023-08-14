@@ -4,14 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:NDI="clr-namespace:NewTek.NDI.WPF;assembly=NDIlibDotNet2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:horizonalBottom="clr-namespace:SportsCoderForVolleyball.HorizonalBottom.Views;assembly=SportsCoderForVolleyball.HorizonalBottom"
     xmlns:local="clr-namespace:SportsCoderForVolleyball.Views"
-    xmlns:local1="clr-namespace:SportsCoderForVolleyball.VerticalLeft.Views;assembly=SportsCoderForVolleyball.VerticalLeft"
-    xmlns:local2="clr-namespace:SportsCoderForVolleyball.HorizonalBottom.Views;assembly=SportsCoderForVolleyball.HorizonalBottom"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:verticalLeft="clr-namespace:SportsCoderForVolleyball.VerticalLeft.Views;assembly=SportsCoderForVolleyball.VerticalLeft"
     xmlns:viewmodels="clr-namespace:SportsCoderForVolleyball.ViewModels"
     Title="SportsCoder"
-    Width="1024"
+    Width="971"
     Height="576"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
@@ -23,31 +23,33 @@
 
         <Grid Width="1280" Height="720">
             <!--  ゲーム統計情報  -->
-            <!--<local2:MatchStuts VerticalAlignment="Center" />-->
+            <!--<horizonalBottom:MatchStuts VerticalAlignment="Center" />-->
 
             <!--  セット統計情報  -->
-            <!--<local2:SetStuts VerticalAlignment="Center" />-->
+            <!--<horizonalBottom:SetStuts VerticalAlignment="Center" />-->
 
 
             <!--  メッセージ  -->
-            <local2:Message Margin="0,570,0,0" />
-            <local1:Message Margin="310,45,0,0" />
-            <local1:CommonMessage Margin="15,120,0,0" />
-            <local1:Infomation Margin="15,45,0,0" />
+            <horizonalBottom:Message Margin="0,0,0,80" />
+            <horizonalBottom:SeparatedMessage Margin="0,0,0,30" />
 
+            <verticalLeft:Message Margin="327,30,0,0" />
+            <verticalLeft:CommonMessage Margin="30,105,0,0" />
+            <verticalLeft:Infomation Margin="30,30,0,0" />
+
+            <horizonalBottom:Infomation Margin="0,0,0,80" />
             <!--  インフォメーション  -->
-            <local2:Infomation Margin="0,570,0,0" />
 
 
             <!--  セットごとの点数  -->
-            <local2:PointPerSet />
+            <horizonalBottom:PointPerSet />
 
             <!--  スコア  -->
-            <local1:ScoreBoardVertical Margin="0,0,950,550" />
-            <local2:ScoreBoard Margin="0,560,0,0" />
+            <verticalLeft:ScoreBoardVertical Margin="30,30,0,0" />
+            <horizonalBottom:ScoreBoard Margin="0,0,0,30" />
 
             <!--  セット数  -->
-            <local2:Set Margin="0,560,0,0" />
+            <horizonalBottom:Set Margin="0,560,0,0" />
         </Grid>
     </NDI:NdiSendContainer>
 </Window>
