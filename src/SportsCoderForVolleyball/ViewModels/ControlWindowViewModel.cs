@@ -48,6 +48,8 @@ namespace SportsCoderForVolleyball.ViewModels
             StatisticsServePointCommand.Subscribe(_ => Option.InfomationServePoint());
             StatisticsServeErrorCommand.Subscribe(_ => Option.InfomationServeError());
 
+            SendInfomationCommand.Subscribe(_ =>UI.Instance.ShowMessage(Message.Value,MessageLeft.Value,MessageRight.Value));
+
             //色
             //ColorCodeLeftTeam = Data.Instance.ColorCodeLeftTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
             //ColorCodeRightTeam = Data.Instance.ColorCodeRightTeam.ObserveProperty(x => x.Value).ToReactiveProperty();
@@ -83,6 +85,10 @@ namespace SportsCoderForVolleyball.ViewModels
         public ReactiveCommand StatisticsServePointCommand { get; set; } = new();
         public ReactiveCommand StatisticsServeErrorCommand { get; set; } = new();
         public ReactiveCommand StatisticsNoIndicatedCommand { get; set; } = new();
+        public ReactiveCommand SendInfomationCommand { get; set; } = new();
+        public ReactiveProperty<string> Message { get; set; } = new("Message");
+        public ReactiveProperty<string> MessageLeft { get; set; } = new("1");
+        public ReactiveProperty<string> MessageRight { get; set; } = new("1");
 
         //セット統計用
         public ReactiveProperty<int> LeftTeamServePoint { get; set; } = Data.Instance.LeftTeamServePoint.ObserveProperty(x => x.Value).ToReactiveProperty();

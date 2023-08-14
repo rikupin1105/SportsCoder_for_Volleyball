@@ -361,6 +361,36 @@
                     <Button Margin="5" Command="{Binding StatisticsServePointCommand}" Content="サーブポイント" />
                     <Button Margin="5" Command="{Binding StatisticsServeErrorCommand}" Content="サーブミス" />
                 </StackPanel>
+
+                <TextBlock Margin="5,5,0,0" HorizontalAlignment="Left" Text="任意のメッセージと数字を表示します" />
+
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="左側の数字" />
+                    <Label Grid.Column="1" Margin="5,0,0,0" Content="メッセージ内容" />
+                    <Label Grid.Column="2" Content="右側の数字" />
+
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Text="{Binding Message.Value}" />
+                    <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding MessageLeft.Value}" />
+                    <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding MessageRight.Value}" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding SendInfomationCommand}"
+                        Content="送信/削除" />
+                </Grid>
             </StackPanel>
         </StackPanel>
     </StackPanel>
