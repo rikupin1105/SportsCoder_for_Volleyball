@@ -22,34 +22,8 @@
     <NDI:NdiSendContainer HorizontalAlignment="Center" VerticalAlignment="Center" NdiName="SportsCoder Volleyball">
 
         <Grid Width="1280" Height="720">
-            <!--  ゲーム統計情報  -->
-            <!--<horizonalBottom:MatchStuts VerticalAlignment="Center" />-->
-
-            <!--  セット統計情報  -->
-            <!--<horizonalBottom:SetStuts VerticalAlignment="Center" />-->
-
-
-            <!--  メッセージ  -->
-            <horizonalBottom:Message Margin="0,0,0,80" />
-            <horizonalBottom:SeparatedMessage Margin="0,0,0,30" />
-
-            <verticalLeft:Message Margin="327,30,0,0" />
-            <verticalLeft:CommonMessage Margin="30,105,0,0" />
-            <verticalLeft:Infomation Margin="30,30,0,0" />
-
-            <horizonalBottom:Infomation Margin="0,0,0,80" />
-            <!--  インフォメーション  -->
-
-
-            <!--  セットごとの点数  -->
-            <horizonalBottom:PointPerSet />
-
-            <!--  スコア  -->
-            <verticalLeft:ScoreBoardVertical Margin="30,30,0,0" />
-            <horizonalBottom:ScoreBoard Margin="0,0,0,30" />
-
-            <!--  セット数  -->
-            <horizonalBottom:Set Margin="0,560,0,0" />
+            <verticalLeft:Main />
+            <horizonalBottom:Main />
         </Grid>
     </NDI:NdiSendContainer>
 </Window>
