@@ -5,200 +5,161 @@
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <UserControl.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-    </UserControl.Resources>
-    <Grid>
-        <!--  左メッセージ  -->
-        <Grid Width="570" Height="40" Opacity="0">
+    <Grid VerticalAlignment="Bottom">
+        <Grid Width="570">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="3*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
+            <!--  左メッセージ  -->
             <Border
-                Grid.ColumnSpan="4"
+                Grid.Column="1"
+                Height="0"
+                VerticalAlignment="Bottom"
                 Background="#242526"
                 BorderThickness="0"
-                CornerRadius="10,10,0,0"
-                Opacity="1" />
-            <TextBlock Grid.ColumnSpan="4" Foreground="White" Text="{Binding Message.Value}" />
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayLeftMessage.Value}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation
-                                            BeginTime="0:0:0.1"
-                                            Storyboard.TargetProperty="Margin"
-                                            From="0,0,0,0"
-                                            To="0,0,0,90"
-                                            Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,90" To="0,0,0,0" Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation
-                                            BeginTime="0:0:0.3"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1"
-                                            To="0"
-                                            Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-        </Grid>
-        <!--  右メッセージ  -->
-        <Grid Width="570" Height="40" Opacity="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="20" />
-            </Grid.ColumnDefinitions>
-            <Border
-                Grid.Column="4"
-                Grid.ColumnSpan="4"
-                Background="#242526"
-                BorderThickness="0"
-                CornerRadius="10,10,0,0"
-                Opacity="1" />
-            <TextBlock Grid.Column="4" Grid.ColumnSpan="4" Text="{Binding Message.Value}" />
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayRightMessage.Value}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation
-                                            BeginTime="0:0:0.1"
-                                            Storyboard.TargetProperty="Margin"
-                                            From="0,0,0,0"
-                                            To="0,0,0,90"
-                                            Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,90" To="0,0,0,0" Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation
-                                            BeginTime="0:0:0.3"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1"
-                                            To="0"
-                                            Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-        </Grid>
-        <!--  全体メッセージ  -->
-        <Grid Width="570" Height="35" Margin="0,0,0,0" Opacity="0">
-            <Border CornerRadius="10,10,0,0">
-                <Border.Background>
-                    <SolidColorBrush Color="#242526" />
-                </Border.Background>
+                CornerRadius="10,10,0,0">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDisplayLeftMessage.Value}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="40" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard BeginTime="0:0:0.1">
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="40" To="0" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Semibold"
+                    Foreground="White"
+                    Text="{Binding Message.Value}" />
             </Border>
-            <TextBlock
-                Grid.Row="1"
+
+            <!--  右メッセージ  -->
+            <Border
+                Grid.Column="2"
+                Height="0"
+                VerticalAlignment="Bottom"
+                Background="#242526"
+                BorderThickness="0"
+                CornerRadius="10,10,0,0">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDisplayRightMessage.Value}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="40" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard BeginTime="0:0:0.1">
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="40" To="0" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Semibold"
+                    Foreground="White"
+                    Opacity="1"
+                    Text="{Binding Message.Value}" />
+            </Border>
+
+            <!--  全体メッセージ  -->
+            <Border
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="SemiBold"
-                Foreground="White"
-                Text="{Binding Message.Value}"
-                TextAlignment="Center" />
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDisplayCommonMessage.Value}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation
-                                            BeginTime="0:0:0.1"
-                                            Storyboard.TargetProperty="Margin"
-                                            From="0,0,0,0"
-                                            To="0,0,0,90"
-                                            Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,90" To="0,0,0,0" Duration="0:0:0.3">
-                                            <ThicknessAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseInOut" />
-                                            </ThicknessAnimation.EasingFunction>
-                                        </ThicknessAnimation>
-                                        <DoubleAnimation
-                                            BeginTime="0:0:0.3"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1"
-                                            To="0"
-                                            Duration="0:0:0.1" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
+                Height="0"
+                VerticalAlignment="Bottom"
+                Background="#242526"
+                BorderThickness="0"
+                CornerRadius="10,10,0,0"
+                Opacity="1">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDisplayCommonMessage.Value}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="40" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard BeginTime="0:0:0.1">
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" From="40" To="0" Duration="0:0:0.3">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseInOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Semibold"
+                    Foreground="White"
+                    Opacity="1"
+                    Text="{Binding Message.Value}" />
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

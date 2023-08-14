@@ -21,7 +21,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Width="600" Height="50" CornerRadius="5">
+    <Border Width="600" Height="50" VerticalAlignment="Bottom" CornerRadius="5">
         <Border.Background>
             <LinearGradientBrush>
                 <GradientStop Offset="0" Color="#011640" />

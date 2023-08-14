@@ -12,7 +12,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
-    <Grid Width="570" Height="35" Opacity="0">
+    <Grid Width="570" Height="0" VerticalAlignment="Bottom" Opacity="0">
 
         <Border CornerRadius="10,10,0,0">
             <Border.Background>
@@ -31,16 +31,16 @@
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ThicknessAnimation
+                                    <DoubleAnimation
                                         BeginTime="0:0:0.1"
-                                        Storyboard.TargetProperty="Margin"
-                                        From="0,0,0,0"
-                                        To="0,0,0,90"
+                                        Storyboard.TargetProperty="Height"
+                                        From="0"
+                                        To="35"
                                         Duration="0:0:0.3">
-                                        <ThicknessAnimation.EasingFunction>
+                                        <DoubleAnimation.EasingFunction>
                                             <CubicEase EasingMode="EaseInOut" />
-                                        </ThicknessAnimation.EasingFunction>
-                                    </ThicknessAnimation>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.1" />
                                 </Storyboard>
                             </BeginStoryboard>
@@ -48,11 +48,11 @@
                         <DataTrigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,90" To="0,0,0,0" Duration="0:0:0.3">
-                                        <ThicknessAnimation.EasingFunction>
+                                    <DoubleAnimation Storyboard.TargetProperty="Height" From="35" To="0" Duration="0:0:0.3">
+                                        <DoubleAnimation.EasingFunction>
                                             <CubicEase EasingMode="EaseInOut" />
-                                        </ThicknessAnimation.EasingFunction>
-                                    </ThicknessAnimation>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
                                     <DoubleAnimation
                                         BeginTime="0:0:0.3"
                                         Storyboard.TargetProperty="Opacity"
