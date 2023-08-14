@@ -1,6 +1,7 @@
 ﻿using SportsCoderForVolleyball.Shared;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using static SportsCoderForVolleyball.Models.Data;
 
 namespace SportsCoderForVolleyball.Models
@@ -19,7 +20,7 @@ namespace SportsCoderForVolleyball.Models
         }
         public static void TechnicalTimeOut() => UI.Instance.ShowMessage("TECHNICAL TIMEOUT", autoHideSeconds: 10);
 
-        public static void InfomationScore()
+        public static async void InfomationScore()
         {
             if (UI.Instance.IsDisplayScoreboard.Value)
             {
@@ -31,6 +32,7 @@ namespace SportsCoderForVolleyball.Models
                 else
                 {
                     UI.Instance.HideMessage();
+                    await Task.Delay(1000);
                     UI.Instance.IsDisplayScoreboard.Value = false;
                 }
             }

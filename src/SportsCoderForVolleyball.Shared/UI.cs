@@ -5,6 +5,10 @@ namespace SportsCoderForVolleyball.Shared
     public class UI
     {
         public static UI Instance { get; } = new();
+        public UI() 
+        {
+
+        }
         /// <summary>
         /// メッセージを表示します
         /// </summary>
@@ -34,13 +38,6 @@ namespace SportsCoderForVolleyball.Shared
                 }
             }
 
-            //スコアが表示されていない場合、表示する
-            if (UI.Instance.IsDisplayScoreboard.Value == false)
-            {
-                UI.Instance.IsDisplayScoreboard.Value = true;
-                await Task.Delay(1000);
-            }
-
             //別のメッセージが表示されている場合は、閉じる
             if (IsMessageShow && forceNoHide == false)
             {
@@ -48,6 +45,7 @@ namespace SportsCoderForVolleyball.Shared
                 await Task.Delay(1000);
             }
 
+            //スコアが表示されていない場合、分離メッセージを表示する
             IsMessageShow = true;
             Message.Value = message;
 
@@ -109,7 +107,7 @@ namespace SportsCoderForVolleyball.Shared
             //表示中にもう一度押されたら非表示にする。
             if (message == Message.Value && messageLeft == MessageLeft.Value  && messageRight==MessageRight.Value && forceNoHide == false)
             {
-                if (IsDisplayMessage.Value == true)
+                if (IsMessageShow == true)
                 {
                     HideMessage();
                     return;
@@ -157,10 +155,40 @@ namespace SportsCoderForVolleyball.Shared
         {
             IsDisplayMessageLeft.Value = false;
             IsDisplayMessageRight.Value = false;
+            IsDisplaySeparatedMessageLeft.Value = false;
+            IsDisplaySeparatedMessageRight.Value = false;
             IsDisplayMessage.Value = false;
+            IsDisplaySeparatedMessage.Value = false;
             IsDisplayInfomation.Value = false;
 
             IsMessageShow = false;
+        }
+
+        /// <summary>
+        /// スコアボードを表示します
+        /// </summary>
+        public void ShowScoreboard()
+        {
+            if (IsDisplayScoreboard.Value)
+            {
+                return;
+            }
+
+            HideMessage();
+            IsDisplayScoreboard.Value = true;
+        }
+
+        /// <summary>
+        /// 縦左のスコアボードを表示します
+        /// </summary>
+        public void ShowVerticalScoreboard()
+        {
+            if (IsDisplayVerticalLeftScoreboard.Value)
+            {
+                return;
+            }
+            HideMessage();
+            IsDisplayVerticalLeftScoreboard.Value = true;
         }
 
         public void ShowPointParSet(List<PointParSetInfomationSource> source)
@@ -173,9 +201,11 @@ namespace SportsCoderForVolleyball.Shared
         public void HidePointParSet() => IsDisplayPointParSet.Value = false;
 
 
-        public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
+        public ReactiveProperty<bool> IsDisplayScoreboard { get; } = new(true);
+        public ReactiveProperty<bool> IsDisplayVerticalLeftScoreboard { get; } = new(true);
+
+
         private bool IsMessageShow { get; set; }
-        public ReactiveProperty<bool> IsDisplayMessageRight { get; private set; } = new();
         public ReactiveProperty<string> Message { get; } = new();
         public ReactiveProperty<string> MessageLeft { get; } = new();
         public ReactiveProperty<string> MessageRight { get; } = new();
