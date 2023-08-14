@@ -51,17 +51,35 @@ namespace SportsCoderForVolleyball.Shared
             IsMessageShow = true;
             Message.Value = message;
 
-            if (LeftTeam is null)
+            if (UI.Instance.IsDisplayScoreboard.Value == false)
             {
-                IsDisplayMessage.Value = true;
-            }
-            else if ((bool)LeftTeam)
-            {
-                IsDisplayMessageLeft.Value = true;
+                switch (LeftTeam)
+                {
+                    case null:
+                        IsDisplaySeparatedMessage.Value = true;
+                        break;
+                    case true:
+                        IsDisplaySeparatedMessageLeft.Value = true;
+                        break;
+                    case false:
+                        IsDisplaySeparatedMessageRight.Value = true;
+                        break;
+                }
             }
             else
             {
-                IsDisplayMessageRight.Value = true;
+                switch (LeftTeam)
+                {
+                    case null:
+                        IsDisplayMessage.Value = true;
+                        break;
+                    case true:
+                        IsDisplayMessageLeft.Value = true;
+                        break;
+                    case false:
+                        IsDisplayMessageRight.Value = true;
+                        break;
+                }
             }
 
             if (autoHideSeconds is not null)
@@ -157,19 +175,25 @@ namespace SportsCoderForVolleyball.Shared
 
         public ReactiveProperty<bool> IsDisplayScoreboard = new(true);
         private bool IsMessageShow { get; set; }
-        public ReactiveProperty<string> Message { get; private set; } = new();
-        public ReactiveProperty<string> MessageLeft { get; private set; } = new();
-        public ReactiveProperty<string> MessageRight { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayMessageLeft { get; private set; } = new();
         public ReactiveProperty<bool> IsDisplayMessageRight { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayMessage { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayInfomation { get; private set; } = new();
-        public ReactiveProperty<bool> IsDisplayCommonMessage { get; private set; } = new(false);
+        public ReactiveProperty<string> Message { get; } = new();
+        public ReactiveProperty<string> MessageLeft { get; } = new();
+        public ReactiveProperty<string> MessageRight { get; } = new();
+        public ReactiveProperty<bool> IsDisplayMessageLeft { get; } = new();
+        public ReactiveProperty<bool> IsDisplayMessageRight { get; } = new();
 
-        public ReactiveProperty<bool> IsDisplayGetSet { get; private set; } = new(false);
-        public ReactiveProperty<bool> IsDisplayPointParSet { get; private set; } = new(false);
-        public ReactiveProperty<bool> IsDisplaySetStuts { get; private set; } = new(false);
-        public ReactiveProperty<bool> IsDisplayGameStuts { get; private set; } = new(false);
+        public ReactiveProperty<bool> IsDisplaySeparatedMessageLeft { get; } = new();
+        public ReactiveProperty<bool> IsDisplaySeparatedMessageRight { get; } = new();
+        public ReactiveProperty<bool> IsDisplaySeparatedMessage { get; } = new();
+
+        public ReactiveProperty<bool> IsDisplayMessage { get; } = new();
+        public ReactiveProperty<bool> IsDisplayInfomation { get; } = new();
+        public ReactiveProperty<bool> IsDisplayCommonMessage { get; } = new(false);
+
+        public ReactiveProperty<bool> IsDisplayGetSet { get; } = new(false);
+        public ReactiveProperty<bool> IsDisplayPointParSet { get; } = new(false);
+        public ReactiveProperty<bool> IsDisplaySetStuts { get; } = new(false);
+        public ReactiveProperty<bool> IsDisplayGameStuts { get; } = new(false);
 
         //UI部品
         public ReactiveProperty<int> Set = new(1);
